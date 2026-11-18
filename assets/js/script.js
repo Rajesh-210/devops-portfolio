@@ -25,7 +25,7 @@ const toolCategories = {
     ],
     cicd: [
         { name: 'Jenkins', icon: 'jenkins' },
-        { name: 'GitHub Actions', icon: 'githubactions' },
+        { name: 'GitHub Actions', icon: 'github-actions' },
         { name: 'ArgoCD', icon: 'argo' },
         { name: 'GitHub', icon: 'github' },
         { name: 'GitLab CI', icon: 'gitlab' },
@@ -63,10 +63,17 @@ const categoryElementIds = {
 
 // ---- SKILLICONS URL BUILDER ----
 function getSkillIconUrl(name) {
-    // skillicons.dev uses lowercase names
     const normalized = name.toLowerCase().replace(/\s+/g, '-');
     return `https://skillicons.dev/icons?i=${normalized}`;
 }
+
+// Preload all tool icons for background animation
+const toolIconUrls = [];
+Object.values(toolCategories).forEach(tools => {
+    tools.forEach(tool => {
+        toolIconUrls.push(getSkillIconUrl(tool.icon));
+    });
+});
 
 // ---- DOM READY ----
 document.addEventListener('DOMContentLoaded', () => {
@@ -133,7 +140,6 @@ function animateCounter(el) {
     function update(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        // Easing: easeOutExpo
         const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
         const current = target * eased;
 
@@ -153,14 +159,14 @@ function animateCounter(el) {
     requestAnimationFrame(update);
 }
 
-// ---- PARTICLE SYSTEM ----
+// ---- PARTICLE SYSTEM WITH DEVOPS TOOL LOGOS ----
 function initParticleSystem() {
     const canvas = document.getElementById('bg-canvas');
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     let particles = [];
-    let geometry = [];
+    let toolIcons = [];
     let width = 0;
     let height = 0;
     let mouseX = -1000;
@@ -177,6 +183,38 @@ function initParticleSystem() {
 
     const SHAPES = ['circle', 'triangle', 'square', 'ring', 'line'];
 
+    // Load tool icon images
+    const toolImages = [];
+    let imagesLoaded = 0;
+
+    function loadToolImages() {
+        toolIconUrls.forEach(url => {
+            const img = new Image();
+            img.onload = () => {
+                imagesLoaded++;
+                if (imagesLoaded === toolIconUrls.length) {
+                    initToolIconParticles();
+                }
+            };
+            img.onerror = () => {
+                imagesLoaded++;
+                if (imagesLoaded === toolIconUrls.length) {
+                    initToolIconParticles();
+                }
+            };
+            img.src = url;
+            toolImages.push(img);
+        });
+    }
+
+    function initToolIconParticles() {
+        const TOOL_COUNT = Math.min(toolIconUrls.length * 2, 40);
+        for (let i = 0; i < TOOL_COUNT; i++) {
+            toolIcons.push(new ToolIcon());
+        }
+        animate();
+    }
+
     function resize() {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
@@ -185,13 +223,12 @@ function initParticleSystem() {
     window.addEventListener('resize', resize);
     resize();
 
-    // Track mouse for interactive particles
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
 
-    // Particle Class
+    // Small geometric particles
     class Particle {
         constructor() {
             this.reset();
@@ -214,11 +251,9 @@ function initParticleSystem() {
         }
 
         update() {
-            // Basic movement
             this.x += this.speedX;
             this.y += this.speedY;
 
-            // Mouse attraction (subtle)
             const dx = mouseX - this.x;
             const dy = mouseY - this.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
@@ -228,18 +263,14 @@ function initParticleSystem() {
                 this.y -= dy * force;
             }
 
-            // Rotation
             this.rotation += this.rotationSpeed;
 
-            // Pulsing
             this.pulsePhase += this.pulseSpeed;
             this.size = this.baseSize * (1 + Math.sin(this.pulsePhase) * 0.3);
 
-            // Boundary check
             if (this.x < -50 || this.x > width + 50 ||
                 this.y < -50 || this.y > height + 50) {
                 this.reset();
-                // Reposition on opposite side
                 if (this.x < 0) this.x = width;
                 if (this.x > width) this.x = 0;
                 if (this.y < 0) this.y = height;
@@ -292,6 +323,57 @@ function initParticleSystem() {
                     ctx.stroke();
                     break;
             }
+
+            ctx.restore();
+        }
+    }
+
+    // DevOps tool logo icons floating in background
+    class ToolIcon {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.size = Math.random() * 60 + 40;
+            this.baseSize = this.size;
+            this.speedX = (Math.random() - 0.5) * 0.08;
+            this.speedY = (Math.random() - 0.5) * 0.08;
+            this.rotation = Math.random() * Math.PI * 2;
+            this.rotationSpeed = (Math.random() - 0.5) * 0.005;
+            this.opacity = Math.random() * 0.25 + 0.1;
+            this.image = toolImages[Math.floor(Math.random() * toolImages.length)];
+            this.floatOffset = Math.random() * Math.PI * 2;
+            this.floatSpeed = 0.002 + Math.random() * 0.004;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.rotation += this.rotationSpeed;
+
+            // Gentle floating motion
+            this.floatOffset += this.floatSpeed;
+            const floatY = Math.sin(this.floatOffset) * 20;
+
+            if (this.x < -this.size || this.x > width + this.size ||
+                this.y < -this.size || this.y > height + this.size) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            if (!this.image || !this.image.complete) return;
+
+            ctx.save();
+            ctx.translate(this.x, this.y + Math.sin(this.floatOffset) * 20);
+            ctx.rotate(this.rotation);
+            ctx.globalAlpha = this.opacity;
+
+            const s = this.size;
+            ctx.drawImage(this.image, -s / 2, -s / 2, s, s);
 
             ctx.restore();
         }
@@ -361,7 +443,6 @@ function initParticleSystem() {
                     ctx.beginPath();
                     ctx.arc(0, 0, s, 0, Math.PI * 2);
                     ctx.stroke();
-                    // Inner ring
                     ctx.beginPath();
                     ctx.arc(0, 0, s * 0.6, 0, Math.PI * 2);
                     ctx.stroke();
@@ -373,11 +454,14 @@ function initParticleSystem() {
     }
 
     // Initialize
-    const PARTICLE_COUNT = Math.min(120, Math.floor((width * height) / 15000));
-    const GEO_COUNT = 15;
+    const PARTICLE_COUNT = Math.min(80, Math.floor((width * height) / 20000));
+    const GEO_COUNT = 12;
 
     for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
     for (let i = 0; i < GEO_COUNT; i++) geometry.push(new GeoShape());
+
+    // Start loading images
+    loadToolImages();
 
     // Connections between nearby particles
     function drawConnections() {
@@ -403,23 +487,17 @@ function initParticleSystem() {
 
     // Animation Loop
     function animate() {
-        // Clear with subtle trail effect
         ctx.fillStyle = 'rgba(3, 0, 20, 0.15)';
         ctx.fillRect(0, 0, width, height);
 
-        // Draw connections first (behind particles)
         drawConnections();
 
-        // Update & draw particles
         particles.forEach(p => { p.update(); p.draw(); });
-
-        // Update & draw geometry
+        toolIcons.forEach(t => { t.update(); t.draw(); });
         geometry.forEach(g => { g.update(); g.draw(); });
 
         animationId = requestAnimationFrame(animate);
     }
-
-    animate();
 
     // Cleanup on page hide
     document.addEventListener('visibilitychange', () => {
@@ -482,7 +560,6 @@ function initParallaxOrbs() {
 
 // ---- HOVER EFFECTS ----
 function initHoverEffects() {
-    // Magnetic buttons
     const magneticElements = document.querySelectorAll('.glow-border, .card-interactive, .tool-card');
 
     magneticElements.forEach(el => {
@@ -491,7 +568,6 @@ function initHoverEffects() {
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
 
-            // Subtle magnetic effect
             el.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px)`;
         });
 
@@ -500,7 +576,6 @@ function initHoverEffects() {
         });
     });
 
-    // Nav link underline animation
     const navLinks = document.querySelectorAll('nav a:not(.glass):not(.bg-gradient-to-r)');
     navLinks.forEach(link => {
         link.style.position = 'relative';
