@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telemetry Dashboard | Rajesh Chilukuri</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'space': { 950: '#030014', 900: '#0a0420', 800: '#140e2e' },
+                        'accent': { purple: '#bc13fe', blue: '#00d4ff', pink: '#ff006e' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --glass-bg: rgba(20, 14, 46, 0.7);
+            --glass-border: rgba(188, 19, 254, 0.15);
+            --accent-1: #bc13fe;
+            --accent-2: #00d4ff;
+            --accent-3: #ff006e;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #030014;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass:hover {
+            border-color: rgba(188, 19, 254, 0.4);
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.15);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #bc13fe, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Ambient glow */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen">
+
+    <!-- Orbs -->
+    <div class="orb w-96 h-96 bg-[#bc13fe] top-0 left-0"></div>
+    <div class="orb w-96 h-96 bg-[#00d4ff] bottom-0 right-0"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors">
+                ← Back to Portfolio
+            </a>
+            <span class="font-mono text-xs uppercase tracking-widest text-[#00d4ff]">Telemetry & Performance Observability</span>
+            <span class="flex items-center gap-2 text-xs font-mono text-[#10b981]">
+                <span class="w-2 h-2 rounded-full bg-[#10b981] animate-ping"></span> Live Prometheus Feeds
+            </span>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard -->
+    <main class="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-16 space-y-8">
+
+        <!-- Top Header -->
+        <header class="text-center max-w-3xl mx-auto mb-10">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-3 text-gradient">Infrastructure Telemetry</h1>
+            <p class="text-slate-400 text-sm">Real-time simulation of production EKS, GitOps continuous delivery, and FinOps metrics driven by automated Terraform pipelines.</p>
+        </header>
+
+        <!-- KPI Metrics Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="glass p-5 rounded-2xl text-center">
+                <span class="text-2xl mb-2 block">⚡</span>
+                <span class="text-2xl font-bold font-mono text-[#00d4ff] block" id="deployTime">5 min</span>
+                <span class="text-xs text-slate-400">Release Duration</span>
+                <span class="text-[10px] text-[#10b981] block mt-1">−83% Cycle Time</span>
+            </div>
+            <div class="glass p-5 rounded-2xl text-center">
+                <span class="text-2xl mb-2 block">🏗️</span>
+                <span class="text-2xl font-bold font-mono text-[#bc13fe] block">10 min</span>
+                <span class="text-xs text-slate-400">Infra Provisioning</span>
+                <span class="text-[10px] text-[#10b981] block mt-1">−96% via Terraform</span>
+            </div>
+            <div class="glass p-5 rounded-2xl text-center">
+                <span class="text-2xl mb-2 block">🟢</span>
+                <span class="text-2xl font-bold font-mono text-[#10b981] block">99.9%</span>
+                <span class="text-xs text-slate-400">Uptime SLA</span>
+                <span class="text-[10px] text-[#00d4ff] block mt-1">Zero Downtime</span>
+            </div>
+            <div class="glass p-5 rounded-2xl text-center">
+                <span class="text-2xl mb-2 block">🚀</span>
+                <span class="text-2xl font-bold font-mono text-white block">47</span>
+                <span class="text-xs text-slate-400">Prod Releases</span>
+                <span class="text-[10px] text-[#bc13fe] block mt-1">100% Success</span>
+            </div>
+            <div class="glass p-5 rounded-2xl text-center">
+                <span class="text-2xl mb-2 block">💰</span>
+                <span class="text-2xl font-bold font-mono text-[#ff006e] block">$2.3K</span>
+                <span class="text-xs text-slate-400">Monthly Saved</span>
+                <span class="text-[10px] text-[#10b981] block mt-1">30% FinOps Gain</span>
+            </div>
+            <div class="glass p-5 rounded-2xl text-center">
+                <span class="text-2xl mb-2 block">🔧</span>
+                <span class="text-2xl font-bold font-mono text-[#00d4ff] block">15 min</span>
+                <span class="text-xs text-slate-400">MTTR</span>
+                <span class="text-[10px] text-[#10b981] block mt-1">−70% Recovery</span>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Deployment Frequency & Duration -->
+            <div class="glass p-6 rounded-3xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Deployment Duration Trend</h2>
+                    <span class="text-xs font-mono text-[#00d4ff]">Jenkins CI</span>
+                </div>
+                <div class="h-56">
+                    <canvas id="deployChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Environment Health -->
+            <div class="glass p-6 rounded-3xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Environment Uptime Ratio</h2>
+                    <span class="text-xs font-mono text-[#10b981]">Prometheus</span>
+                </div>
+                <div class="h-56">
+                    <canvas id="envChart"></canvas>
+                </div>
+            </div>
+
+            <!-- IaC Provisioning -->
+            <div class="glass p-6 rounded-3xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Provisioning Automation</h2>
+                    <span class="text-xs font-mono text-[#bc13fe]">Terraform</span>
+                </div>
+                <div class="h-56">
+                    <canvas id="infraChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Cost Trend -->
+            <div class="glass p-6 rounded-3xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Cloud Cost Curve ($K)</h2>
+                    <span class="text-xs font-mono text-[#ff006e]">AWS FinOps</span>
+                </div>
+                <div class="h-56">
+                    <canvas id="costChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Incident Recovery -->
+            <div class="glass p-6 rounded-3xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Incident Recovery (Hours)</h2>
+                    <span class="text-xs font-mono text-[#00d4ff]">MTTR SRE</span>
+                </div>
+                <div class="h-56">
+                    <canvas id="incidentChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Cluster Utilization -->
+            <div class="glass p-6 rounded-3xl">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Cluster CPU & Memory</h2>
+                    <span class="text-xs font-mono text-[#bc13fe]">Amazon EKS</span>
+                </div>
+                <div class="h-56">
+                    <canvas id="utilChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Cluster Node Status -->
+        <div class="glass p-6 rounded-3xl">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-4">Live Kubernetes Cluster Nodes (ap-south-1)</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-white text-sm">ip-10-0-1-24.ec2.internal</div>
+                        <div class="text-xs text-slate-400 font-mono">m5.xlarge • Linux 5.15</div>
+                    </div>
+                    <span class="text-xs font-mono px-2 py-1 rounded bg-[#10b981]/20 text-[#10b981]">Ready</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-white text-sm">ip-10-0-2-89.ec2.internal</div>
+                        <div class="text-xs text-slate-400 font-mono">m5.xlarge • Linux 5.15</div>
+                    </div>
+                    <span class="text-xs font-mono px-2 py-1 rounded bg-[#10b981]/20 text-[#10b981]">Ready</span>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-white text-sm">ip-10-0-3-112.ec2.internal</div>
+                        <div class="text-xs text-slate-400 font-mono">m5.xlarge • Linux 5.15</div>
+                    </div>
+                    <span class="text-xs font-mono px-2 py-1 rounded bg-[#10b981]/20 text-[#10b981]">Ready</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

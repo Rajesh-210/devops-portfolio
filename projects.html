@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Case Studies | Rajesh Chilukuri</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --glass-bg: rgba(20, 14, 46, 0.7);
+            --glass-border: rgba(188, 19, 254, 0.15);
+            --accent-1: #bc13fe;
+            --accent-2: #00d4ff;
+            --accent-3: #ff006e;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #030014;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            transition: all 0.3s ease;
+        }
+
+        .glass:hover {
+            border-color: rgba(188, 19, 254, 0.4);
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.15);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #bc13fe, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen">
+
+    <div class="orb w-96 h-96 bg-[#bc13fe] top-0 left-0"></div>
+    <div class="orb w-96 h-96 bg-[#00d4ff] bottom-0 right-0"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors">
+                ← Back to Portfolio
+            </a>
+            <span class="font-mono text-xs uppercase tracking-widest text-[#00d4ff]">Engineering Architecture Deep Dives</span>
+            <a href="dashboard.html" class="text-xs font-mono text-slate-300 hover:text-[#bc13fe] transition-colors">View Dashboard →</a>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="relative z-10 max-w-5xl mx-auto px-6 pt-28 pb-20 space-y-16">
+
+        <!-- Header -->
+        <header class="text-center max-w-2xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-4 text-gradient">Flagship Case Studies</h1>
+            <p class="text-slate-400 text-sm">Real-world production engineering architectures detailing the problem, solution, code artifacts, and measurable business outcomes.</p>
+        </header>
+
+        <!-- Project 1: EKS -->
+        <article class="glass p-8 sm:p-10 rounded-3xl" id="three-tier">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                <div>
+                    <span class="text-xs font-mono text-[#00d4ff] bg-[#00d4ff]/10 px-3 py-1 rounded-full border border-[#00d4ff]/20">AWS EKS Platform</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-2">Three-Tier Microservices on Amazon EKS</h2>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-xs font-mono px-3 py-1 bg-white/5 rounded-lg border border-white/10 text-emerald-400">83% Faster Deploys</span>
+                    <span class="text-xs font-mono px-3 py-1 bg-white/5 rounded-lg border border-white/10 text-cyan-400">Zero Downtime</span>
+                </div>
+            </div>
+
+            <div class="space-y-6 text-sm text-slate-300 leading-relaxed">
+                <div>
+                    <h3 class="font-bold text-white mb-2 text-base">The Challenge</h3>
+                    <p>Deploying a distributed three-tier application (React frontend, Node.js backend, RDS PostgreSQL) across dev, staging, and production environments suffered from configuration drift, manual rollout errors, and deployment durations exceeding 30 minutes.</p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-white mb-2 text-base">Architectural Solution</h3>
+                    <p>Designed a fully automated GitOps delivery pipeline on AWS EKS. Modular Terraform provisions the VPC, multi-AZ subnets, NAT gateways, EKS cluster, and IAM OIDC roles. Jenkins executes build, lint, and security scan stages before pushing Docker images to Amazon ECR. ArgoCD detects repository changes and triggers self-healing rolling updates on Kubernetes.</p>
+                </div>
+
+                <!-- Code block -->
+                <div class="rounded-2xl bg-[#030014]/80 border border-white/10 p-5 font-mono text-xs text-slate-300 overflow-x-auto">
+                    <div class="text-slate-500 mb-2">// Terraform EKS Module Definition</div>
+                    <pre><code>module "eks" {
+  source          = "terraform-aws-modules/eks/aws"
+  version         = "19.15.3"
+  cluster_name    = "prod-eks-cluster"
+  cluster_version = "1.28"
+  vpc_id          = module.vpc.vpc_id
+  subnet_ids      = module.vpc.private_subnets
+
+  eks_managed_node_groups = {
+    general = {
+      min_size     = 2
+      max_size     = 10
+      desired_size = 3
+      instance_types = ["m5.large"]
+      capacity_type  = "ON_DEMAND"
+    }
+  }
+}</code></pre>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                    <div class="p-3 bg-white/5 rounded-xl text-center">
+                        <div class="text-xl font-bold text-cyan-400 font-mono">5 min</div>
+                        <div class="text-xs text-slate-400">Release Cycle</div>
+                    </div>
+                    <div class="p-3 bg-white/5 rounded-xl text-center">
+                        <div class="text-xl font-bold text-emerald-400 font-mono">100%</div>
+                        <div class="text-xs text-slate-400">IaC Governed</div>
+                    </div>
+                    <div class="p-3 bg-white/5 rounded-xl text-center">
+                        <div class="text-xl font-bold text-purple-400 font-mono">Zero</div>
+                        <div class="text-xs text-slate-400">Deployment Downtime</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Project 2: GitOps -->
+        <article class="glass p-8 sm:p-10 rounded-3xl" id="gitops">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                <div>
+                    <span class="text-xs font-mono text-[#bc13fe] bg-[#bc13fe]/10 px-3 py-1 rounded-full border border-[#bc13fe]/20">GitOps Delivery</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-2">Continuous GitOps Deployment via ArgoCD</h2>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-xs font-mono px-3 py-1 bg-white/5 rounded-lg border border-white/10 text-emerald-400">Zero Drift</span>
+                    <span class="text-xs font-mono px-3 py-1 bg-white/5 rounded-lg border border-white/10 text-purple-400">Auditable Git</span>
+                </div>
+            </div>
+
+            <div class="space-y-6 text-sm text-slate-300 leading-relaxed">
+                <div>
+                    <h3 class="font-bold text-white mb-2 text-base">The Challenge</h3>
+                    <p>Direct `kubectl` invocations and manual manifest edits created severe configuration drift between Kubernetes cluster states and repository declarations, leaving no auditable history or reliable rollback pathway.</p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-white mb-2 text-base">Architectural Solution</h3>
+                    <p>Established Git as the single source of truth using ArgoCD. Implemented Helm charts with values hierarchy for multiple environments. Configured automated sync policies with self-healing and pruning enabled to revert uncommitted manual cluster adjustments instantly.</p>
+                </div>
+
+                <!-- Code block -->
+                <div class="rounded-2xl bg-[#030014]/80 border border-white/10 p-5 font-mono text-xs text-slate-300 overflow-x-auto">
+                    <div class="text-slate-500 mb-2">// ArgoCD Application Custom Resource</div>
+                    <pre><code>apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-three-tier
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Rajesh-210/k8s-manifests
+    targetRevision: HEAD
+    path: environments/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true</code></pre>
+                </div>
+            </div>
+        </article>
+
+        <!-- Project 3: Monitoring -->
+        <article class="glass p-8 sm:p-10 rounded-3xl" id="monitoring">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                <div>
+                    <span class="text-xs font-mono text-[#ff006e] bg-[#ff006e]/10 px-3 py-1 rounded-full border border-[#ff006e]/20">Observability</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-2">End-to-End Prometheus & Grafana Monitoring</h2>
+                </div>
+                <div class="flex gap-2">
+                    <span class="text-xs font-mono px-3 py-1 bg-white/5 rounded-lg border border-white/10 text-pink-400">−70% MTTR</span>
+                    <span class="text-xs font-mono px-3 py-1 bg-white/5 rounded-lg border border-white/10 text-cyan-400">100% Metrics</span>
+                </div>
+            </div>
+
+            <div class="space-y-6 text-sm text-slate-300 leading-relaxed">
+                <div>
+                    <h3 class="font-bold text-white mb-2 text-base">The Challenge</h3>
+                    <p>Blind spots in cluster resource saturation, unmonitored pod crash loops, and slow triage times caused incident response cycles to drag out over several hours without proactive alerting.</p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-white mb-2 text-base">Architectural Solution</h3>
+                    <p>Deployed the kube-prometheus-stack Helm chart with custom PrometheusRules for crash detection, CPU throttling, and node memory pressure. Connected Alertmanager to Slack webhooks for immediate on-call notifications, paired with Grafana dashboards for deep telemetry.</p>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+</body>
+</html>
