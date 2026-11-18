@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Rajesh Chilukuri</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+</head>
+<body>
+    <canvas id="bg-particles"></canvas>
+
+    <header class="dashboard-header">
+        <div class="container dashboard-header__content">
+            <a href="index.html" class="back-link">← Portfolio</a>
+            <h1>Performance Dashboard</h1>
+            <p class="dashboard-subtitle">Real-time visualisation of engineering impact metrics</p>
+            <div class="time-range">
+                <span>Time Range:</span>
+                <select id="timeRange">
+                    <option value="7d">Last 7 Days</option>
+                    <option value="30d" selected>Last 30 Days</option>
+                    <option value="90d">Last 90 Days</option>
+                    <option value="1y">Last Year</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <!-- KPI Cards Row -->
+            <section class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-icon">⚡</div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" id="kpi-deploy-time">5 min</span>
+                        <span class="kpi-label">Avg Deployment Time</span>
+                        <span class="kpi-trend trend--good">-83% vs baseline</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">🏗️</div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" id="kpi-infra-time">10 min</span>
+                        <span class="kpi-label">Infra Provisioning</span>
+                        <span class="kpi-trend trend--good">-96% vs manual</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">🟢</div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" id="kpi-uptime">99.9%</span>
+                        <span class="kpi-label">Platform Uptime</span>
+                        <span class="kpi-trend trend--good">Zero-downtime deploys</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">🚀</div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" id="kpi-releases">47</span>
+                        <span class="kpi-label">Successful Releases</span>
+                        <span class="kpi-trend trend--good">This quarter</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">💰</div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" id="kpi-cost">$2.3K</span>
+                        <span class="kpi-label">Monthly Cloud Spend</span>
+                        <span class="kpi-trend trend--good">Optimized 30%</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon">🔧</div>
+                    <div class="kpi-content">
+                        <span class="kpi-value" id="kpi-mttr">15 min</span>
+                        <span class="kpi-label">MTTR (Incidents)</span>
+                        <span class="kpi-trend trend--good">-70% faster</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Grid -->
+            <section class="charts-section">
+                <div class="charts-row">
+                    <div class="chart-panel chart-panel--wide">
+                        <div class="chart-header">
+                            <h3>Deployment Pipeline Performance</h3>
+                            <div class="chart-controls">
+                                <button class="control-btn active" data-metric="duration">Duration</button>
+                                <button class="control-btn" data-metric="frequency">Frequency</button>
+                                <button class="control-btn" data-metric="success-rate">Success Rate</button>
+                            </div>
+                        </div>
+                        <canvas id="deployPerfChart"></canvas>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3>Environment Health</h3>
+                        </div>
+                        <canvas id="envHealthChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="charts-row">
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3>Infrastructure Provisioning Trend</h3>
+                        </div>
+                        <canvas id="infraTrendChart"></canvas>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3>Cost Optimization</h3>
+                        </div>
+                        <canvas id="costChart"></canvas>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3>Incident Response</h3>
+                        </div>
+                        <canvas id="incidentChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="charts-row">
+                    <div class="chart-panel chart-panel--wide">
+                        <div class="chart-header">
+                            <h3>Cluster Resource Utilization</h3>
+                        </div>
+                        <canvas id="clusterUtilChart"></canvas>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="chart-header">
+                            <h3>GitHub Activity</h3>
+                        </div>
+                        <canvas id="githubChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Live Cluster Status -->
+            <section class="cluster-status">
+                <div class="chart-header">
+                    <h3>Live Cluster Status (Simulated)</h3>
+                    <span class="status-indicator status--healthy">● All Systems Operational</span>
+                </div>
+                <div class="cluster-grid">
+                    <div class="cluster-item">
+                        <div class="cluster-name">EKS Control Plane</div>
+                        <div class="cluster-metric">
+                            <span class="metric-value">Healthy</span>
+                            <div class="mini-bar" style="--fill: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="cluster-item">
+                        <div class="cluster-name">Worker Nodes (3/3)</div>
+                        <div class="cluster-metric">
+                            <span class="metric-value">Ready</span>
+                            <div class="mini-bar" style="--fill: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="cluster-item">
+                        <div class="cluster-name">Pods Running</div>
+                        <div class="cluster-metric">
+                            <span class="metric-value">142/145</span>
+                            <div class="mini-bar" style="--fill: 98%"></div>
+                        </div>
+                    </div>
+                    <div class="cluster-item">
+                        <div class="cluster-name">CPU Utilization</div>
+                        <div class="cluster-metric">
+                            <span class="metric-value">42%</span>
+                            <div class="mini-bar" style="--fill: 42%"></div>
+                        </div>
+                    </div>
+                    <div class="cluster-item">
+                        <div class="cluster-name">Memory Utilization</div>
+                        <div class="cluster-metric">
+                            <span class="metric-value">58%</span>
+                            <div class="mini-bar" style="--fill: 58%"></div>
+                        </div>
+                    </div>
+                    <div class="cluster-item">
+                        <div class="cluster-name">ArgoCD Sync Status</div>
+                        <div class="cluster-metric">
+                            <span class="metric-value">Synced</span>
+                            <div class="mini-bar" style="--fill: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Rajesh Chilukuri. Crafted with ☕, ⚡, and Kubernetes.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
