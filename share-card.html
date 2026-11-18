@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rajesh Chilukuri | DevOps Engineer</title>
+    <meta name="description" content="Senior DevOps & Platform Engineer - AWS, Kubernetes, Terraform, ArgoCD. 99.9% Uptime • 30% Cost Saved • 15 min MTTR">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --purple: #8b5cf6;
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+            --emerald: #10b981;
+            --amber: #f59e0b;
+            --bg: #020204;
+        }
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--bg);
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #020204 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        /* Ambient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .orb-1 { width: 400px; height: 400px; background: var(--purple); top: -10%; left: -10%; animation: pulse 4s ease-in-out infinite; }
+        .orb-2 { width: 350px; height: 350px; background: var(--cyan); bottom: -10%; right: -10%; animation: pulse 5s ease-in-out infinite; animation-delay: 1.5s; }
+        .orb-3 { width: 300px; height: 300px; background: var(--pink); top: 35%; right: 25%; animation: pulse 4s ease-in-out infinite; animation-delay: 3s; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.15); opacity: 0.5; }
+        }
+        .grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        /* Profile content */
+        .profile {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 320px;
+            width: 100%;
+        }
+        .name {
+            font-size: 2.25rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 50%, var(--pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.3));
+        }
+        .title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-bottom: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        /* Metrics */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+        .metric {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-radius: 16px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+        }
+        .metric:hover {
+            border-color: var(--purple);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+        }
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+        }
+        .metric-value.purple { color: var(--purple); }
+        .metric-value.cyan { color: var(--cyan); }
+        .metric-value.emerald { color: var(--emerald); }
+        .metric-value.amber { color: var(--amber); }
+        .metric-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        /* Skills */
+        .skills-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--purple);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+        .skill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .skill:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: var(--purple);
+            transform: scale(1.05);
+        }
+        .skill-icon {
+            font-size: 1rem;
+        }
+        /* Contact */
+        .contact {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+        .contact-btn {
+            padding: 0.85rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-email {
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            color: #fff;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+        }
+        .btn-email:hover {
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+            transform: translateY(-2px);
+        }
+        .btn-linkedin {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        .btn-linkedin:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+            transform: translateY(-2px);
+        }
+        .footer {
+            position: absolute;
+            bottom: 1rem;
+            z-index: 10;
+            font-size: 0.65rem;
+            color: #64748b;
+            font-family: 'JetBrains Mono', monospace;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid"></div>
+
+        <div class="profile">
+            <div class="name">Rajesh<br>Chilukuri</div>
+            <div class="title">DevOps & Platform Engineer</div>
+
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-value purple">99.9%</div>
+                    <div class="metric-label">Uptime SLA</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value amber">30%</div>
+                    <div class="metric-label">Cloud Cost Saved</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value cyan">15 min</div>
+                    <div class="metric-label">MTTR</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value emerald">Daily</div>
+                    <div class="metric-label">Deployments</div>
+                </div>
+            </div>
+
+            <div class="skills-label">Stack</div>
+            <div class="skills">
+                <div class="skill"><span class="skill-icon">☁</span> AWS</div>
+                <div class="skill"><span class="skill-icon">⎈</span> Kubernetes</div>
+                <div class="skill"><span class="skill-icon">📦</span> Terraform</div>
+                <div class="skill"><span class="skill-icon">🔄</span> ArgoCD</div>
+                <div class="skill"><span class="skill-icon">📊</span> Prometheus</div>
+                <div class="skill"><span class="skill-icon">🐳</span> Docker</div>
+            </div>
+
+            <div class="contact">
+                <a href="mailto:rajeshchilukuri210@gmail.com" class="contact-btn btn-email">
+                    <span class="skill-icon">📧</span> Email
+                </a>
+                <a href="https://www.linkedin.com/in/rajesh-chilukuri-692506406" target="_blank" class="contact-btn btn-linkedin">
+                    <span class="skill-icon">💼</span> LinkedIn
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            rajeshchilukuri210@gmail.com &bull; github.com/Rajesh-210
+        </div>
+    </div>
+</body>
+</html>
