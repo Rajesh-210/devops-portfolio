@@ -7,21 +7,21 @@
 const toolCategories = {
     cloud: [
         { name: 'AWS', icon: 'aws' },
-        { name: 'EC2', icon: 'amazonec2' },
-        { name: 'S3', icon: 'amazons3' },
-        { name: 'VPC', icon: 'amazonvpc' },
-        { name: 'EKS', icon: 'amazonaws' }, // using aws for EKS
-        { name: 'Route53', icon: 'amazonroute53' },
-        { name: 'CloudWatch', icon: 'amazoncloudwatch' },
-        { name: 'IAM', icon: 'amazoniam' },
+        { name: 'EC2', icon: 'aws' },
+        { name: 'S3', icon: 'aws' },
+        { name: 'VPC', icon: 'aws' },
+        { name: 'EKS', icon: 'kubernetes' },
+        { name: 'Route53', icon: 'aws' },
+        { name: 'CloudWatch', icon: 'aws' },
+        { name: 'IAM', icon: 'aws' },
     ],
     containers: [
         { name: 'Kubernetes', icon: 'kubernetes' },
         { name: 'Docker', icon: 'docker' },
-        { name: 'EKS', icon: 'amazonaws' },
+        { name: 'EKS', icon: 'kubernetes' },
         { name: 'Helm', icon: 'helm' },
-        { name: 'Containerd', icon: 'containerd' },
-        { name: 'ECR', icon: 'amazonec2' },
+        { name: 'Containerd', icon: 'docker' },
+        { name: 'ECR', icon: 'aws' },
     ],
     cicd: [
         { name: 'Jenkins', icon: 'jenkins' },
@@ -51,6 +51,16 @@ const toolCategories = {
     ]
 };
 
+// Map JS container keys to actual HTML element IDs
+const categoryElementIds = {
+    cloud: 'cloud-tools',
+    containers: 'container-tools',
+    cicd: 'cicd-tools',
+    iac: 'iac-tools',
+    observability: 'obs-tools',
+    scripting: 'script-tools',
+};
+
 // ---- SKILLICONS URL BUILDER ----
 function getSkillIconUrl(name) {
     // skillicons.dev uses lowercase names
@@ -71,7 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ---- TOOL GRIDS ----
 function initToolGrids() {
     Object.entries(toolCategories).forEach(([category, tools]) => {
-        const container = document.getElementById(`${category}-tools`);
+        const containerId = categoryElementIds[category];
+        const container = document.getElementById(containerId);
         if (!container) return;
 
         tools.forEach((tool, index) => {

@@ -828,6 +828,103 @@
             </div>
         </section>
 
+        <!-- Upcoming Projects -->
+        <section id="upcoming" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <header class="text-center mb-16 stagger-in">
+                    <span class="text-xs font-mono uppercase tracking-widest text-[var(--accent-3)]">Roadmap</span>
+                    <h2 class="text-4xl sm:text-5xl font-bold mt-4 text-gradient-primary">Upcoming Projects</h2>
+                    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">Industry-oriented architecture initiatives I'm planning to design, build, and open-source.</p>
+                </header>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-in">
+                    <!-- Multi-Cloud DR -->
+                    <article class="glass-strong rounded-3xl p-8 card-interactive relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-2)]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="relative flex items-center gap-3 mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00d4ff] to-[#bc13fe] flex items-center justify-center">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">Multi-Cloud Disaster Recovery Platform</h3>
+                                <p class="text-xs font-mono text-slate-400">Cross-Region Failover & HA</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="glass px-4 py-3 rounded-xl">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-slate-300">RTO Target</span>
+                                    <span class="font-bold text-[var(--accent-2)]">&lt; 15 min</span>
+                                </div>
+                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 80%"></div></div>
+                            </div>
+                            <ul class="space-y-2 text-xs text-slate-400 font-mono">
+                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Terraform modules for AWS + GCP</li>
+                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Route53 health checks & failover</li>
+                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Automated DNS cutover</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- Zero-Trust Service Mesh -->
+                    <article class="glass-strong rounded-3xl p-8 card-interactive relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-1)]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="relative flex items-center gap-3 mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#bc13fe] to-[#00d4ff] flex items-center justify-center">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">Zero-Trust Service Mesh on EKS</h3>
+                                <p class="text-xs font-mono text-slate-400">Istio + mTLS + OPA Policy</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="glass px-4 py-3 rounded-xl">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-slate-300">Policy Enforcement</span>
+                                    <span class="font-bold text-[var(--accent-1)]">100%</span>
+                                </div>
+                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                            <ul class="space-y-2 text-xs text-slate-400 font-mono">
+                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Istio sidecar injection & mTLS</li>
+                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> OPA Gatekeeper policies</li>
+                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> SPIFFE workload identity</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- FinOps Auto-Scaling -->
+                    <article class="glass-strong rounded-3xl p-8 card-interactive relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-3)]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="relative flex items-center gap-3 mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#ff006e] to-[#bc13fe] flex items-center justify-center">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">FinOps Auto-Scaling Engine</h3>
+                                <p class="text-xs font-mono text-slate-400">Karpenter + Cost Anomaly Detection</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="glass px-4 py-3 rounded-xl">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-slate-300">Projected Savings</span>
+                                    <span class="font-bold text-[var(--accent-3)]">25-35%</span>
+                                </div>
+                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 60%"></div></div>
+                            </div>
+                            <ul class="space-y-2 text-xs text-slate-400 font-mono">
+                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Karpenter node provisioning</li>
+                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Cost anomaly alerts via Slack</li>
+                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Spot instance optimization</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
         <!-- Certifications -->
         <section class="py-24 px-6 relative">
             <div class="max-w-7xl mx-auto">
