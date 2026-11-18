@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajesh Chilukuri - DevOps Portfolio Reel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --neon-purple: #8b5cf6;
+            --neon-cyan: #06b6d4;
+            --neon-pink: #ec4899;
+            --neon-emerald: #10b981;
+            --neon-amber: #f59e0b;
+            --abyss: #020204;
+            --space-900: #0a0a12;
+        }
+
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: var(--abyss);
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+        }
+
+        /* Video canvas - vertical 9:16 (1080x1920) */
+        .reel {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #020204 100%);
+        }
+
+        /* Ambient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .orb-1 { width: 500px; height: 500px; background: var(--neon-purple); top: -15%; left: -10%; animation: pulse 4s ease-in-out infinite; }
+        .orb-2 { width: 450px; height: 450px; background: var(--neon-cyan); bottom: -10%; right: -15%; animation: pulse 5s ease-in-out infinite; animation-delay: 1.5s; }
+        .orb-3 { width: 350px; height: 350px; background: var(--neon-pink); top: 40%; right: 20%; animation: pulse 4s ease-in-out infinite; animation-delay: 3s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.35; }
+            50% { transform: scale(1.15); opacity: 0.55; }
+        }
+
+        /* Grid pattern */
+        .grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Canvas for tool logos */
+        #reelCanvas {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* Scene container */
+        .scene {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .scene.active { opacity: 1; transform: translateY(0); }
+        .scene.exit { opacity: 0; transform: translateY(-30px); }
+
+        /* Scene 1: Name */
+        .name-main {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 0.95;
+            text-align: center;
+            background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-cyan) 50%, var(--neon-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradientShift 4s ease infinite;
+            filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.4));
+        }
+        .name-sub {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--neon-cyan);
+            margin-top: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+        .name-tag {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Scene 2: Skills */
+        .skills-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 700px;
+            width: 100%;
+        }
+        .skill-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.4s ease;
+        }
+        .skill-card:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: var(--neon-purple);
+            transform: translateY(-5px);
+        }
+        .skill-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        .skill-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .skill-tag {
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+        }
+
+        /* Scene 3: Projects */
+        .projects-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.4s ease;
+        }
+        .project-card:hover {
+            border-color: var(--neon-cyan);
+            background: rgba(6, 182, 212, 0.05);
+        }
+        .project-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .badge-aws { background: linear-gradient(135deg, #FF9900, #FF9900); box-shadow: 0 0 20px rgba(255, 153, 0, 0.3); }
+        .badge-k8s { background: linear-gradient(135deg, #326CE5, #326CE5); box-shadow: 0 0 20px rgba(50, 108, 229, 0.3); }
+        .badge-terraform { background: linear-gradient(135deg, #7B42BC, #7B42BC); box-shadow: 0 0 20px rgba(123, 66, 188, 0.3); }
+        .project-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+        .project-info p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+            font-family: 'Inter', sans-serif;
+        }
+        .project-stats {
+            display: flex;
+            gap: 1rem;
+        }
+        .stat {
+            text-align: right;
+        }
+        .stat-value {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--neon-emerald);
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Scene 4: CTA */
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            line-height: 1.1;
+        }
+        .cta-title span { color: var(--neon-purple); }
+        .cta-sub {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+        .cta-button {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+            color: #fff;
+            border: none;
+            padding: 1.25rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+            animation: btnGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes btnGlow {
+            0% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.4); }
+            100% { box-shadow: 0 0 60px rgba(6, 182, 212, 0.5); }
+        }
+        .contact-info {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .contact-item svg { color: var(--neon-purple); width: 16px; height: 16px; }
+
+        /* Progress bar at top */
+        .progress {
+            position: absolute;
+            top: 0; left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+            z-index: 50;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: progress 30s linear forwards;
+        }
+        @keyframes progress {
+            to { transform: scaleX(1); }
+        }
+
+        /* Instagram frame */
+        .instagram-frame {
+            position: absolute;
+            inset: 0;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0;
+            z-index: 60;
+            pointer-events: none;
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Fade overlay for scene transitions */
+        .fade {
+            position: absolute;
+            inset: 0;
+            background: var(--abyss);
+            z-index: 40;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+        .fade.active { opacity: 1; }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="reel">
+        <!-- Progress bar -->
+        <div class="progress"></div>
+
+        <!-- Background elements -->
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="grid"></div>
+
+        <!-- Canvas for DevOps tool logos -->
+        <canvas id="reelCanvas"></canvas>
+
+        <!-- Instagram frame -->
+        <div class="instagram-frame"></div>
+
+        <!-- Scene 1: Name -->
+        <div class="scene" id="scene-1">
+            <div class="name-main">Rajesh<br>Chilukuri</div>
+            <div class="name-sub">DevOps &amp; Platform Engineer</div>
+            <div class="name-tag">AWS • Kubernetes • Terraform • ArgoCD • Prometheus</div>
+        </div>
+
+        <!-- Scene 2: Skills -->
+        <div class="scene" id="scene-2">
+            <div class="skills-title">Tools I Engineer With</div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">☁</div>
+                    <div class="skill-name">AWS</div>
+                    <div class="skill-tag">Cloud Infrastructure</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⎈</div>
+                    <div class="skill-name">Kubernetes</div>
+                    <div class="skill-tag">Container Orchestration</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🐳</div>
+                    <div class="skill-name">Docker</div>
+                    <div class="skill-tag">Containerization</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📦</div>
+                    <div class="skill-name">Terraform</div>
+                    <div class="skill-tag">Infrastructure as Code</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔄</div>
+                    <div class="skill-name">ArgoCD</div>
+                    <div class="skill-tag">GitOps Delivery</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📊</div>
+                    <div class="skill-name">Prometheus</div>
+                    <div class="skill-tag">Observability</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔧</div>
+                    <div class="skill-name">Jenkins</div>
+                    <div class="skill-tag">CI/CD Pipelines</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🛡️</div>
+                    <div class="skill-name">DevSecOps</div>
+                    <div class="skill-tag">Security & Compliance</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 3: Projects -->
+        <div class="scene" id="scene-3">
+            <div class="projects-title">Production Case Studies</div>
+            <div class="project-card">
+                <div class="project-badge badge-aws">☁</div>
+                <div class="project-info">
+                    <h3>Three-Tier EKS Platform</h3>
+                    <p>AWS • EKS • ArgoCD • Terraform • Zero Downtime</p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <span class="stat-value">83%</span>
+                            <span class="stat-label">Faster Deploys</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">5 min</span>
+                            <span class="stat-label">Release Cycle</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-badge badge-k8s">⎈</div>
+                <div class="project-info">
+                    <h3>Zero-Trust Service Mesh</h3>
+                    <p>Istio • mTLS • OPA • EKS • 100% Policy</p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <span class="stat-value">Zero</span>
+                            <span class="stat-label">Critical CVEs</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">mTLS</span>
+                            <span class="stat-label">Encrypted</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-badge badge-terraform">📦</div>
+                <div class="project-info">
+                    <h3>FinOps Auto-Scaling</h3>
+                    <p>Karpenter • Spot Instances • Cost Alerts</p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <span class="stat-value">30%</span>
+                            <span class="stat-label">Monthly Saved</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">Auto</span>
+                            <span class="stat-label">Scaling</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 4: CTA -->
+        <div class="scene" id="scene-4">
+            <div class="cta-title">Ready to <span>Transform</span><br>Your Platform?</div>
+            <div class="cta-sub">I help engineering teams ship faster, safer, and cheaper with automated, observable cloud infrastructure.</div>
+            <button class="cta-button">Let's Talk</button>
+            <div class="contact-info">
+                <div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>rajeshchilukuri210@gmail.com</div>
+                <div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11v7a4 4 0 00-8 0v-7M5 9h14l1 12H4L5 9z"/></svg>rajesh-chilukuri-692506406</div>
+                <div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>github.com/Rajesh-210</div>
+            </div>
+        </div>
+
+        <!-- Fade overlay -->
+        <div class="fade" id="fade"></div>
+    </div>
+
+    <script>
+        // ============================================
+        // INSTAGRAM REEL - DevOps Tool Background Animation
+        // ============================================
+        const canvas = document.getElementById('reelCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let tools = [];
+
+        const toolIcons = [
+            { char: '☁', color: '#FFA41C' },   // AWS
+            { char: '⎈', color: '#326CE5' },   // K8s
+            { char: '🐳', color: '#2496ED' },  // Docker
+            { char: '📦', color: '#7B42BC' },  // Terraform
+            { char: '🔄', color: '#E5492B' },  // ArgoCD
+            { char: '📊', color: '#E6522C' },  // Prometheus
+            { char: '🔧', color: '#D24939' },  // Jenkins
+            { char: '🛡️', color: '#1A1918' },  // Ansible
+            { char: '🐙', color: '#171515' },  // GitHub
+            { char: '🔌', color: '#009639' },  // Nginx
+        ];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class ToolParticle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 40 + 25;
+                this.speedX = (Math.random() - 0.5) * 0.2;
+                this.speedY = (Math.random() - 0.5) * 0.2;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.01;
+                this.opacity = Math.random() * 0.4 + 0.15;
+                const tool = toolIcons[Math.floor(Math.random() * toolIcons.length)];
+                this.char = tool.char;
+                this.color = tool.color;
+                this.floatPhase = Math.random() * Math.PI * 2;
+                this.floatSpeed = 0.002 + Math.random() * 0.004;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.rotation += this.rotationSpeed;
+                this.floatPhase += this.floatSpeed;
+                if (this.x < -this.size) this.x = width + this.size;
+                if (this.x > width + this.size) this.x = -this.size;
+                if (this.y < -this.size) this.y = height + this.size;
+                if (this.y > height + this.size) this.y = -this.size;
+            }
+            draw() {
+                const floatY = Math.sin(this.floatPhase) * 12;
+                ctx.save();
+                ctx.translate(this.x, this.y + floatY);
+                ctx.rotate(this.rotation);
+                ctx.globalAlpha = this.opacity;
+                ctx.font = `${this.size}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = this.color;
+                ctx.fillText(this.char, 0, 0);
+                ctx.restore();
+            }
+        }
+
+        function initTools() {
+            const count = Math.floor((width * height) / 120000);
+            for (let i = 0; i < count; i++) tools.push(new ToolParticle());
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(2, 2, 4, 0.15)';
+            ctx.fillRect(0, 0, width, height);
+            tools.forEach(t => { t.update(); t.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        initTools();
+        animate();
+
+        // ============================================
+        // Scene Sequencer (30 seconds total)
+        // ============================================
+        const scenes = [
+            { id: 'scene-1', start: 0, end: 7 },      // Name - 7s
+            { id: 'scene-2', start: 7, end: 17 },     // Skills - 10s
+            { id: 'scene-3', start: 17, end: 24 },    // Projects - 7s
+            { id: 'scene-4', start: 24, end: 30 },    // CTA - 6s
+        ];
+
+        const sceneEls = {};
+        scenes.forEach(s => {
+            sceneEls[s.id] = document.getElementById(s.id);
+        });
+
+        function updateScenes(time) {
+            scenes.forEach((scene, idx) => {
+                const el = sceneEls[scene.id];
+                const nextScene = scenes[idx + 1];
+
+                if (time >= scene.start && time < scene.end) {
+                    // Current scene - active
+                    el.classList.remove('exit');
+                    el.classList.add('active');
+
+                    // Fade in at start
+                    if (time - scene.start < 1) {
+                        el.style.opacity = Math.min((time - scene.start) / 1, 1);
+                        el.style.transform = `translateY(${30 * (1 - (time - scene.start))}px)`;
+                    }
+
+                    // Fade out near end
+                    if (scene.end - time < 1) {
+                        el.style.opacity = Math.max(scene.end - time, 0);
+                        el.style.transform = `translateY(-${30 * (1 - (scene.end - time))}px)`;
+                    }
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+        }
+
+        const startTime = Date.now();
+        function tick() {
+            const elapsed = (Date.now() - startTime) / 1000;
+            const time = elapsed % 30; // Loop every 30 seconds
+            updateScenes(time);
+            requestAnimationFrame(tick);
+        }
+        tick();
+
+        // Console Easter egg
+        console.log('%c🎬 Instagram Reel Ready!', 'color: #8b5cf6; font-size: 16px; font-weight: bold;');
+        console.log('%cScreen record this at 1080x1920 for your Instagram Reel', 'color: #06b6d4; font-size: 12px;');
+    </script>
+</body>
+</html>
