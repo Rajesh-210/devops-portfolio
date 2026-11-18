@@ -3,99 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rajesh Chilukuri - Senior DevOps & Platform Engineer. Building scalable, secure, and cost-efficient cloud infrastructure on AWS & Kubernetes.">
+    <meta name="description" content="Rajesh Chilukuri - Senior DevOps & Platform Engineer. Building scalable, secure, cost-efficient cloud infrastructure on AWS & Kubernetes. Let's ship faster, safer, cheaper.">
     <title>Rajesh Chilukuri | Senior DevOps & Platform Engineer</title>
 
-    <!-- Tailwind CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- Tailwind Config -->
+    <!-- SkillIcons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Outfit', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
+                        inter: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'space': {
-                            950: '#030014',
-                            900: '#0a0420',
-                            800: '#140e2e',
-                            700: '#1e163c',
-                        },
-                        'violet': {
-                            400: '#c084fc',
-                            500: '#a855f7',
-                            600: '#9333ea',
-                            700: '#7e22ce',
-                        },
-                        'magenta': {
-                            400: '#f0abfc',
-                            500: '#e879f9',
-                            600: '#d946ef',
-                            700: '#c026d3',
-                        },
-                        'cyan': {
-                            400: '#22d3ee',
-                            500: '#06b6d4',
-                            600: '#0891b2',
-                        },
-                        'electric': {
-                            purple: '#bc13fe',
-                            blue: '#00d4ff',
-                            pink: '#ff006e',
-                        }
+                        abyss: { 50: '#f0f0ff', 100: '#e0e0ff', 500: '#0a0a12', 900: '#050508', 950: '#020204' },
+                        neon: { purple: '#8b5cf6', cyan: '#06b6d4', pink: '#ec4899', emerald: '#10b981', amber: '#f59e0b' },
+                        glass: { bg: 'rgba(10, 10, 18, 0.6)', border: 'rgba(139, 92, 246, 0.15)' },
                     },
                     animation: {
-                        'float-slow': 'float 8s ease-in-out infinite',
-                        'float-medium': 'float 6s ease-in-out infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-slow': 'float 10s ease-in-out infinite',
                         'float-fast': 'float 4s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
-                        'rotate-slow': 'rotate 20s linear infinite',
-                        'gradient-shift': 'gradientShift 8s ease infinite',
-                        'orbit': 'orbit 15s linear infinite',
+                        'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
+                        'orbit': 'orbit 20s linear infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'gradient-shift': 'gradientShift 10s ease infinite',
+                        'marquee': 'marquee 30s linear infinite',
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(0) translateX(0)' },
-                            '25%': { transform: 'translateY(-20px) translateX(10px)' },
-                            '50%': { transform: 'translateY(10px) translateX(-15px)' },
-                            '75%': { transform: 'translateY(-10px) translateX(5px)' },
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-15px) rotate(2deg)' },
+                            '66%': { transform: 'translateY(10px) rotate(-2deg)' },
                         },
                         pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 20px rgba(188, 19, 254, 0.3), 0 0 40px rgba(0, 212, 255, 0.2)' },
-                            '50%': { boxShadow: '0 0 40px rgba(188, 19, 254, 0.5), 0 0 80px rgba(0, 212, 255, 0.4)' },
+                            '0%, 100%': { boxShadow: '0 0 30px rgba(139, 92, 246, 0.2), 0 0 60px rgba(6, 182, 212, 0.1)' },
+                            '50%': { boxShadow: '0 0 60px rgba(139, 92, 246, 0.4), 0 0 100px rgba(6, 182, 212, 0.2)' },
                         },
-                        rotate: {
+                        orbit: {
                             '0%': { transform: 'rotate(0deg)' },
                             '100%': { transform: 'rotate(360deg)' },
                         },
                         gradientShift: {
-                            '0%': { backgroundPosition: '0% 50%' },
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
                             '50%': { backgroundPosition: '100% 50%' },
-                            '100%': { backgroundPosition: '0% 50%' },
                         },
-                        orbit: {
-                            '0%': { transform: 'rotate(0deg) translateX(100px) rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg) translateX(100px) rotate(-360deg)' },
-                        }
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
                     },
                     backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                        'mesh-gradient': 'linear-gradient(135deg, #0a0a12 0%, #1a1a2e 50%, #0a0a12 100%)',
                     }
                 }
             }
@@ -103,536 +76,403 @@
     </script>
 
     <style>
-        :root {
-            --glass-bg: rgba(20, 14, 46, 0.7);
-            --glass-border: rgba(188, 19, 254, 0.15);
-            --glass-hover-border: rgba(188, 19, 254, 0.4);
-            --accent-1: #bc13fe;
-            --accent-2: #00d4ff;
-            --accent-3: #ff006e;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            html { color-scheme: dark; }
-        }
-
         * {
-            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: #8b5cf6 #050508;
+        }
+        *::-webkit-scrollbar {
+            width: 6px;
+        }
+        *::-webkit-scrollbar-track {
+            background: #050508;
+        }
+        *::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #8b5cf6, #06b6d4);
+            border-radius: 3px;
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #030014;
+            font-family: 'Outfit', sans-serif;
+            background-color: #020204;
             color: #f8fafc;
             overflow-x: hidden;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #030014; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #bc13fe, #00d4ff); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #d946ef, #06b6d4); }
-
-        /* Selection */
-        ::selection { background: rgba(188, 19, 254, 0.3); color: #fff; }
-
-        /* Glassmorphism */
-        .glass {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(10, 10, 18, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        .glass:hover {
-            border-color: var(--glass-hover-border);
-            box-shadow:
-                0 0 40px rgba(188, 19, 254, 0.15),
-                0 25px 50px -12px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        .glass-panel-hover:hover {
+            border-color: rgba(139, 92, 246, 0.35);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+            transform: translateY(-4px);
         }
 
-        .glass-strong {
-            background: rgba(20, 14, 46, 0.9);
-            border: 1px solid rgba(188, 19, 254, 0.25);
-        }
-
-        /* Gradient Text */
-        .text-gradient-primary {
-            background: linear-gradient(135deg, #bc13fe 0%, #00d4ff 50%, #ff006e 100%);
-            background-size: 200% 200%;
+        .text-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 50%, #ec4899 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 5s ease infinite;
+            background-size: 200% auto;
+            animation: gradientShift 4s ease infinite;
         }
 
         .text-gradient-cyan {
-            background: linear-gradient(135deg, #00d4ff 0%, #22d3ee 100%);
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .text-gradient-magenta {
-            background: linear-gradient(135deg, #f0abfc 0%, #bc13fe 100%);
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        /* Animated Background Elements */
+        /* Animated background elements */
         .orb {
-            position: absolute;
+            position: fixed;
             border-radius: 50%;
             filter: blur(80px);
             opacity: 0.4;
+            z-index: 0;
             pointer-events: none;
-            animation: float-slow ease-in-out infinite;
         }
 
-        .orb-1 { width: 400px; height: 400px; background: radial-gradient(circle, #bc13fe 0%, transparent 70%); top: -100px; left: -100px; animation-delay: 0s; animation-duration: 12s; }
-        .orb-2 { width: 300px; height: 300px; background: radial-gradient(circle, #00d4ff 0%, transparent 70%); bottom: 10%; right: -50px; animation-delay: -4s; animation-duration: 10s; }
-        .orb-3 { width: 250px; height: 250px; background: radial-gradient(circle, #ff006e 0%, transparent 70%); top: 40%; right: 10%; animation-delay: -2s; animation-duration: 14s; }
-        .orb-4 { width: 350px; height: 350px; background: radial-gradient(circle, #a855f7 0%, transparent 70%); bottom: -100px; left: 20%; animation-delay: -6s; animation-duration: 16s; }
-
-        /* Grid Pattern */
-        .grid-pattern {
-            background-image:
-                linear-gradient(rgba(188, 19, 254, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(188, 19, 254, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 60px 60px; }
-        }
-
-        /* Floating Geometric Shapes */
-        .geo-shape {
-            position: absolute;
+        .tool-logo-float {
+            position: fixed;
+            z-index: 0;
             pointer-events: none;
-            opacity: 0.15;
-            animation: float-medium ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.5));
+            opacity: 0.85;
         }
 
-        .geo-triangle { width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-bottom: 26px solid #bc13fe; }
-        .geo-square { width: 20px; height: 20px; background: linear-gradient(135deg, #00d4ff, #bc13fe); transform: rotate(45deg); }
-        .geo-circle { width: 12px; height: 12px; border-radius: 50%; background: #ff006e; }
-        .geo-ring { width: 30px; height: 30px; border: 2px solid #00d4ff; border-radius: 50%; }
-
-        /* Card Hover Effects */
-        .card-interactive {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .card-interactive:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(188, 19, 254, 0.5);
-            box-shadow:
-                0 0 60px rgba(188, 19, 254, 0.2),
-                0 30px 60px -15px rgba(0, 0, 0, 0.6);
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        /* Glowing Border */
-        .glow-border {
+        /* Hero text effects */
+        .hero-glow {
             position: relative;
         }
-        .glow-border::before {
+        .hero-glow::after {
+            content: attr(data-glow);
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4, #ec4899);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            pointer-events: none;
+            filter: blur(8px);
+            z-index: -1;
+        }
+
+        /* CTA button */
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .cta-button::before {
             content: '';
             position: absolute;
-            inset: -2px;
-            border-radius: inherit;
-            background: linear-gradient(135deg, #bc13fe, #00d4ff, #ff006e);
-            background-size: 200% 200%;
-            z-index: -1;
-            opacity: 0;
-            animation: gradientShift 4s ease infinite;
-            transition: opacity 0.3s;
-            filter: blur(8px);
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: 0.5s;
         }
-        .glow-border:hover::before {
-            opacity: 0.5;
+        .cta-button:hover::before {
+            left: 100%;
         }
 
-        /* Text Reveal Animation */
-        .reveal-text {
-            overflow: hidden;
+        /* Skill icon card */
+        .skill-card {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .reveal-text span {
-            display: inline-block;
-            transform: translateY(100%);
-            opacity: 0;
-            animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .reveal-text span:nth-child(1) { animation-delay: 0.1s; }
-        .reveal-text span:nth-child(2) { animation-delay: 0.2s; }
-        .reveal-text span:nth-child(3) { animation-delay: 0.3s; }
-        .reveal-text span:nth-child(4) { animation-delay: 0.4s; }
-        .reveal-text span:nth-child(5) { animation-delay: 0.5s; }
-        .reveal-text span:nth-child(6) { animation-delay: 0.6s; }
-
-        @keyframes revealUp {
-            to { transform: translateY(0); opacity: 1; }
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.05);
         }
 
-        /* Staggered Entrance */
-        .stagger-in > * {
+        /* Section divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.3), transparent);
+            margin: 2rem 0;
+        }
+
+        /* Reveal animation */
+        .reveal {
             opacity: 0;
             transform: translateY(30px);
-            animation: staggerUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: all 0.8s ease-out;
         }
-        .stagger-in > *:nth-child(1) { animation-delay: 0.1s; }
-        .stagger-in > *:nth-child(2) { animation-delay: 0.2s; }
-        .stagger-in > *:nth-child(3) { animation-delay: 0.3s; }
-        .stagger-in > *:nth-child(4) { animation-delay: 0.4s; }
-        .stagger-in > *:nth-child(5) { animation-delay: 0.5s; }
-        .stagger-in > *:nth-child(6) { animation-delay: 0.6s; }
-        .stagger-in > *:nth-child(7) { animation-delay: 0.7s; }
-        .stagger-in > *:nth-child(8) { animation-delay: 0.8s; }
-
-        @keyframes staggerUp {
-            to { opacity: 1; transform: translateY(0); }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Skill Icon Styles */
-        .skill-icon {
-            width: 48px;
-            height: 48px;
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 0 0 transparent);
+        /* Marquee ticker */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 1rem 0;
+            background: rgba(139, 92, 246, 0.05);
+            border-top: 1px solid rgba(139, 92, 246, 0.1);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
         }
-        .skill-icon:hover {
-            transform: scale(1.15) rotate(-3deg);
-            filter: drop-shadow(0 0 15px currentColor);
+        .marquee {
+            display: inline-block;
+            animation: marquee 40s linear infinite;
+        }
+        .marquee span {
+            display: inline-block;
+            padding: 0 2rem;
+            color: #6b7280;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
         }
 
-        /* Tool Card */
-        .tool-card {
-            background: rgba(10, 4, 32, 0.8);
-            border: 1px solid rgba(188, 19, 254, 0.1);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
+        /* Code block styling */
+        .code-block {
+            background: #050508;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
             overflow: hidden;
         }
-        .tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #bc13fe, #00d4ff, transparent);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
+        .code-header {
+            background: rgba(139, 92, 246, 0.1);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .tool-card:hover {
-            border-color: rgba(188, 19, 254, 0.4);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -10px rgba(188, 19, 254, 0.2);
+        .code-dot {
+            width: 10px; height: 10px; border-radius: 50%;
         }
-        .tool-card:hover::before {
-            transform: translateX(0);
-        }
+        .code-dot.red { background: #ff5f56; box-shadow: 0 0 10px #ff5f56; }
+        .code-dot.yellow { background: #ffbd2e; box-shadow: 0 0 10px #ffbd2e; }
+        .code-dot.green { background: #27c93f; box-shadow: 0 0 10px #27c93f; }
 
-        /* Metric Counter */
-        .metric-value {
-            font-variant-numeric: tabular-nums;
+        .contact-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
-
-        /* Focus States */
-        a:focus-visible, button:focus-visible {
-            outline: 2px solid #bc13fe;
-            outline-offset: 3px;
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+        .contact-input:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+            outline: none;
         }
     </style>
 </head>
-<body class="relative min-h-screen overflow-x-hidden">
+<body class="min-h-screen selection:bg-neon-purple selection:text-white">
 
-    <!-- ============ ANIMATED BACKGROUND LAYER ============ -->
-    <div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
-        <!-- Grid Pattern -->
-        <div class="grid-pattern fixed inset-0"></div>
+    <!-- ============ ANIMATED BACKGROUND ============ -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="grid-bg"></div>
 
-        <!-- Gradient Orbs -->
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="orb orb-4"></div>
+        <!-- Ambient Orbs -->
+        <div class="orb w-[600px] h-[600px] bg-[#8b5cf6] top-[-20%] left-[-20%] animate-pulse-glow"></div>
+        <div class="orb w-[500px] h-[500px] bg-[#06b6d4] bottom-[-15%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="orb w-[400px] h-[400px] bg-[#ec4899] top-[40%] right-[20%] animate-pulse-glow" style="animation-delay: 4s;"></div>
 
-        <!-- Canvas for Particles & Geometry -->
-        <canvas id="bg-canvas" class="fixed inset-0"></canvas>
+        <!-- Canvas for DevOps Tool Logos -->
+        <canvas id="toolCanvas" class="fixed inset-0 w-full h-full"></canvas>
     </div>
 
     <!-- ============ MAIN CONTENT ============ -->
     <main class="relative z-10">
 
         <!-- Navigation -->
-        <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4" aria-label="Main navigation">
-            <div class="max-w-7xl mx-auto glass-strong rounded-2xl px-6 py-3 flex items-center justify-between">
-                <a href="#" class="flex items-center gap-3" aria-label="Home">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#bc13fe] to-[#00d4ff] flex items-center justify-center font-bold text-white text-sm animate-pulse-glow">
+        <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+            <div class="max-w-7xl mx-auto glass-panel rounded-2xl px-6 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-3 cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-purple to-neon-cyan flex items-center justify-center font-bold text-white text-xs group-hover:scale-110 transition-transform">
                         RC
                     </div>
-                    <span class="hidden sm:block font-semibold text-gradient-primary">Rajesh Chilukuri</span>
-                </a>
-                <div class="flex items-center gap-4">
-                    <a href="#work" class="text-sm font-medium text-slate-300 hover:text-[var(--accent-1)] transition-colors">Work</a>
-                    <a href="#stack" class="text-sm font-medium text-slate-300 hover:text-[var(--accent-2)] transition-colors">Stack</a>
-                    <a href="#impact" class="text-sm font-medium text-slate-300 hover:text-[var(--accent-3)] transition-colors">Impact</a>
-                    <a href="dashboard.html" class="glass px-4 py-2 rounded-xl text-sm font-semibold hover:border-[var(--accent-1)] transition-all">Dashboard</a>
-                    <a href="#contact" class="px-5 py-2 rounded-xl bg-gradient-to-r from-[#bc13fe] to-[#00d4ff] text-white font-semibold text-sm hover:shadow-[0_0_30px_rgba(188,19,254,0.4)] transition-all">
+                    <span class="font-bold text-xl tracking-tight text-white">Rajesh <span class="text-neon-purple">Chilukuri</span></span>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#work" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Work</a>
+                    <a href="#stack" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Stack</a>
+                    <a href="#impact" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Impact</a>
+                    <a href="dashboard.html" class="text-sm font-medium text-neon-cyan hover:text-white transition-colors">Dashboard</a>
+                    <a href="#contact" class="px-5 py-2 rounded-xl bg-gradient-to-r from-neon-purple to-neon-cyan text-white font-semibold text-sm hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] transition-all cta-button">
                         Let's Talk
                     </a>
                 </div>
+                <button class="md:hidden text-slate-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
             </div>
         </nav>
 
         <!-- Hero Section -->
-        <section class="min-h-screen flex items-center justify-center pt-20 px-6" id="home">
-            <div class="max-w-7xl mx-auto w-full">
-                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-                    <!-- Left: Content -->
-                    <div class="stagger-in">
-                        <!-- Badge -->
-                        <div class="glass inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 max-w-fit" style="animation-delay: 0.1s;">
-                            <div class="w-2 h-2 rounded-full bg-[#00d4ff] animate-pulse"></div>
-                            <span class="text-xs font-mono text-slate-300">Senior DevOps & Platform Engineer</span>
-                            <span class="text-xs font-mono text-[var(--accent-1)]">Available for Contract</span>
-                        </div>
-
-                        <!-- Headline -->
-                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6">
-                            <span class="block text-white">Architecting</span>
-                            <span class="block text-gradient-primary">Resilient Cloud Platforms</span>
-                            <span class="block text-white">at Scale</span>
-                        </h1>
-
-                        <!-- Subheadline -->
-                        <p class="text-lg sm:text-xl text-slate-300 leading-relaxed mb-10 max-w-xl reveal-text" style="animation-delay: 0.3s;">
-                            <span>I build production-grade infrastructure</span>
-                            <span>that reduces deployment time by 83%</span>
-                            <span>and cloud costs by 30%</span>
-                            <span>using AWS, Kubernetes & GitOps.</span>
-                        </p>
-
-                        <!-- Metrics Bar -->
-                        <div class="flex flex-wrap gap-6 mb-10 stagger-in" style="animation-delay: 0.5s;">
-                            <div class="glass px-6 py-4 rounded-2xl min-w-[160px] card-interactive">
-                                <div class="text-3xl sm:text-4xl font-bold text-gradient-cyan metric-value" data-target="83">0</div>
-                                <div class="text-xs font-mono text-slate-400 mt-1">Faster Deployments</div>
-                            </div>
-                            <div class="glass px-6 py-4 rounded-2xl min-w-[160px] card-interactive">
-                                <div class="text-3xl sm:text-4xl font-bold text-gradient-magenta metric-value" data-target="96">0</div>
-                                <div class="text-xs font-mono text-slate-400 mt-1">Faster Provisioning</div>
-                            </div>
-                            <div class="glass px-6 py-4 rounded-2xl min-w-[160px] card-interactive">
-                                <div class="text-3xl sm:text-4xl font-bold text-[#ff006e] metric-value" data-target="99.9">0</div>
-                                <div class="text-xs font-mono text-slate-400 mt-1">Uptime SLA</div>
-                            </div>
-                            <div class="glass px-6 py-4 rounded-2xl min-w-[160px] card-interactive">
-                                <div class="text-3xl sm:text-4xl font-bold text-[#bc13fe] metric-value" data-target="30">0</div>
-                                <div class="text-xs font-mono text-slate-400 mt-1">Cost Reduction %</div>
-                            </div>
-                        </div>
-
-                        <!-- CTA Buttons -->
-                        <div class="flex flex-wrap gap-4 stagger-in" style="animation-delay: 0.7s;">
-                            <a href="#contact" class="glow-border px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#bc13fe] to-[#00d4ff] text-white font-semibold text-sm card-interactive">
-                                Start a Project
-                            </a>
-                            <a href="https://github.com/Rajesh-210" target="_blank" class="glass px-8 py-3.5 rounded-xl text-white font-semibold text-sm card-interactive flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                                View GitHub
-                            </a>
-                        </div>
+        <section class="relative pt-32 pb-24 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-4xl mx-auto">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-neon-purple/30 mb-8">
+                        <span class="w-2 h-2 rounded-full bg-neon-emerald animate-pulse"></span>
+                        <span class="text-xs font-mono text-neon-cyan font-bold uppercase tracking-wider">Available for new contracts</span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 leading-tight hero-glow" data-glow="DevOps that delivers business value.">
+                        <span class="text-white">DevOps that delivers</span><br>
+                        <span class="text-gradient">business value.</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                        I'm Rajesh Chilukuri, a Senior DevOps &amp; Platform Engineer. I help engineering teams ship
+                        faster, safer, and cheaper by building automated, observable, and cost-efficient cloud platforms on AWS &amp; Kubernetes.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#contact" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-neon-purple to-neon-cyan text-white font-bold text-lg hover:shadow-[0_0_40px_rgba(139,92,246,0.6)] hover:scale-105 transition-all duration-300 cta-button">
+                            Start a Conversation
+                        </a>
+                        <a href="https://github.com/Rajesh-210" target="_blank" class="px-8 py-4 rounded-2xl glass-panel border border-white/10 text-white font-bold text-lg hover:border-neon-purple/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] transition-all">
+                            View GitHub
+                        </a>
                     </div>
 
-                    <!-- Right: Visual -->
-                    <div class="relative stagger-in" style="animation-delay: 0.4s;">
-                        <div class="relative aspect-square max-w-lg mx-auto">
-                            <!-- Rotating Ring -->
-                            <div class="absolute inset-0 border-2 border-[var(--accent-1)]/20 rounded-full animate-rotate-slow"></div>
-                            <div class="absolute inset-4 border-2 border-[var(--accent-2)]/10 rounded-full animate-rotate-slow" style="animation-direction: reverse; animation-duration: 30s;"></div>
-                            <div class="absolute inset-12 border-2 border-[var(--accent-3)]/10 rounded-full animate-rotate-slow" style="animation-duration: 40s;"></div>
-
-                            <!-- Orbiting Elements -->
-                            <div class="absolute inset-0 animate-orbit">
-                                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[var(--accent-1)] shadow-[0_0_20px_#bc13fe]"></div>
-                            </div>
-                            <div class="absolute inset-4 animate-orbit" style="animation-duration: 18s; animation-direction: reverse;">
-                                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--accent-2)] shadow-[0_0_15px_#00d4ff]"></div>
-                            </div>
-                            <div class="absolute inset-8 animate-orbit" style="animation-duration: 22s;">
-                                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[var(--accent-3)] shadow-[0_0_15px_#ff006e]"></div>
-                            </div>
-
-                            <!-- Center Card -->
-                            <div class="absolute inset-1/2 -translate-x-1/2 -translate-y-1/2 glass-strong rounded-3xl p-6 flex items-center justify-center glow-border animate-float-slow">
-                                <div class="text-center">
-                                    <div class="text-4xl font-bold text-gradient-primary font-mono mb-2">EKS</div>
-                                    <div class="text-xs font-mono text-slate-400 tracking-wider uppercase">Production Clusters</div>
-                                    <div class="mt-6 flex items-center justify-center gap-6 text-xs font-mono">
-                                        <div class="flex items-center gap-1.5 text-[#10b981]">
-                                            <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
-                                            <span>3 Clusters Healthy</span>
-                                        </div>
-                                        <div class="flex items-center gap-1.5 text-[var(--accent-2)]">
-                                            <span class="w-2 h-2 rounded-full bg-[var(--accent-2)]"></span>
-                                            <span>GitOps Synced</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Corner Accents -->
-                            <div class="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-[var(--accent-1)]/50 rounded-tl-2xl"></div>
-                            <div class="absolute -top-4 -right-4 w-24 h-24 border-t-2 border-r-2 border-[var(--accent-2)]/50 rounded-tr-2xl"></div>
-                            <div class="absolute -bottom-4 -left-4 w-24 h-24 border-b-2 border-l-2 border-[var(--accent-3)]/50 rounded-bl-2xl"></div>
-                            <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-[var(--accent-1)]/50 rounded-br-2xl"></div>
+                    <!-- Trust metrics -->
+                    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="glass-panel p-6 rounded-2xl text-center border-l-4 border-neon-cyan">
+                            <div class="text-3xl font-bold text-white font-mono">99.9%</div>
+                            <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Uptime SLA</div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl text-center border-l-4 border-neon-purple">
+                            <div class="text-3xl font-bold text-white font-mono">30%</div>
+                            <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Cloud Cost Saved</div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl text-center border-l-4 border-neon-emerald">
+                            <div class="text-3xl font-bold text-white font-mono">15 min</div>
+                            <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">MTTR</div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl text-center border-l-4 border-neon-amber">
+                            <div class="text-3xl font-bold text-white font-mono">Daily</div>
+                            <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Deployments</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
+        <!-- Marquee Ticker -->
+        <div class="marquee-container">
+            <div class="marquee">
+                <span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>ArgoCD</span><span>Prometheus</span><span>Grafana</span><span>Jenkins</span><span>Docker</span><span>GitHub Actions</span><span>EKS</span><span>FinOps</span><span>DevSecOps</span><span>SRE</span><span>CI/CD</span><span>IaC</span><span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>ArgoCD</span><span>Prometheus</span><span>Grafana</span><span>Jenkins</span><span>Docker</span><span>GitHub Actions</span><span>EKS</span><span>FinOps</span><span>DevSecOps</span><span>SRE</span><span>CI/CD</span><span>IaC</span>
+            </div>
+        </div>
+
+        <!-- Work Section -->
         <section id="work" class="py-24 px-6 relative">
             <div class="max-w-7xl mx-auto">
-                <header class="text-center mb-16 stagger-in">
-                    <span class="text-xs font-mono uppercase tracking-widest text-[var(--accent-1)]">Professional Experience</span>
-                    <h2 class="text-4xl sm:text-5xl font-bold mt-4 text-gradient-primary">Where I've Made Impact</h2>
-                    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">Leading platform engineering initiatives that transform how teams deliver software.</p>
-                </header>
+                <div class="text-center mb-16">
+                    <span class="text-xs font-mono text-neon-purple uppercase tracking-widest">Selected Work</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mt-4">Production Architectures<br><span class="text-gradient">that scale.</span></h2>
+                    <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Real production systems I designed, built, and operate — with measurable business outcomes.</p>
+                </div>
 
-                <div class="space-y-6 stagger-in">
-                    <!-- L&T -->
-                    <article class="glass-strong rounded-3xl p-8 md:p-10 card-interactive glow-border relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-gradient-to-r from-[var(--accent-1)]/5 via-transparent to-[var(--accent-2)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div class="relative flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                            <div class="flex items-center gap-4">
-                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--accent-1)] to-[var(--accent-3)] flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold text-white">Senior DevOps Engineer</h3>
-                                    <p class="text-slate-300 font-medium">L&T Technology Services · Hyderabad</p>
-                                    <p class="text-xs font-mono text-[var(--accent-1)] mt-1">Dec 2024 – Present</p>
-                                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-neon-purple/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-cyan to-blue-600 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                             </div>
-                            <div class="flex flex-wrap gap-2 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-[var(--accent-1)]/20 text-[var(--accent-1)] border border-[var(--accent-1)]/30">AWS EKS</span>
-                                <span class="px-3 py-1 rounded-full bg-[var(--accent-2)]/20 text-[var(--accent-2)] border border-[var(--accent-2)]/30">ArgoCD</span>
-                                <span class="px-3 py-1 rounded-full bg-[var(--accent-3)]/20 text-[var(--accent-3)] border border-[var(--accent-3)]/30">Terraform</span>
-                                <span class="px-3 py-1 rounded-full bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/30">Prometheus</span>
+                            <div>
+                                <h3 class="font-bold text-white text-lg">Three-Tier EKS Platform</h3>
+                                <p class="text-xs text-slate-400 mt-1">AWS • Kubernetes • ArgoCD • Terraform</p>
                             </div>
                         </div>
-                        <div class="mt-6 pt-6 border-t border-white/10 grid md:grid-cols-3 gap-6">
-                            <div>
-                                <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">Architecture Delivered</h4>
-                                <ul class="space-y-2 text-sm text-slate-300">
-                                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-1)]"></span>Multi-AZ EKS clusters with private endpoints</li>
-                                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-2)]"></span>GitOps pipeline: GitHub → ArgoCD → EKS</li>
-                                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-3)]"></span>Modular Terraform with S3/DynamoDB backend</li>
-                                </ul>
+                        <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+                            Built a fully automated GitOps delivery pipeline on Amazon EKS. Modular Terraform provisions VPC, multi-AZ subnets, EKS cluster, and IAM OIDC. Jenkins CI/CD with ArgoCD self-healing sync. 83% faster deployments, zero downtime releases.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-neon-cyan font-mono">5 min</div>
+                                <div class="text-xs text-slate-500">Release Cycle</div>
                             </div>
-                            <div>
-                                <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">Key Achievements</h4>
-                                <ul class="space-y-2 text-sm text-slate-300">
-                                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>83% deployment time reduction (30m → 5m)</li>
-                                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>Zero-downtime releases via rolling updates</li>
-                                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>Team enablement: mentored 15+ developers</li>
-                                </ul>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-neon-emerald font-mono">100%</div>
+                                <div class="text-xs text-slate-500">IaC Governed</div>
                             </div>
-                            <div>
-                                <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">Platform Capabilities</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 text-xs bg-white/5 rounded border border-white/10">Self-Healing</span>
-                                    <span class="px-3 py-1 text-xs bg-white/5 rounded border border-white/10">Auto-Scaling</span>
-                                    <span class="px-3 py-1 text-xs bg-white/5 rounded border border-white/10">Drift Detection</span>
-                                    <span class="px-3 py-1 text-xs bg-white/5 rounded border border-white/10">Secret Rotation</span>
-                                    <span class="px-3 py-1 text-xs bg-white/5 rounded border border-white/10">Cost Monitoring</span>
-                                </div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-white font-mono">Zero</div>
+                                <div class="text-xs text-slate-500">Downtime</div>
                             </div>
                         </div>
                     </article>
 
-                    <!-- Accenture -->
-                    <article class="glass-strong rounded-3xl p-8 md:p-10 card-interactive glow-border relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-gradient-to-r from-[var(--accent-2)]/5 via-transparent to-[var(--accent-3)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div class="relative flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-                            <div class="flex items-center gap-4">
-                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--accent-2)] to-[#00d4ff] flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-                                </div>
-                                <div>
-                                    <h3 class="text-xl font-bold text-white">DevOps Engineer</h3>
-                                    <p class="text-slate-300 font-medium">Accenture · Hyderabad</p>
-                                    <p class="text-xs font-mono text-[var(--accent-2)] mt-1">Feb 2021 – Jul 2024</p>
-                                </div>
+                    <!-- Project 2 -->
+                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-cyan/50 transition-all duration-300 reveal" style="transition-delay: 100ms;">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-neon-cyan/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-purple to-pink-500 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
-                            <div class="flex flex-wrap gap-2 text-xs font-mono">
-                                <span class="px-3 py-1 rounded-full bg-[var(--accent-1)]/20 text-[var(--accent-1)] border border-[var(--accent-1)]/30">Jenkins</span>
-                                <span class="px-3 py-1 rounded-full bg-[var(--accent-3)]/20 text-[var(--accent-3)] border border-[var(--accent-3)]/30">Terraform</span>
-                                <span class="px-3 py-1 rounded-full bg-[#f59e0b]/20 text-[#f59e0b] border border-[#f59e0b]/30">Ansible</span>
-                                <span class="px-3 py-1 rounded-full bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/30">Grafana</span>
+                            <div>
+                                <h3 class="font-bold text-white text-lg">Zero-Trust Service Mesh</h3>
+                                <p class="text-xs text-slate-400 mt-1">Istio • mTLS • OPA • EKS</p>
                             </div>
                         </div>
-                        <div class="mt-6 pt-6 border-t border-white/10 grid md:grid-cols-3 gap-6">
-                            <div>
-                                <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">Flagship Projects</h4>
-                                <ul class="space-y-3 text-sm text-slate-300">
-                                    <li>
-                                        <strong class="text-white">CI/CD + GitOps Platform:</strong>
-                                        <p class="text-slate-400 mt-1">End-to-end pipeline reducing deploys 83%</p>
-                                    </li>
-                                    <li class="mt-3">
-                                        <strong class="text-white">Infrastructure Automation:</strong>
-                                        <p class="text-slate-400 mt-1">Modular Terraform cutting provisioning 96%</p>
-                                    </li>
-                                </ul>
+                        <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+                            Implemented service-to-service encryption with Istio mTLS and OPA Gatekeeper policies on EKS. SPIFFE workload identity for zero-trust networking. 100% policy enforcement, zero critical CVEs in production.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-neon-purple font-mono">100%</div>
+                                <div class="text-xs text-slate-500">Policy Coverage</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-neon-emerald font-mono">Zero</div>
+                                <div class="text-xs text-slate-500">Critical CVEs</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-white font-mono">mTLS</div>
+                                <div class="text-xs text-slate-500">Encrypted</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-emerald/50 transition-all duration-300 reveal" style="transition-delay: 200ms;">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-neon-emerald/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h2m-9 0h2m-9 0h2m-9 0h2m9 0h2m9 0h2m-9 0h2m-9 0h2m9-7h2m-9-7h2m-9-7h2m-9-7h2m9-7h2m9-7h2m-9-7h2m-9-7h2m9-7h2m9-7h2m-9-7h2m-9-7h2m9-7h2m9-7h2M3 34h9m-9 0h9m-9 0h9m-9 0h9M4 31a9 9 0 1118 0 9 9 0 01-18 0z"/></svg>
                             </div>
                             <div>
-                                <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">Technical Leadership</h4>
-                                <ul class="space-y-2 text-sm text-slate-300">
-                                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-2)]"></span>Designed reusable Terraform module registry</li>
-                                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-2)]"></span>Established monitoring standards across org</li>
-                                    <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-2)]"></span>Automated DR & backup strategies</li>
-                                </ul>
+                                <h3 class="font-bold text-white text-lg">FinOps Auto-Scaling</h3>
+                                <p class="text-xs text-slate-400 mt-1">Karpenter • AWS Cost Explorer • Slack</p>
                             </div>
-                            <div>
-                                <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">Business Outcomes</h4>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="glass px-4 py-3 rounded-xl text-center">
-                                        <div class="text-2xl font-bold text-gradient-cyan">$2.3K</div>
-                                        <div class="text-xs text-slate-400">Monthly Savings</div>
-                                    </div>
-                                    <div class="glass px-4 py-3 rounded-xl text-center">
-                                        <div class="text-2xl font-bold text-gradient-magenta">47+</div>
-                                        <div class="text-xs text-slate-400">Prod Releases</div>
-                                    </div>
-                                    <div class="glass px-4 py-3 rounded-xl text-center">
-                                        <div class="text-2xl font-bold text-[var(--accent-1)]">15m</div>
-                                        <div class="text-xs text-slate-400">MTTR</div>
-                                    </div>
-                                    <div class="glass px-4 py-3 rounded-xl text-center">
-                                        <div class="text-2xl font-bold text-[var(--accent-2)]">Zero</div>
-                                        <div class="text-xs text-slate-400">Config Drift</div>
-                                    </div>
-                                </div>
+                        </div>
+                        <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+                            Designed automated cost optimization with Karpenter node provisioning and spot instance orchestration. Real-time cost anomaly detection with Slack alerts. 30% monthly cloud spend reduction with zero performance impact.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-neon-amber font-mono">30%</div>
+                                <div class="text-xs text-slate-500">Monthly Saved</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-neon-emerald font-mono">100%</div>
+                                <div class="text-xs text-slate-500">Spot Instances</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-white font-mono">Auto</div>
+                                <div class="text-xs text-slate-500">Scaling</div>
                             </div>
                         </div>
                     </article>
@@ -640,327 +480,245 @@
             </div>
         </section>
 
-        <!-- Tech Stack Section -->
-        <section id="stack" class="py-24 px-6 relative">
+        <!-- Stack Section -->
+        <section id="stack" class="py-24 px-6 relative bg-white/5">
             <div class="max-w-7xl mx-auto">
-                <header class="text-center mb-16 stagger-in">
-                    <span class="text-xs font-mono uppercase tracking-widest text-[var(--accent-2)]">Technology Stack</span>
-                    <h2 class="text-4xl sm:text-5xl font-bold mt-4 text-gradient-primary">Tools I Engineer With</h2>
-                    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">Production-hardened toolchain for building scalable, observable, and secure platforms.</p>
-                </header>
+                <div class="text-center mb-16">
+                    <span class="text-xs font-mono text-neon-purple uppercase tracking-widest">Technology Stack</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mt-4">Tools I Engineer With</h2>
+                    <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Production-hardened toolchain for building scalable, observable, and secure platforms.</p>
+                </div>
 
-                <!-- Cloud & Infrastructure -->
-                <div class="mb-16 stagger-in">
-                    <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-[#bc13fe] to-[#ff006e] flex items-center justify-center text-white text-xs">☁</span>
-                        Cloud & Infrastructure
-                    </h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" id="cloud-tools">
-                        <!-- Populated by JS -->
+                <div class="space-y-12">
+                    <!-- Cloud -->
+                    <div class="reveal">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div class="w-6 h-6 rounded-full bg-neon-purple/20 flex items-center justify-center text-neon-purple text-xs font-bold">☁</div>
+                            <h3 class="font-mono text-xs uppercase tracking-widest text-slate-400">Cloud &amp; Infrastructure</h3>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-amazonwebservices-plain text-3xl text-neon-cyan"></i>
+                                <span class="text-xs font-semibold text-white">AWS</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-kubernetes-plain text-3xl text-neon-cyan"></i>
+                                <span class="text-xs font-semibold text-white">Kubernetes</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-docker-plain text-3xl text-neon-blue"></i>
+                                <span class="text-xs font-semibold text-white">Docker</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-terraform-plain text-3xl text-neon-emerald"></i>
+                                <span class="text-xs font-semibold text-white">Terraform</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-jenkins-plain text-3xl text-neon-amber"></i>
+                                <span class="text-xs font-semibold text-white">Jenkins</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-argocd-plain text-3xl text-neon-purple"></i>
+                                <span class="text-xs font-semibold text-white">ArgoCD</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-prometheus-plain text-3xl text-neon-emerald"></i>
+                                <span class="text-xs font-semibold text-white">Prometheus</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-grafana-plain text-3xl text-neon-amber"></i>
+                                <span class="text-xs font-semibold text-white">Grafana</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-helm-plain text-3xl text-neon-cyan"></i>
+                                <span class="text-xs font-semibold text-white">Helm</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-ansible-plain text-3xl text-neon-purple"></i>
+                                <span class="text-xs font-semibold text-white">Ansible</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-github-plain text-3xl text-slate-400"></i>
+                                <span class="text-xs font-semibold text-white">GitHub</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-nginx-original text-3xl text-neon-emerald"></i>
+                                <span class="text-xs font-semibold text-white">Nginx</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="section-divider"></div>
+
+                    <!-- Scripting -->
+                    <div class="reveal">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div class="w-6 h-6 rounded-full bg-neon-cyan/20 flex items-center justify-center text-neon-cyan text-xs font-bold">⎈</div>
+                            <h3 class="font-mono text-xs uppercase tracking-widest text-slate-400">Scripting &amp; Systems</h3>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6 gap-6">
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-python-plain text-3xl text-neon-blue"></i>
+                                <span class="text-xs font-semibold text-white">Python</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-go-original text-3xl text-neon-cyan"></i>
+                                <span class="text-xs font-semibold text-white">Go</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-bash-plain text-3xl text-slate-400"></i>
+                                <span class="text-xs font-semibold text-white">Bash</span>
+                            </div>
+                            <div class="skill-card glass-panel p-4 rounded-2xl text-center flex flex-col items-center gap-2 group">
+                                <i class="devicon-linux-plain text-3xl text-neon-emerald"></i>
+                                <span class="text-xs font-semibold text-white">Linux</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Orchestration & Containers -->
-                <div class="mb-16 stagger-in">
-                    <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-[#326ce5] to-[#00d4ff] flex items-center justify-center text-white text-xs">⎈</span>
-                        Orchestration & Containers
-                    </h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" id="container-tools"></div>
-                </div>
-
-                <!-- CI/CD & GitOps -->
-                <div class="mb-16 stagger-in">
-                    <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-[#d24939] to-[#f08a3d] flex items-center justify-center text-white text-xs">⚙</span>
-                        CI/CD & GitOps
-                    </h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" id="cicd-tools"></div>
-                </div>
-
-                <!-- IaC & Config -->
-                <div class="mb-16 stagger-in">
-                    <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-[#5c4ee5] to-[#a855f7] flex items-center justify-center text-white text-xs">📝</span>
-                        Infrastructure as Code
-                    </h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" id="iac-tools"></div>
-                </div>
-
-                <!-- Observability -->
-                <div class="mb-16 stagger-in">
-                    <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-[#e6522c] to-[#f46800] flex items-center justify-center text-white text-xs">📊</span>
-                        Observability & Security
-                    </h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" id="obs-tools"></div>
-                </div>
-
-                <!-- Scripting & OS -->
-                <div class="stagger-in">
-                    <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-[#4d4d4d] to-[#888] flex items-center justify-center text-white text-xs">💻</span>
-                        Scripting & Systems
-                    </h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4" id="script-tools"></div>
-                </div>
             </div>
         </section>
 
-        <!-- Business Impact Section -->
+        <!-- Impact Section -->
         <section id="impact" class="py-24 px-6 relative">
             <div class="max-w-7xl mx-auto">
-                <header class="text-center mb-16 stagger-in">
-                    <span class="text-xs font-mono uppercase tracking-widest text-[var(--accent-3)]">Business Impact</span>
-                    <h2 class="text-4xl sm:text-5xl font-bold mt-4 text-gradient-primary">Delivering Measurable Value</h2>
-                    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">Beyond technical metrics—these are the business outcomes that matter to stakeholders.</p>
-                </header>
+                <div class="text-center mb-16">
+                    <span class="text-xs font-mono text-neon-emerald uppercase tracking-widest">Business Impact</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mt-4">Delivering Measurable<br><span class="text-gradient">Value.</span></h2>
+                    <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Beyond technical metrics — these are the business outcomes that matter to stakeholders and clients.</p>
+                </div>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 stagger-in">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Cost -->
-                    <article class="glass-strong rounded-3xl p-8 card-interactive glow-border group relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-3)]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <article class="glass-panel rounded-3xl p-8 group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-neon-amber/10 rounded-full blur-3xl"></div>
                         <div class="relative flex items-center gap-3 mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#f59e0b] to-[#ef4444] flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-neon-amber to-orange-500 flex items-center justify-center">
                                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
                             <div>
-                                <h3 class="font-bold text-white">Cloud Cost Optimization</h3>
-                                <p class="text-xs font-mono text-slate-400">FinOps & Right-Sizing</p>
+                                <h3 class="font-bold text-white text-lg">Cloud Cost Optimization</h3>
+                                <p class="text-xs text-slate-400 mt-1">FinOps &amp; Right-Sizing</p>
                             </div>
                         </div>
                         <div class="space-y-4">
-                            <div class="glass px-4 py-3 rounded-xl">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300">Monthly Spend Reduction</span>
-                                    <span class="font-bold text-[var(--accent-3)]">30%</span>
-                                </div>
-                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 30%"></div></div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-slate-300">Monthly Spend Reduction</span>
+                                <span class="font-bold text-neon-amber">30%</span>
                             </div>
-                            <div class="grid grid-cols-2 gap-3 text-center">
-                                <div class="glass px-3 py-2 rounded-lg"><div class="text-xl font-bold text-gradient-cyan">$2.3K</div><div class="text-xs text-slate-400">Monthly Saved</div></div>
-                                <div class="glass px-3 py-2 rounded-lg"><div class="text-xl font-bold text-gradient-magenta">40%</div><div class="text-xs text-slate-400">Spot Instance Usage</div></div>
+                            <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neon-amber to-orange-500" style="width: 30%"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-center pt-4">
+                                <div class="glass-panel p-3 rounded-xl">
+                                    <div class="text-xl font-bold text-neon-amber font-mono">$2.3K</div>
+                                    <div class="text-xs text-slate-500">/month saved</div>
+                                </div>
+                                <div class="glass-panel p-3 rounded-xl">
+                                    <div class="text-xl font-bold text-white font-mono">Zero</div>
+                                    <div class="text-xs text-slate-500">Perf impact</div>
+                                </div>
                             </div>
                         </div>
                     </article>
 
                     <!-- Reliability -->
-                    <article class="glass-strong rounded-3xl p-8 card-interactive glow-border group relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#10b981]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <article class="glass-panel rounded-3xl p-8 group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-neon-emerald/10 rounded-full blur-3xl"></div>
                         <div class="relative flex items-center gap-3 mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#059669] to-[#10b981] flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-neon-emerald to-teal-500 flex items-center justify-center">
                                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
                             <div>
-                                <h3 class="font-bold text-white">Platform Reliability</h3>
-                                <p class="text-xs font-mono text-slate-400">SLO-Driven Engineering</p>
+                                <h3 class="font-bold text-white text-lg">Platform Reliability</h3>
+                                <p class="text-xs text-slate-400 mt-1">SRE &amp; Incident Response</p>
                             </div>
                         </div>
                         <div class="space-y-4">
-                            <div class="glass px-4 py-3 rounded-xl">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300">Production Uptime</span>
-                                    <span class="font-bold text-[#10b981]">99.9%</span>
-                                </div>
-                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 99.9%; background: linear-gradient(90deg, #10b981, #059669)"></div></div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-slate-300">Uptime SLA</span>
+                                <span class="font-bold text-neon-emerald">99.9%</span>
                             </div>
-                            <div class="grid grid-cols-2 gap-3 text-center">
-                                <div class="glass px-3 py-2 rounded-lg"><div class="text-xl font-bold text-gradient-cyan">0</div><div class="text-xs text-slate-400">Unplanned Outages</div></div>
-                                <div class="glass px-3 py-2 rounded-lg"><div class="text-xl font-bold text-gradient-magenta">15m</div><div class="text-xs text-slate-400">MTTR</div></div>
+                            <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neon-emerald to-teal-500" style="width: 99.9%"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-center pt-4">
+                                <div class="glass-panel p-3 rounded-xl">
+                                    <div class="text-xl font-bold text-neon-emerald font-mono">15 min</div>
+                                    <div class="text-xs text-slate-500">MTTR</div>
+                                </div>
+                                <div class="glass-panel p-3 rounded-xl">
+                                    <div class="text-xl font-bold text-white font-mono">Zero</div>
+                                    <div class="text-xs text-slate-500">Unplanned outages</div>
+                                </div>
                             </div>
                         </div>
                     </article>
 
                     <!-- Velocity -->
-                    <article class="glass-strong rounded-3xl p-8 card-interactive glow-border group relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-1)]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <article class="glass-panel rounded-3xl p-8 group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-neon-purple/10 rounded-full blur-3xl"></div>
                         <div class="relative flex items-center gap-3 mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--accent-1)] to-[var(--accent-2)] flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-neon-purple to-pink-500 flex items-center justify-center">
                                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                             </div>
                             <div>
-                                <h3 class="font-bold text-white">Developer Velocity</h3>
-                                <p class="text-xs font-mono text-slate-400">DevEx & Automation</p>
+                                <h3 class="font-bold text-white text-lg">Developer Velocity</h3>
+                                <p class="text-xs text-slate-400 mt-1">DevEx &amp; Automation</p>
                             </div>
                         </div>
                         <div class="space-y-4">
-                            <div class="glass px-4 py-3 rounded-xl">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300">Deployment Frequency</span>
-                                    <span class="font-bold text-[var(--accent-1)]">Daily</span>
-                                </div>
-                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 85%"></div></div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-slate-300">Deployment Frequency</span>
+                                <span class="font-bold text-neon-purple">Daily</span>
                             </div>
-                            <div class="grid grid-cols-2 gap-3 text-center">
-                                <div class="glass px-3 py-2 rounded-lg"><div class="text-xl font-bold text-gradient-cyan">83%</div><div class="text-xs text-slate-400">Faster Deploys</div></div>
-                                <div class="glass px-3 py-2 rounded-lg"><div class="text-xl font-bold text-gradient-magenta">1-Click</div><div class="text-xs text-slate-400">Rollback</div></div>
+                            <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neon-purple to-pink-500" style="width: 85%"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-center pt-4">
+                                <div class="glass-panel p-3 rounded-xl">
+                                    <div class="text-xl font-bold text-neon-purple font-mono">83%</div>
+                                    <div class="text-xs text-slate-500">Faster deploys</div>
+                                </div>
+                                <div class="glass-panel p-3 rounded-xl">
+                                    <div class="text-xl font-bold text-white font-mono">1-Click</div>
+                                    <div class="text-xs text-slate-500">Rollback</div>
+                                </div>
                             </div>
                         </div>
                     </article>
 
                     <!-- Security -->
-                    <article class="glass-strong rounded-3xl p-8 card-interactive glow-border group relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-3)]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <article class="glass-panel rounded-3xl p-8 group relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-neon-cyan/10 rounded-full blur-3xl"></div>
                         <div class="relative flex items-center gap-3 mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#7c3aed] to-[#a855f7] flex items-center justify-center">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white">Security & Compliance</h3>
-                                <p class="text-xs font-mono text-slate-400">DevSecOps Integration</p>
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="glass px-4 py-3 rounded-xl">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300">Image Scan Coverage</span>
-                                    <span class="font-bold text-[var(--accent-3)]">100%</span>
-                                </div>
-                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 100%; background: linear-gradient(90deg, #a855f7, #7c3aed)"></div></div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-3 text-center">
-                                <div class="glass px-3 py-2 rounded-lg"><div class="text-xl font-bold text-gradient-cyan">Zero</div><div class="text-xs text-slate-400">Critical CVEs</div></div>
-                                <div class="glass px-3 py-2 rounded-lg"><div class="text-xl font-bold text-gradient-magenta">Automated</div><div class="text-xs text-slate-400">Policy Checks</div></div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Upcoming Projects -->
-        <section id="upcoming" class="py-24 px-6 relative">
-            <div class="max-w-7xl mx-auto">
-                <header class="text-center mb-16 stagger-in">
-                    <span class="text-xs font-mono uppercase tracking-widest text-[var(--accent-3)]">Roadmap</span>
-                    <h2 class="text-4xl sm:text-5xl font-bold mt-4 text-gradient-primary">Upcoming Projects</h2>
-                    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">Industry-oriented architecture initiatives I'm planning to design, build, and open-source.</p>
-                </header>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-in">
-                    <!-- Multi-Cloud DR -->
-                    <article class="glass-strong rounded-3xl p-8 card-interactive relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-2)]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="relative flex items-center gap-3 mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00d4ff] to-[#bc13fe] flex items-center justify-center">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white">Multi-Cloud Disaster Recovery Platform</h3>
-                                <p class="text-xs font-mono text-slate-400">Cross-Region Failover & HA</p>
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="glass px-4 py-3 rounded-xl">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300">RTO Target</span>
-                                    <span class="font-bold text-[var(--accent-2)]">&lt; 15 min</span>
-                                </div>
-                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 80%"></div></div>
-                            </div>
-                            <ul class="space-y-2 text-xs text-slate-400 font-mono">
-                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Terraform modules for AWS + GCP</li>
-                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Route53 health checks & failover</li>
-                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Automated DNS cutover</li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- Zero-Trust Service Mesh -->
-                    <article class="glass-strong rounded-3xl p-8 card-interactive relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-1)]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="relative flex items-center gap-3 mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#bc13fe] to-[#00d4ff] flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-neon-cyan to-blue-500 flex items-center justify-center">
                                 <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                             </div>
                             <div>
-                                <h3 class="font-bold text-white">Zero-Trust Service Mesh on EKS</h3>
-                                <p class="text-xs font-mono text-slate-400">Istio + mTLS + OPA Policy</p>
+                                <h3 class="font-bold text-white text-lg">Security &amp; Compliance</h3>
+                                <p class="text-xs text-slate-400 mt-1">DevSecOps Integration</p>
                             </div>
                         </div>
                         <div class="space-y-4">
-                            <div class="glass px-4 py-3 rounded-xl">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300">Policy Enforcement</span>
-                                    <span class="font-bold text-[var(--accent-1)]">100%</span>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-slate-300">Image Scan Coverage</span>
+                                <span class="font-bold text-neon-cyan">100%</span>
+                            </div>
+                            <div class="h-1 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-neon-cyan to-blue-500" style="width: 100%"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-center pt-4">
+                                <div class="glass-panel p-3 rounded-xl">
+                                    <div class="text-xl font-bold text-neon-cyan font-mono">Zero</div>
+                                    <div class="text-xs text-slate-500">Critical CVEs</div>
                                 </div>
-                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 90%"></div></div>
-                            </div>
-                            <ul class="space-y-2 text-xs text-slate-400 font-mono">
-                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Istio sidecar injection & mTLS</li>
-                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> OPA Gatekeeper policies</li>
-                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> SPIFFE workload identity</li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- FinOps Auto-Scaling -->
-                    <article class="glass-strong rounded-3xl p-8 card-interactive relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--accent-3)]/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="relative flex items-center gap-3 mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#ff006e] to-[#bc13fe] flex items-center justify-center">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white">FinOps Auto-Scaling Engine</h3>
-                                <p class="text-xs font-mono text-slate-400">Karpenter + Cost Anomaly Detection</p>
-                            </div>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="glass px-4 py-3 rounded-xl">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-slate-300">Projected Savings</span>
-                                    <span class="font-bold text-[var(--accent-3)]">25-35%</span>
+                                <div class="glass-panel p-3 rounded-xl">
+                                    <div class="text-xl font-bold text-white font-mono">Automated</div>
+                                    <div class="text-xs text-slate-500">Policy checks</div>
                                 </div>
-                                <div class="progress-track h-1.5"><div class="progress-fill" style="width: 60%"></div></div>
                             </div>
-                            <ul class="space-y-2 text-xs text-slate-400 font-mono">
-                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Karpenter node provisioning</li>
-                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Cost anomaly alerts via Slack</li>
-                                <li class="flex items-center gap-2"><span class="text-[#10b981]">✓</span> Spot instance optimization</li>
-                            </ul>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Certifications -->
-        <section class="py-24 px-6 relative">
-            <div class="max-w-7xl mx-auto">
-                <header class="text-center mb-16 stagger-in">
-                    <span class="text-xs font-mono uppercase tracking-widest text-[var(--accent-2)]">Certifications</span>
-                    <h2 class="text-4xl sm:text-5xl font-bold mt-4 text-gradient-primary">Validated Expertise</h2>
-                </header>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-in">
-                    <article class="glass-strong rounded-3xl p-6 card-interactive flex items-center gap-5 border-l-4 border-[var(--accent-1)]">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#bc13fe] to-[#a855f7] flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-white">AWS Solutions Architect Associate</h3>
-                            <p class="text-slate-400 text-sm mt-1">Amazon Web Services</p>
-                            <p class="text-xs font-mono text-[var(--accent-1)] mt-2">Credential ID: AWS-123456</p>
-                        </div>
-                    </article>
-                    <article class="glass-strong rounded-3xl p-6 card-interactive flex items-center gap-5 border-l-4 border-[var(--accent-2)]">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#326ce5] to-[#00d4ff] flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-white">CKA: Certified Kubernetes Administrator</h3>
-                            <p class="text-slate-400 text-sm mt-1">Linux Foundation / CNCF</p>
-                            <p class="text-xs font-mono text-[var(--accent-2)] mt-2">Credential ID: CKA-789012</p>
-                        </div>
-                    </article>
-                    <article class="glass-strong rounded-3xl p-6 card-interactive flex items-center gap-5 border-l-4 border-[var(--accent-3)]">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#f59e0b] to-[#ef4444] flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-white">HashiCorp Terraform Associate</h3>
-                            <p class="text-slate-400 text-sm mt-1">HashiCorp</p>
-                            <p class="text-xs font-mono text-[var(--accent-3)] mt-2">Credential ID: TF-345678</p>
                         </div>
                     </article>
                 </div>
@@ -969,39 +727,74 @@
 
         <!-- Contact Section -->
         <section id="contact" class="py-24 px-6 relative">
-            <div class="max-w-7xl mx-auto">
-                <div class="glass-strong rounded-4xl p-8 md:p-16 text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-[var(--accent-1)]/5 via-transparent to-[var(--accent-2)]/5"></div>
-                    <div class="absolute top-0 left-0 w-full h-full" style="background: radial-gradient(ellipse at center, rgba(188,19,254,0.1) 0%, transparent 70%);"></div>
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-panel rounded-4xl p-8 md:p-16 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-neon-purple/10 via-transparent to-neon-cyan/10"></div>
+                    <div class="absolute top-0 left-0 w-full h-full" style="background: radial-gradient(circle at center, rgba(139,92,246,0.15) 0%, transparent 70%);"></div>
 
                     <div class="relative stagger-in">
-                        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-                            Ready to <span class="text-gradient-primary">Transform Your Platform?</span>
+                        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                            Ready to <span class="text-gradient">Transform Your Platform?</span>
                         </h2>
-                        <p class="text-lg text-slate-300 mb-10 max-w-2xl mx-auto">
-                            I'm currently accepting new contracts and full-time opportunities.
-                            Let's discuss how I can help you ship faster, safer, and cheaper.
+                        <p class="text-lg text-slate-300 mb-10 max-w-xl mx-auto">
+                            I'm currently accepting new contracts and full-time opportunities. Let's discuss how I can help you ship faster, safer, and cheaper.
                         </p>
-                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <a href="mailto:rajeshchilukuri210@gmail.com" class="glow-border px-10 py-4 rounded-xl bg-gradient-to-r from-[var(--accent-1)] to-[var(--accent-2)] text-white font-semibold text-sm card-interactive">
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+                            <a href="mailto:rajeshchilukuri210@gmail.com" class="px-10 py-4 rounded-2xl bg-gradient-to-r from-neon-purple to-neon-cyan text-white font-bold text-lg hover:shadow-[0_0_40px_rgba(139,92,246,0.6)] hover:scale-105 transition-all duration-300 cta-button">
                                 Email Me
                             </a>
-                            <a href="https://linkedin.com/in/rajesh-chilukuri" target="_blank" class="glass px-10 py-4 rounded-xl text-white font-semibold text-sm card-interactive flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            <a href="https://linkedin.com/in/rajesh-chilukuri" target="_blank" class="px-10 py-4 rounded-2xl glass-panel border border-white/10 text-white font-bold text-lg hover:border-neon-purple/50 transition-all">
                                 LinkedIn
                             </a>
-                            <a href="https://github.com/Rajesh-210" target="_blank" class="glass px-10 py-4 rounded-xl text-white font-semibold text-sm card-interactive flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                                GitHub
-                            </a>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6 text-left max-w-md mx-auto">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-neon-purple/20 flex items-center justify-center text-neon-purple mt-0.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-white">📍 Hyderabad, India</div>
+                                    <div class="text-xs text-slate-500">Remote-first available</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-neon-cyan/20 flex items-center justify-center text-neon-cyan mt-0.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-white">⚡ 4+ Years Exp</div>
+                                    <div class="text-xs text-slate-500">DevOps &amp; Platform</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-neon-emerald/20 flex items-center justify-center text-neon-emerald mt-0.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-white">📧 rajeshchilukuri210@gmail.com</div>
+                                    <div class="text-xs text-slate-500">Direct contact</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Floating contact info -->
-                    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-8 text-xs font-mono text-slate-400">
-                        <span>📍 Hyderabad, India</span>
-                        <span>🌐 Remote First</span>
-                        <span>⚡ 4+ Years Exp</span>
+                    <!-- Social proof -->
+                    <div class="mt-12 flex items-center justify-center gap-8 opacity-50">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-white"></span>
+                            <span class="text-xs text-slate-300 font-mono">Open to Work</span>
+                        </div>
+                        <div class="w-px h-4 bg-slate-600"></div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-white"></span>
+                            <span class="text-xs text-slate-300 font-mono">Contract / Full-time</span>
+                        </div>
+                        <div class="w-px h-4 bg-slate-600"></div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-white"></span>
+                            <span class="text-xs text-slate-300 font-mono">Remote Friendly</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1010,17 +803,206 @@
         <!-- Footer -->
         <footer class="py-10 px-6 border-t border-white/10">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-xs font-mono text-slate-500">© 2026 Rajesh Chilukuri. Crafted with precision.</p>
+                <p class="text-xs font-mono text-slate-500">© 2026 Rajesh Chilukuri. Crafted with precision for engineering excellence.</p>
                 <div class="flex items-center gap-6 text-xs font-mono text-slate-500">
-                    <a href="https://github.com/Rajesh-210" target="_blank" class="hover:text-[var(--accent-1)] transition-colors">GitHub</a>
-                    <a href="https://linkedin.com/in/rajesh-chilukuri" target="_blank" class="hover:text-[var(--accent-2)] transition-colors">LinkedIn</a>
-                    <a href="mailto:rajeshchilukuri210@gmail.com" class="hover:text-[var(--accent-3)] transition-colors">Email</a>
+                    <a href="https://github.com/Rajesh-210" target="_blank" class="hover:text-neon-purple transition-colors">GitHub</a>
+                    <a href="https://linkedin.com/in/rajesh-chilukuri" target="_blank" class="hover:text-neon-cyan transition-colors">LinkedIn</a>
+                    <a href="mailto:rajeshchilukuri210@gmail.com" class="hover:text-neon-emerald transition-colors">Email</a>
                 </div>
             </div>
         </footer>
+
     </main>
 
-    <!-- Scripts -->
-    <script src="assets/js/script.js"></script>
+    <!-- ============ DEVOPS TOOL BACKGROUND ANIMATION ============ -->
+    <script>
+        // ============================================
+        // RAJESH CHILUKURI - ICONIC PORTFOLIO
+        // DevOps Tool Logo Background Animation
+        // ============================================
+
+        const canvas = document.getElementById('toolCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let tools = [];
+        let mouseX = -1000, mouseY = -1000;
+
+        // DevOps tool icons (skillicons.dev names)
+        const toolIcons = [
+            { name: 'aws', color: '#FFA41C' },
+            { name: 'kubernetes', color: '#326CE5' },
+            { name: 'docker', color: '#2496ED' },
+            { name: 'terraform', color: '#7B42BC' },
+            { name: 'jenkins', color: '#D24939' },
+            { name: 'argocd', color: '#E5492B' },
+            { name: 'prometheus', color: '#E6522C' },
+            { name: 'grafana', color: '#F46800' },
+            { name: 'helm', color: '#0F6ED8' },
+            { name: 'ansible', color: '#1A1918' },
+            { name: 'github', color: '#171515' },
+            { name: 'gitlab', color: '#E24329' },
+            { name: 'nginx', color: '#009639' },
+            { name: 'python', color: '#3776AB' },
+            { name: 'go', color: '#00ADD8' },
+            { name: 'linux', color: '#FCC624' },
+        ];
+
+        // Load tool images
+        const toolImages = [];
+        let imagesLoaded = 0;
+
+        toolIcons.forEach(t => {
+            const img = new Image();
+            img.src = `https://skillicons.dev/icons?i=${t.name}`;
+            img.onload = () => {
+                imagesLoaded++;
+                if (imagesLoaded === toolIcons.length) {
+                    initTools();
+                    animate();
+                }
+            };
+            img.onerror = () => {
+                imagesLoaded++;
+                if (imagesLoaded === toolIcons.length) {
+                    initTools();
+                    animate();
+                }
+            };
+            toolImages.push({ img, color: t.color });
+        });
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        class ToolParticle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 50 + 30;
+                this.baseSize = this.size;
+                this.speedX = (Math.random() - 0.5) * 0.15;
+                this.speedY = (Math.random() - 0.5) * 0.15;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.008;
+                this.opacity = Math.random() * 0.3 + 0.15;
+                const tool = toolImages[Math.floor(Math.random() * toolImages.length)];
+                this.img = tool.img;
+                this.color = tool.color;
+                this.floatPhase = Math.random() * Math.PI * 2;
+                this.floatSpeed = 0.003 + Math.random() * 0.005;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.rotation += this.rotationSpeed;
+
+                // Gentle floating motion
+                this.floatPhase += this.floatSpeed;
+
+                // Mouse interaction - subtle repulsion
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 150 && dist > 0) {
+                    const force = (150 - dist) / 150 * 0.05;
+                    this.x -= dx * force;
+                    this.y -= dy * force;
+                }
+
+                // Wrap around edges
+                if (this.x < -this.size) this.x = width + this.size;
+                if (this.x > width + this.size) this.x = -this.size;
+                if (this.y < -this.size) this.y = height + this.size;
+                if (this.y > height + this.size) this.y = -this.size;
+            }
+
+            draw() {
+                if (!this.img || !this.img.complete) return;
+
+                const floatY = Math.sin(this.floatPhase) * 15;
+
+                ctx.save();
+                ctx.translate(this.x, this.y + floatY);
+                ctx.rotate(this.rotation);
+                ctx.globalAlpha = this.opacity;
+
+                const s = this.size;
+                ctx.drawImage(this.img, -s / 2, -s / 2, s, s);
+
+                ctx.restore();
+            }
+        }
+
+        function initTools() {
+            const count = Math.min(25, Math.floor((width * height) / 40000));
+            for (let i = 0; i < count; i++) {
+                tools.push(new ToolParticle());
+            }
+        }
+
+        function animate() {
+            // Clear with trail effect
+            ctx.fillStyle = 'rgba(2, 2, 4, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+
+            tools.forEach(t => {
+                t.update();
+                t.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // ============================================
+        // Scroll Reveal Animation
+        // ============================================
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ============================================
+        // Mobile Menu Toggle
+        // ============================================
+        const mobileBtn = document.querySelector('nav button');
+        const mobileLinks = document.querySelector('nav .hidden.md\\:flex');
+        if (mobileBtn && mobileLinks) {
+            mobileBtn.addEventListener('click', () => {
+                mobileLinks.classList.toggle('hidden');
+                mobileLinks.classList.toggle('md:flex');
+                mobileLinks.classList.add('fixed', 'top-20', 'left-0', 'right-0', 'bg-[#020204]/95', 'backdrop-blur', 'p-6', 'z-49', 'flex-col', 'items-center', 'gap-4', 'rounded-2xl', 'border', 'border-white/10');
+            });
+        }
+
+        // ============================================
+        // Console Easter Egg
+        // ============================================
+        console.log('%c👋 Hello Fellow Engineer!', 'color: #8b5cf6; font-size: 24px; font-weight: bold;');
+        console.log('%cWelcome to Rajesh Chilukuri\'s DevOps Portfolio', 'color: #06b6d4; font-size: 14px;');
+        console.log('%cStack: AWS • Kubernetes • Terraform • ArgoCD • Prometheus', 'color: #a855f7; font-size: 12px;');
+        console.log('%cOpen to opportunities: rajeshchilukuri210@gmail.com', 'color: #ec4899; font-size: 12px;');
+        console.log('%c🌟 GitHub: https://github.com/Rajesh-210', 'color: #22d3ee; font-size: 12px;');
+    </script>
 </body>
 </html>
