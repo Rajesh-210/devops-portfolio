@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajesh Chilukuri — DevOps & Platform Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        zinc: {
+                            950: '#09090b',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { color-scheme: dark; }
+        body { background-color: #09090b; scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+        .glass {
+            background: rgba(18, 18, 20, 0.7);
+            border: 1px solid rgba(39, 39, 42, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .glass:hover {
+            border-color: rgba(63, 63, 70, 0.9);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #22d3ee 0%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #22d3ee, #60a5fa);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px -5px rgba(6, 182, 212, 0.4);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 25px 50px -15px rgba(0,0,0,0.6);
+        }
+
+        .bar-fill {
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+            border-radius: 4px;
+            height: 6px;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .progress-track {
+            background: #27272a;
+            border-radius: 4px;
+            height: 6px;
+            overflow: hidden;
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .ambient-glow-1 {
+            position: fixed;
+            top: -30%;
+            left: -10%;
+            width: 70vw;
+            height: 70vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .ambient-glow-2 {
+            position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .dot-grid {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        /* Blinking status dot */
+        @keyframes ping-slow {
+            0% { transform: scale(1); opacity: 1; }
+            80%, 100% { transform: scale(2); opacity: 0; }
+        }
+        .ping-slow { animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+    </style>
+</head>
+<body class="font-sans text-zinc-100 antialiased">
+
+    <!-- Ambient Background -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    <div class="fixed inset-0 dot-grid pointer-events-none z-0 opacity-50"></div>
+
+    <!-- Wrapper -->
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+
+        <!-- ── NAV ── -->
+        <nav class="flex items-center justify-between mb-12">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl btn-primary flex items-center justify-center font-extrabold text-white text-sm shadow-lg">
+                    RC
+                </div>
+                <div>
+                    <p class="font-bold text-base leading-tight">Rajesh Chilukuri</p>
+                    <p class="text-[11px] text-zinc-400 font-mono">DevOps &amp; Platform Engineer</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs font-semibold text-emerald-400">
+                    <span class="relative flex h-2 w-2">
+                        <span class="ping-slow absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    Available
+                </div>
+                <a href="#contact" class="px-4 py-2 rounded-xl glass text-sm font-semibold hover:text-cyan-400 transition-colors duration-200">
+                    Contact
+                </a>
+            </div>
+        </nav>
+
+        <!-- ── BENTO GRID ── -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+            <!-- ① HERO (col-span-8) -->
+            <div class="md:col-span-8 glass rounded-3xl p-8 md:p-10 card-hover relative overflow-hidden flex flex-col justify-between min-h-[360px]">
+                <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-gradient-to-bl from-cyan-500/10 to-transparent pointer-events-none"></div>
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono mb-6">
+                        ⚡ 4+ Years · AWS · Kubernetes · GitOps
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.1] mb-5">
+                        Architecting <span class="gradient-text">reliable systems</span><br>& automated pipelines.
+                    </h1>
+                    <p class="text-zinc-400 text-[15px] leading-relaxed max-w-xl mb-8">
+                        DevOps Engineer specializing in production-grade EKS clusters, GitOps with ArgoCD, and slashing deployment times by <strong class="text-cyan-400">83%</strong> through Terraform &amp; Jenkins CI/CD automation.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://github.com/Rajesh-210" target="_blank" class="btn-primary px-6 py-3 rounded-xl font-bold text-sm text-white flex items-center gap-2">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                    <button onclick="navigator.clipboard.writeText('rajeshchilukuri210@gmail.com');this.textContent='✓ Copied!';" class="px-6 py-3 rounded-xl glass border-zinc-700 text-sm font-semibold hover:text-cyan-400 transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        Copy Email
+                    </button>
+                    <a href="dashboard.html" class="px-6 py-3 rounded-xl glass border-zinc-700 text-sm font-semibold hover:text-cyan-400 transition-colors flex items-center gap-2">
+                        📊 Live Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <!-- ② METRICS (col-span-4) -->
+            <div class="md:col-span-4 glass rounded-3xl p-7 card-hover flex flex-col gap-5">
+                <p class="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Impact Metrics</p>
+                <div class="flex-1 flex flex-col justify-around gap-4">
+                    <div>
+                        <div class="flex items-baseline justify-between mb-2">
+                            <span class="text-4xl font-extrabold text-cyan-400 font-mono">83%</span>
+                            <span class="text-[11px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-semibold">Faster Deploys</span>
+                        </div>
+                        <p class="text-[12px] text-zinc-400 leading-snug">Release time: 30 min → <strong class="text-white">5 min</strong> via Jenkins &amp; ArgoCD GitOps.</p>
+                        <div class="progress-track mt-2"><div class="bar-fill w-[83%]"></div></div>
+                    </div>
+                    <div class="border-t border-zinc-800 pt-4">
+                        <div class="flex items-baseline justify-between mb-2">
+                            <span class="text-4xl font-extrabold text-blue-400 font-mono">96%</span>
+                            <span class="text-[11px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-semibold">IaC Automation</span>
+                        </div>
+                        <p class="text-[12px] text-zinc-400 leading-snug">AWS provisioning: 3 h+ → <strong class="text-white">10 min</strong> with modular Terraform.</p>
+                        <div class="progress-track mt-2"><div class="bar-fill w-[96%]"></div></div>
+                    </div>
+                    <div class="border-t border-zinc-800 pt-4 flex items-center justify-between">
+                        <div>
+                            <p class="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mb-1">Production Uptime</p>
+                            <p class="text-2xl font-extrabold text-emerald-400 font-mono">99.9%</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mb-1">Zero Downtime Deploys</p>
+                            <p class="text-2xl font-extrabold text-white font-mono">∞</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ③ STACK (col-span-6) -->
+            <div class="md:col-span-6 glass rounded-3xl p-7 card-hover">
+                <div class="flex items-center justify-between mb-6">
+                    <p class="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Core Toolchain</p>
+                    <span class="text-[11px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">Production Tested</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2.5">
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-amber-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">AWS EKS</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-blue-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-blue-500 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">Kubernetes</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-purple-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-purple-500 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">Terraform</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-orange-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-orange-500 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">ArgoCD</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-red-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-500 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">Jenkins</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-cyan-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">Docker</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-pink-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-pink-500 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">Prometheus</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-amber-600/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-600 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">Grafana</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-emerald-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">Ansible</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-slate-400/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-slate-400 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">Helm</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-green-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">GitHub Actions</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-zinc-800/50 rounded-xl px-3 py-2.5 border border-zinc-800 hover:border-yellow-500/40 transition-colors duration-200">
+                        <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 flex-shrink-0"></span>
+                        <span class="text-[13px] font-semibold truncate">Bash/Linux</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ④ CLUSTER STATUS (col-span-6) -->
+            <div class="md:col-span-6 glass rounded-3xl p-7 card-hover flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <p class="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Live Cluster Telemetry</p>
+                        <div class="flex items-center gap-1.5">
+                            <span class="relative flex h-2.5 w-2.5">
+                                <span class="ping-slow absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                            </span>
+                            <span class="text-[11px] font-mono text-emerald-400">All Systems Green</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-[12px] font-mono mb-1.5">
+                                <span class="text-zinc-400">Worker Nodes</span>
+                                <span class="text-cyan-400 font-bold">3 / 3 Ready</span>
+                            </div>
+                            <div class="progress-track"><div class="bar-fill w-full"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[12px] font-mono mb-1.5">
+                                <span class="text-zinc-400">CPU Utilization</span>
+                                <span class="text-blue-400 font-bold">42%</span>
+                            </div>
+                            <div class="progress-track"><div class="bar-fill w-[42%]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[12px] font-mono mb-1.5">
+                                <span class="text-zinc-400">Memory Utilization</span>
+                                <span class="text-violet-400 font-bold">58%</span>
+                            </div>
+                            <div class="progress-track"><div class="bar-fill" style="width:58%;background:linear-gradient(90deg,#8b5cf6,#7c3aed)"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[12px] font-mono mb-1.5">
+                                <span class="text-zinc-400">ArgoCD GitOps Sync</span>
+                                <span class="text-emerald-400 font-bold">Synced</span>
+                            </div>
+                            <div class="progress-track"><div class="bar-fill w-full" style="background:linear-gradient(90deg,#10b981,#059669)"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[12px] font-mono mb-1.5">
+                                <span class="text-zinc-400">Pods Running</span>
+                                <span class="text-white font-bold">142 / 145</span>
+                            </div>
+                            <div class="progress-track"><div class="bar-fill" style="width:98%"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-4 border-t border-zinc-800 flex items-center justify-between">
+                    <span class="text-[11px] text-zinc-500 font-mono">ap-south-1 · EKS v1.28</span>
+                    <a href="dashboard.html" class="text-[12px] font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">Full Dashboard →</a>
+                </div>
+            </div>
+
+            <!-- ⑤ PROJECTS (col-span-12) -->
+            <div class="md:col-span-12 glass rounded-3xl p-8 sm:p-10 card-hover">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                    <div>
+                        <p class="text-[10px] font-mono uppercase tracking-widest text-cyan-400 mb-2">Flagship Architecture</p>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Featured DevOps Projects</h2>
+                    </div>
+                    <a href="projects.html" class="text-[13px] font-semibold text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1.5 flex-shrink-0">
+                        View All Case Studies
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Card 1 -->
+                    <a href="projects.html#three-tier" class="block bg-zinc-800/40 border border-zinc-800 rounded-2xl p-6 hover:border-cyan-500/50 card-hover group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded-lg">AWS EKS</span>
+                            <span class="text-[11px] text-emerald-400 font-bold">−83% Deploy Time</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base mb-2 group-hover:text-cyan-400 transition-colors">Three-Tier App on EKS</h3>
+                        <p class="text-zinc-400 text-[13px] leading-relaxed mb-5">Scalable frontend + backend + DB deployed on EKS with Jenkins CI/CD, Terraform IaC, and Nginx Ingress.</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[11px] font-mono bg-zinc-900 px-2 py-0.5 rounded text-zinc-400 border border-zinc-800">Jenkins</span>
+                            <span class="text-[11px] font-mono bg-zinc-900 px-2 py-0.5 rounded text-zinc-400 border border-zinc-800">Terraform</span>
+                            <span class="text-[11px] font-mono bg-zinc-900 px-2 py-0.5 rounded text-zinc-400 border border-zinc-800">Kubernetes</span>
+                        </div>
+                    </a>
+                    <!-- Card 2 -->
+                    <a href="projects.html#gitops" class="block bg-zinc-800/40 border border-zinc-800 rounded-2xl p-6 hover:border-orange-500/50 card-hover group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono font-bold text-orange-400 bg-orange-500/10 px-2.5 py-1 rounded-lg">ArgoCD GitOps</span>
+                            <span class="text-[11px] text-emerald-400 font-bold">Zero Drift</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base mb-2 group-hover:text-orange-400 transition-colors">GitOps Continuous Delivery</h3>
+                        <p class="text-zinc-400 text-[13px] leading-relaxed mb-5">Declarative deployments with ArgoCD — Git as single source of truth, auto-sync, and self-healing cluster state.</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[11px] font-mono bg-zinc-900 px-2 py-0.5 rounded text-zinc-400 border border-zinc-800">ArgoCD</span>
+                            <span class="text-[11px] font-mono bg-zinc-900 px-2 py-0.5 rounded text-zinc-400 border border-zinc-800">Helm</span>
+                            <span class="text-[11px] font-mono bg-zinc-900 px-2 py-0.5 rounded text-zinc-400 border border-zinc-800">GitHub</span>
+                        </div>
+                    </a>
+                    <!-- Card 3 -->
+                    <a href="projects.html#monitoring" class="block bg-zinc-800/40 border border-zinc-800 rounded-2xl p-6 hover:border-pink-500/50 card-hover group">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono font-bold text-pink-400 bg-pink-500/10 px-2.5 py-1 rounded-lg">Observability</span>
+                            <span class="text-[11px] text-emerald-400 font-bold">−70% MTTR</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base mb-2 group-hover:text-pink-400 transition-colors">Monitoring & Alerting Stack</h3>
+                        <p class="text-zinc-400 text-[13px] leading-relaxed mb-5">Full Prometheus + Grafana + Alertmanager deployment. Custom dashboards, SLO-based alerts via Slack & email.</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-[11px] font-mono bg-zinc-900 px-2 py-0.5 rounded text-zinc-400 border border-zinc-800">Prometheus</span>
+                            <span class="text-[11px] font-mono bg-zinc-900 px-2 py-0.5 rounded text-zinc-400 border border-zinc-800">Grafana</span>
+                            <span class="text-[11px] font-mono bg-zinc-900 px-2 py-0.5 rounded text-zinc-400 border border-zinc-800">Helm</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ⑥ EXPERIENCE (col-span-7) -->
+            <div class="md:col-span-7 glass rounded-3xl p-7 card-hover">
+                <p class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 mb-6">Professional Experience</p>
+                <div class="space-y-6">
+                    <div class="grid grid-cols-[4px_1fr] gap-5">
+                        <div class="w-[3px] rounded-full bg-gradient-to-b from-cyan-400 to-blue-500"></div>
+                        <div>
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-1 justify-between mb-1.5">
+                                <h4 class="font-bold text-white text-base">DevOps Engineer</h4>
+                                <span class="text-[11px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">Dec 2024 – May 2025</span>
+                            </div>
+                            <p class="text-[13px] text-zinc-400 mb-2 font-semibold">L&T Technology Services · Hyderabad</p>
+                            <p class="text-[12px] text-zinc-500 leading-relaxed">Architected Jenkins CI/CD pipelines, containerized microservices on EKS, implemented ArgoCD GitOps, and built Production Prometheus/Grafana monitoring stack. Acted as DevOps lead, mentoring developers on container and pipeline best practices.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-[4px_1fr] gap-5">
+                        <div class="w-[3px] rounded-full bg-gradient-to-b from-blue-500 to-violet-600"></div>
+                        <div>
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-1 justify-between mb-1.5">
+                                <h4 class="font-bold text-white text-base">DevOps Engineer</h4>
+                                <span class="text-[11px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">Feb 2021 – Jul 2024</span>
+                            </div>
+                            <p class="text-[13px] text-zinc-400 mb-2 font-semibold">Accenture · Hyderabad</p>
+                            <p class="text-[12px] text-zinc-500 leading-relaxed">Designed and owned two flagship projects: a full CI/CD + GitOps pipeline (83% faster deploys) and a Terraform Infrastructure Automation suite (96% faster provisioning). Built end-to-end AWS environments using modular IaC with S3 remote state and DynamoDB locking.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ⑦ CONTACT (col-span-5) -->
+            <div id="contact" class="md:col-span-5 glass rounded-3xl p-7 card-hover flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-gradient-to-tl from-blue-500/10 to-transparent pointer-events-none"></div>
+                <div>
+                    <p class="text-[10px] font-mono uppercase tracking-widest text-zinc-400 mb-3">Let's Connect</p>
+                    <h2 class="text-xl font-extrabold text-white mb-3 leading-snug">Ready to elevate your infrastructure?</h2>
+                    <p class="text-[13px] text-zinc-400 leading-relaxed mb-6">Open to DevOps &amp; Platform Engineering (SRE) opportunities. Hyderabad, India · Remote-friendly.</p>
+                    <div class="space-y-2.5">
+                        <div class="flex items-center gap-3 text-[13px]">
+                            <span class="w-7 h-7 rounded-lg bg-zinc-800 flex items-center justify-center text-sm">📍</span>
+                            <span class="text-zinc-300">Hyderabad, India</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-[13px]">
+                            <span class="w-7 h-7 rounded-lg bg-zinc-800 flex items-center justify-center text-sm">📱</span>
+                            <span class="text-zinc-300">+91 8309818360</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2.5 mt-6">
+                    <a href="mailto:rajeshchilukuri210@gmail.com" class="py-2.5 px-4 rounded-xl bg-zinc-800/60 border border-zinc-700 text-[13px] font-semibold text-center hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-200">
+                        ✉️ Email
+                    </a>
+                    <a href="https://linkedin.com/in/rajesh-chilukuri" target="_blank" class="py-2.5 px-4 rounded-xl bg-zinc-800/60 border border-zinc-700 text-[13px] font-semibold text-center hover:text-blue-400 hover:border-blue-500/50 transition-all duration-200">
+                        💼 LinkedIn
+                    </a>
+                    <a href="https://github.com/Rajesh-210" target="_blank" class="py-2.5 px-4 rounded-xl bg-zinc-800/60 border border-zinc-700 text-[13px] font-semibold text-center hover:text-white hover:border-zinc-500 transition-all duration-200 col-span-2">
+                        🐙 GitHub · Rajesh-210
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-14 text-center text-[12px] text-zinc-500 font-mono">
+            © 2026 Rajesh Chilukuri · Built with precision &amp; passion · Inspired by modern bento design
+        </footer>
+    </div>
+
+</body>
+</html>
