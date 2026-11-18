@@ -2,77 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajesh Chilukuri - DevOps Portfolio Reel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rajesh Chilukuri | DevOps Portfolio Reel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         :root {
-            --neon-purple: #8b5cf6;
-            --neon-cyan: #06b6d4;
-            --neon-pink: #ec4899;
-            --neon-emerald: #10b981;
-            --neon-amber: #f59e0b;
-            --abyss: #020204;
-            --space-900: #0a0a12;
+            --bg: #020204;
+            --space-900: #050508;
+            --space-800: #0a0a12;
+            --purple: #8b5cf6;
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+            --emerald: #10b981;
+            --amber: #f59e0b;
+            --violet: #a855f7;
+            --glass-bg: rgba(10, 10, 18, 0.45);
+            --glass-border: rgba(139, 92, 246, 0.18);
         }
 
         html, body {
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            background: var(--abyss);
+            background: var(--bg);
             font-family: 'Outfit', sans-serif;
             color: #fff;
         }
 
-        /* Video canvas - vertical 9:16 (1080x1920) */
+        /* ============ REEL CONTAINER ============ */
         .reel {
             width: 100vw;
             height: 100vh;
             position: relative;
-            background: radial-gradient(circle at center, #1a1a2e 0%, #020204 100%);
+            background: radial-gradient(circle at 50% 50%, #0d0d1a 0%, var(--bg) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        /* Ambient orbs */
+        /* ============ BACKGROUND ORBS ============ */
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.35;
+            filter: blur(100px);
+            opacity: 0;
             z-index: 1;
             pointer-events: none;
         }
-        .orb-1 { width: 500px; height: 500px; background: var(--neon-purple); top: -15%; left: -10%; animation: pulse 4s ease-in-out infinite; }
-        .orb-2 { width: 450px; height: 450px; background: var(--neon-cyan); bottom: -10%; right: -15%; animation: pulse 5s ease-in-out infinite; animation-delay: 1.5s; }
-        .orb-3 { width: 350px; height: 350px; background: var(--neon-pink); top: 40%; right: 20%; animation: pulse 4s ease-in-out infinite; animation-delay: 3s; }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.35; }
-            50% { transform: scale(1.15); opacity: 0.55; }
+        .orb-1 {
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.45) 0%, transparent 70%);
+            top: -15%; left: -10%;
+            animation: orbFloat 12s ease-in-out infinite;
+        }
+        .orb-2 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, transparent 70%);
+            bottom: -10%; right: -15%;
+            animation: orbFloat 15s ease-in-out infinite;
+            animation-delay: 4s;
+        }
+        .orb-3 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.35) 0%, transparent 70%);
+            top: 30%; right: 20%;
+            animation: orbFloat 10s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        .orb-4 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+            bottom: 20%; left: 25%;
+            animation: orbFloat 14s ease-in-out infinite;
+            animation-delay: 6s;
         }
 
-        /* Grid pattern */
-        .grid {
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+            33% { transform: translate(40px, -30px) scale(1.1); opacity: 0.6; }
+            66% { transform: translate(-20px, 40px) scale(0.95); opacity: 0.3; }
+        }
+
+        /* ============ GRID PATTERN ============ */
+        .grid-bg {
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-image:
+                linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
             z-index: 2;
             pointer-events: none;
+            opacity: 0.6;
+            animation: gridMove 20s linear infinite;
+        }
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
         }
 
-        /* Canvas for tool logos */
+        /* ============ LIGHT LEAK ============ */
+        .light-leak {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0) 100%);
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            animation: lightLeak 8s ease-in-out infinite;
+        }
+        @keyframes lightLeak {
+            0%, 100% { opacity: 0; transform: translateX(-100%); }
+            50% { opacity: 0.5; transform: translateX(100%); }
+        }
+
+        /* ============ TOOL LOGO CANVAS ============ */
         #reelCanvas {
             position: absolute;
             inset: 0;
-            z-index: 3;
+            z-index: 5;
             pointer-events: none;
         }
 
-        /* Scene container */
+        /* ============ SCENES ============ */
         .scene {
             position: absolute;
             inset: 0;
@@ -83,168 +138,262 @@
             justify-content: center;
             padding: 2rem;
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+            pointer-events: none;
+            transition: all 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .scene.active { opacity: 1; transform: translateY(0); }
-        .scene.exit { opacity: 0; transform: translateY(-30px); }
+        .scene.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .scene.exit {
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+        }
 
-        /* Scene 1: Name */
-        .name-main {
-            font-size: 5rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-            line-height: 0.95;
+        /* ============ SCENE 1: NAME INTRO ============ */
+        .name-wrapper {
             text-align: center;
-            background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-cyan) 50%, var(--neon-pink) 100%);
+            animation: nameScale 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes nameScale {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .name-main {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            letter-spacing: -3px;
+            line-height: 0.9;
+            background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 40%, #ec4899 70%, #8b5cf6 100%);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: gradientShift 4s ease infinite;
-            filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.4));
+            filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.5));
+            animation: nameGlow 5s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes nameGlow {
+            0%, 100% { background-position: 0% 50%; filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.4)); }
+            50% { background-position: 100% 50%; filter: drop-shadow(0 0 60px rgba(6, 182, 212, 0.5)); }
         }
         .name-sub {
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 3vw, 1.5rem);
             font-weight: 600;
-            color: var(--neon-cyan);
-            margin-top: 1.5rem;
+            color: var(--cyan);
             font-family: 'JetBrains Mono', monospace;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            margin-bottom: 0.5rem;
             opacity: 0.9;
+            animation: fadeInUp 1.5s ease-out 0.5s both;
         }
         .name-tag {
-            margin-top: 1rem;
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: #94a3b8;
             font-weight: 400;
+            letter-spacing: 2px;
+            animation: fadeInUp 1.5s ease-out 0.8s both;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* Scene 2: Skills */
+        /* ============ SCENE 2: SKILLS GRID ============ */
+        .skills-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .skills-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--purple);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
         .skills-title {
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             font-weight: 800;
             color: #fff;
-            margin-bottom: 2rem;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            max-width: 700px;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 1.25rem;
             width: 100%;
+            max-width: 650px;
+            padding: 0 1rem;
         }
         .skill-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            border-radius: 16px;
-            padding: 1.25rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0.75rem;
-            transition: all 0.4s ease;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 20px;
+        }
+        .skill-card:hover::before {
+            opacity: 1;
         }
         .skill-card:hover {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: var(--neon-purple);
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.05);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 20px 50px rgba(139, 92, 246, 0.2);
         }
-        .skill-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        .skill-img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
+            transition: transform 0.4s ease;
+        }
+        .skill-card:hover .skill-img {
+            transform: scale(1.2) rotate(5deg);
         }
         .skill-name {
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
             color: #fff;
+            font-family: 'JetBrains Mono', monospace;
         }
         .skill-tag {
-            font-size: 0.7rem;
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--neon-cyan);
+            font-size: 0.6rem;
+            color: #64748b;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
         }
 
-        /* Scene 3: Projects */
+        /* ============ SCENE 3: PROJECTS ============ */
+        .projects-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .projects-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
         .projects-title {
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             font-weight: 800;
             color: #fff;
-            margin-bottom: 2rem;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            line-height: 1.1;
         }
         .project-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 1.75rem;
             margin-bottom: 1rem;
+            width: 100%;
+            max-width: 520px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--purple), var(--cyan), var(--pink));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+        }
+        .project-header {
             display: flex;
             align-items: center;
             gap: 1rem;
-            transition: all 0.4s ease;
-        }
-        .project-card:hover {
-            border-color: var(--neon-cyan);
-            background: rgba(6, 182, 212, 0.05);
+            margin-bottom: 1rem;
         }
         .project-badge {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
-        .badge-aws { background: linear-gradient(135deg, #FF9900, #FF9900); box-shadow: 0 0 20px rgba(255, 153, 0, 0.3); }
-        .badge-k8s { background: linear-gradient(135deg, #326CE5, #326CE5); box-shadow: 0 0 20px rgba(50, 108, 229, 0.3); }
-        .badge-terraform { background: linear-gradient(135deg, #7B42BC, #7B42BC); box-shadow: 0 0 20px rgba(123, 66, 188, 0.3); }
+        .badge-aws { background: linear-gradient(135deg, #FF9900 0%, #EC7211 100%); }
+        .badge-k8s { background: linear-gradient(135deg, #326CE5 0%, #2D87D7 100%); }
+        .badge-terraform { background: linear-gradient(135deg, #7B42BC 0%, #5E40A8 100%); }
         .project-info h3 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.3rem;
         }
         .project-info p {
             font-size: 0.8rem;
             color: #94a3b8;
-            margin-bottom: 0.75rem;
-            font-family: 'Inter', sans-serif;
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.5;
         }
         .project-stats {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
         .stat {
-            text-align: right;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            flex: 1;
+            min-width: 110px;
+            text-align: center;
         }
         .stat-value {
             display: block;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 800;
             font-family: 'JetBrains Mono', monospace;
-            color: var(--neon-emerald);
+            color: var(--emerald);
+            margin-bottom: 0.2rem;
         }
+        .stat-value.amber { color: var(--amber); }
+        .stat-value.purple { color: var(--purple); }
         .stat-label {
             font-size: 0.65rem;
             color: #64748b;
@@ -252,63 +401,91 @@
             letter-spacing: 0.5px;
         }
 
-        /* Scene 4: CTA */
-        .cta-title {
-            font-size: 2.5rem;
+        /* ============ SCENE 4: CTA ============ */
+        .cta-wrapper {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        .cta-main {
+            font-size: clamp(2rem, 7vw, 3rem);
             font-weight: 900;
             color: #fff;
-            margin-bottom: 1.5rem;
-            text-align: center;
             line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .cta-title span { color: var(--neon-purple); }
+        .cta-main span { color: var(--purple); }
         .cta-sub {
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 3vw, 1.15rem);
             color: #94a3b8;
-            text-align: center;
+            line-height: 1.7;
             margin-bottom: 2.5rem;
-            max-width: 500px;
-            line-height: 1.6;
+            font-weight: 400;
         }
         .cta-button {
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+            display: inline-block;
+            padding: 1.25rem 2.75rem;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
             color: #fff;
-            border: none;
-            padding: 1.25rem 2.5rem;
+            text-decoration: none;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 700;
             font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
-            animation: btnGlow 2s ease-in-out infinite alternate;
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.5);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: ctaPulse 3s ease-in-out infinite;
         }
-        @keyframes btnGlow {
-            0% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.4); }
-            100% { box-shadow: 0 0 60px rgba(6, 182, 212, 0.5); }
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.5); transform: scale(1); }
+            50% { box-shadow: 0 0 70px rgba(6, 182, 212, 0.6); transform: scale(1.03); }
+        }
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.7);
         }
         .contact-info {
-            margin-top: 2rem;
-            text-align: center;
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: center;
         }
         .contact-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             color: #94a3b8;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
             font-family: 'JetBrains Mono', monospace;
         }
-        .contact-item svg { color: var(--neon-purple); width: 16px; height: 16px; }
+        .contact-item svg {
+            width: 18px; height: 18px;
+            color: var(--purple);
+            filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));
+        }
 
-        /* Progress bar at top */
+        /* ============ SCENE TRANSITIONS ============ */
+        .fade-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--bg);
+            z-index: 40;
+            opacity: 1;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+        .fade-overlay.hidden { opacity: 0; }
+
+        /* ============ PROGRESS BAR ============ */
         .progress {
             position: absolute;
             top: 0; left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--cyan));
             z-index: 50;
             transform: scaleX(0);
             transform-origin: left;
@@ -318,29 +495,6 @@
             to { transform: scaleX(1); }
         }
 
-        /* Instagram frame */
-        .instagram-frame {
-            position: absolute;
-            inset: 0;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0;
-            z-index: 60;
-            pointer-events: none;
-            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Fade overlay for scene transitions */
-        .fade {
-            position: absolute;
-            inset: 0;
-            background: var(--abyss);
-            z-index: 40;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.8s ease;
-        }
-        .fade.active { opacity: 1; }
-
         /* Hide scrollbar */
         ::-webkit-scrollbar { display: none; }
     </style>
@@ -348,126 +502,147 @@
 <body>
 
     <div class="reel">
-        <!-- Progress bar -->
         <div class="progress"></div>
 
-        <!-- Background elements -->
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
-        <div class="grid"></div>
+        <div class="orb orb-4"></div>
 
-        <!-- Canvas for DevOps tool logos -->
+        <div class="grid-bg"></div>
+        <div class="light-leak"></div>
+
         <canvas id="reelCanvas"></canvas>
-
-        <!-- Instagram frame -->
-        <div class="instagram-frame"></div>
 
         <!-- Scene 1: Name -->
         <div class="scene" id="scene-1">
-            <div class="name-main">Rajesh<br>Chilukuri</div>
-            <div class="name-sub">DevOps &amp; Platform Engineer</div>
-            <div class="name-tag">AWS • Kubernetes • Terraform • ArgoCD • Prometheus</div>
+            <div class="name-wrapper">
+                <div class="name-main">Rajesh<br>Chilukuri</div>
+                <div class="name-sub">DevOps & Platform Engineer</div>
+                <div class="name-tag">AWS • Kubernetes • Terraform • ArgoCD • Prometheus</div>
+            </div>
         </div>
 
         <!-- Scene 2: Skills -->
         <div class="scene" id="scene-2">
-            <div class="skills-title">Tools I Engineer With</div>
+            <div class="skills-header">
+                <span class="skills-label">Technology Stack</span>
+                <div class="skills-title">Tools I Engineer With</div>
+            </div>
             <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">☁</div>
+                <div class="skill-card" style="animation-delay: 0.1s;">
+                    <img src="https://skillicons.dev/icons?i=aws" alt="AWS" class="skill-img">
                     <div class="skill-name">AWS</div>
                     <div class="skill-tag">Cloud Infrastructure</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">⎈</div>
+                <div class="skill-card" style="animation-delay: 0.2s;">
+                    <img src="https://skillicons.dev/icons?i=kubernetes" alt="Kubernetes" class="skill-img">
                     <div class="skill-name">Kubernetes</div>
                     <div class="skill-tag">Container Orchestration</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🐳</div>
+                <div class="skill-card" style="animation-delay: 0.3s;">
+                    <img src="https://skillicons.dev/icons?i=docker" alt="Docker" class="skill-img">
                     <div class="skill-name">Docker</div>
                     <div class="skill-tag">Containerization</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">📦</div>
+                <div class="skill-card" style="animation-delay: 0.4s;">
+                    <img src="https://skillicons.dev/icons?i=terraform" alt="Terraform" class="skill-img">
                     <div class="skill-name">Terraform</div>
                     <div class="skill-tag">Infrastructure as Code</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔄</div>
+                <div class="skill-card" style="animation-delay: 0.5s;">
+                    <img src="https://skillicons.dev/icons?i=argocd" alt="ArgoCD" class="skill-img">
                     <div class="skill-name">ArgoCD</div>
                     <div class="skill-tag">GitOps Delivery</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">📊</div>
+                <div class="skill-card" style="animation-delay: 0.6s;">
+                    <img src="https://skillicons.dev/icons?i=prometheus" alt="Prometheus" class="skill-img">
                     <div class="skill-name">Prometheus</div>
                     <div class="skill-tag">Observability</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔧</div>
+                <div class="skill-card" style="animation-delay: 0.7s;">
+                    <img src="https://skillicons.dev/icons?i=jenkins" alt="Jenkins" class="skill-img">
                     <div class="skill-name">Jenkins</div>
                     <div class="skill-tag">CI/CD Pipelines</div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🛡️</div>
-                    <div class="skill-name">DevSecOps</div>
-                    <div class="skill-tag">Security & Compliance</div>
+                <div class="skill-card" style="animation-delay: 0.8s;">
+                    <img src="https://skillicons.dev/icons?i=ansible" alt="Ansible" class="skill-img">
+                    <div class="skill-name">Ansible</div>
+                    <div class="skill-tag">Configuration Mgmt</div>
+                </div>
+                <div class="skill-card" style="animation-delay: 0.9s;">
+                    <img src="https://skillicons.dev/icons?i=github" alt="GitHub" class="skill-img">
+                    <div class="skill-name">GitHub</div>
+                    <div class="skill-tag">Version Control</div>
+                </div>
+                <div class="skill-card" style="animation-delay: 1s;">
+                    <img src="https://skillicons.dev/icons?i=nginx" alt="Nginx" class="skill-img">
+                    <div class="skill-name">Nginx</div>
+                    <div class="skill-tag">Reverse Proxy</div>
                 </div>
             </div>
         </div>
 
         <!-- Scene 3: Projects -->
         <div class="scene" id="scene-3">
-            <div class="projects-title">Production Case Studies</div>
+            <div class="projects-header">
+                <span class="projects-label">Production Case Studies</span>
+                <div class="projects-title">Real Architectures<br>That Scale</div>
+            </div>
             <div class="project-card">
-                <div class="project-badge badge-aws">☁</div>
-                <div class="project-info">
-                    <h3>Three-Tier EKS Platform</h3>
-                    <p>AWS • EKS • ArgoCD • Terraform • Zero Downtime</p>
-                    <div class="project-stats">
-                        <div class="stat">
-                            <span class="stat-value">83%</span>
-                            <span class="stat-label">Faster Deploys</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">5 min</span>
-                            <span class="stat-label">Release Cycle</span>
-                        </div>
+                <div class="project-header">
+                    <div class="project-badge badge-aws">☁</div>
+                    <div class="project-info">
+                        <h3>Three-Tier EKS Platform</h3>
+                        <p>AWS • EKS • ArgoCD • Terraform • Zero Downtime</p>
+                    </div>
+                </div>
+                <div class="project-stats">
+                    <div class="stat">
+                        <span class="stat-value emerald">83%</span>
+                        <span class="stat-label">Faster Deploys</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value cyan">5 min</span>
+                        <span class="stat-label">Release Cycle</span>
                     </div>
                 </div>
             </div>
             <div class="project-card">
-                <div class="project-badge badge-k8s">⎈</div>
-                <div class="project-info">
-                    <h3>Zero-Trust Service Mesh</h3>
-                    <p>Istio • mTLS • OPA • EKS • 100% Policy</p>
-                    <div class="project-stats">
-                        <div class="stat">
-                            <span class="stat-value">Zero</span>
-                            <span class="stat-label">Critical CVEs</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">mTLS</span>
-                            <span class="stat-label">Encrypted</span>
-                        </div>
+                <div class="project-header">
+                    <div class="project-badge badge-k8s">⎈</div>
+                    <div class="project-info">
+                        <h3>Zero-Trust Service Mesh</h3>
+                        <p>Istio • mTLS • OPA • EKS • 100% Policy</p>
+                    </div>
+                </div>
+                <div class="project-stats">
+                    <div class="stat">
+                        <span class="stat-value emerald">Zero</span>
+                        <span class="stat-label">Critical CVEs</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value purple">mTLS</span>
+                        <span class="stat-label">Encrypted</span>
                     </div>
                 </div>
             </div>
             <div class="project-card">
-                <div class="project-badge badge-terraform">📦</div>
-                <div class="project-info">
-                    <h3>FinOps Auto-Scaling</h3>
-                    <p>Karpenter • Spot Instances • Cost Alerts</p>
-                    <div class="project-stats">
-                        <div class="stat">
-                            <span class="stat-value">30%</span>
-                            <span class="stat-label">Monthly Saved</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">Auto</span>
-                            <span class="stat-label">Scaling</span>
-                        </div>
+                <div class="project-header">
+                    <div class="project-badge badge-terraform">📦</div>
+                    <div class="project-info">
+                        <h3>FinOps Auto-Scaling</h3>
+                        <p>Karpenter • Spot Instances • Cost Alerts</p>
+                    </div>
+                </div>
+                <div class="project-stats">
+                    <div class="stat">
+                        <span class="stat-value amber">30%</span>
+                        <span class="stat-label">Monthly Saved</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value emerald">Auto</span>
+                        <span class="stat-label">Scaling</span>
                     </div>
                 </div>
             </div>
@@ -475,24 +650,32 @@
 
         <!-- Scene 4: CTA -->
         <div class="scene" id="scene-4">
-            <div class="cta-title">Ready to <span>Transform</span><br>Your Platform?</div>
-            <div class="cta-sub">I help engineering teams ship faster, safer, and cheaper with automated, observable cloud infrastructure.</div>
-            <button class="cta-button">Let's Talk</button>
-            <div class="contact-info">
-                <div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>rajeshchilukuri210@gmail.com</div>
-                <div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11v7a4 4 0 00-8 0v-7M5 9h14l1 12H4L5 9z"/></svg>rajesh-chilukuri-692506406</div>
-                <div class="contact-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>github.com/Rajesh-210</div>
+            <div class="cta-wrapper">
+                <div class="cta-main">Ready to <span>Transform</span><br>Your Platform?</div>
+                <div class="cta-sub">I help engineering teams ship faster, safer, and cheaper with automated, observable cloud infrastructure on AWS & Kubernetes.</div>
+                <a href="mailto:rajeshchilukuri210@gmail.com" class="cta-button">Let's Talk</a>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        rajeshchilukuri210@gmail.com
+                    </div>
+                    <div class="contact-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11v7a4 4 0 00-8 0v-7M5 9h14l1 12H4L5 9z"/></svg>
+                        linkedin.com/in/rajesh-chilukuri-692506406
+                    </div>
+                    <div class="contact-item">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                        github.com/Rajesh-210
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Fade overlay -->
-        <div class="fade" id="fade"></div>
+        <div class="fade-overlay" id="fadeOverlay"></div>
     </div>
 
     <script>
-        // ============================================
-        // INSTAGRAM REEL - DevOps Tool Background Animation
-        // ============================================
+        // ============ TOOL LOGO BACKGROUND ANIMATION ============
         const canvas = document.getElementById('reelCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -500,17 +683,42 @@
         let tools = [];
 
         const toolIcons = [
-            { char: '☁', color: '#FFA41C' },   // AWS
-            { char: '⎈', color: '#326CE5' },   // K8s
-            { char: '🐳', color: '#2496ED' },  // Docker
-            { char: '📦', color: '#7B42BC' },  // Terraform
-            { char: '🔄', color: '#E5492B' },  // ArgoCD
-            { char: '📊', color: '#E6522C' },  // Prometheus
-            { char: '🔧', color: '#D24939' },  // Jenkins
-            { char: '🛡️', color: '#1A1918' },  // Ansible
-            { char: '🐙', color: '#171515' },  // GitHub
-            { char: '🔌', color: '#009639' },  // Nginx
+            { name: 'aws', color: '#FFA41C' },
+            { name: 'kubernetes', color: '#326CE5' },
+            { name: 'docker', color: '#2496ED' },
+            { name: 'terraform', color: '#7B42BC' },
+            { name: 'jenkins', color: '#D24939' },
+            { name: 'argocd', color: '#E5492B' },
+            { name: 'prometheus', color: '#E6522C' },
+            { name: 'grafana', color: '#F46800' },
+            { name: 'helm', color: '#0F6ED8' },
+            { name: 'ansible', color: '#1A1918' },
+            { name: 'github', color: '#171515' },
+            { name: 'nginx', color: '#009639' },
         ];
+
+        const toolImages = [];
+        let loadedCount = 0;
+
+        toolIcons.forEach(t => {
+            const img = new Image();
+            img.src = `https://skillicons.dev/icons?i=${t.name}`;
+            img.onload = () => {
+                loadedCount++;
+                if (loadedCount === toolIcons.length) {
+                    initTools();
+                    animate();
+                }
+            };
+            img.onerror = () => {
+                loadedCount++;
+                if (loadedCount === toolIcons.length) {
+                    initTools();
+                    animate();
+                }
+            };
+            toolImages.push(img);
+        });
 
         function resize() {
             width = canvas.width = window.innerWidth;
@@ -526,15 +734,14 @@
             reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.size = Math.random() * 40 + 25;
-                this.speedX = (Math.random() - 0.5) * 0.2;
-                this.speedY = (Math.random() - 0.5) * 0.2;
+                this.size = Math.random() * 45 + 30;
+                this.baseSize = this.size;
+                this.speedX = (Math.random() - 0.5) * 0.18;
+                this.speedY = (Math.random() - 0.5) * 0.18;
                 this.rotation = Math.random() * Math.PI * 2;
                 this.rotationSpeed = (Math.random() - 0.5) * 0.01;
-                this.opacity = Math.random() * 0.4 + 0.15;
-                const tool = toolIcons[Math.floor(Math.random() * toolIcons.length)];
-                this.char = tool.char;
-                this.color = tool.color;
+                this.opacity = Math.random() * 0.25 + 0.1;
+                this.img = toolImages[Math.floor(Math.random() * toolImages.length)];
                 this.floatPhase = Math.random() * Math.PI * 2;
                 this.floatSpeed = 0.002 + Math.random() * 0.004;
             }
@@ -549,73 +756,71 @@
                 if (this.y > height + this.size) this.y = -this.size;
             }
             draw() {
-                const floatY = Math.sin(this.floatPhase) * 12;
+                if (!this.img || !this.img.complete) return;
+                const floatY = Math.sin(this.floatPhase) * 15;
                 ctx.save();
                 ctx.translate(this.x, this.y + floatY);
                 ctx.rotate(this.rotation);
                 ctx.globalAlpha = this.opacity;
-                ctx.font = `${this.size}px sans-serif`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillStyle = this.color;
-                ctx.fillText(this.char, 0, 0);
+                const s = this.size;
+                ctx.drawImage(this.img, -s/2, -s/2, s, s);
                 ctx.restore();
             }
         }
 
         function initTools() {
-            const count = Math.floor((width * height) / 120000);
+            const count = Math.floor((width * height) / 140000);
             for (let i = 0; i < count; i++) tools.push(new ToolParticle());
         }
 
         function animate() {
-            ctx.fillStyle = 'rgba(2, 2, 4, 0.15)';
+            ctx.fillStyle = 'rgba(2, 2, 4, 0.12)';
             ctx.fillRect(0, 0, width, height);
             tools.forEach(t => { t.update(); t.draw(); });
             requestAnimationFrame(animate);
         }
 
-        initTools();
-        animate();
-
-        // ============================================
-        // Scene Sequencer (30 seconds total)
-        // ============================================
+        // ============ SCENE SEQUENCER ============
         const scenes = [
-            { id: 'scene-1', start: 0, end: 7 },      // Name - 7s
-            { id: 'scene-2', start: 7, end: 17 },     // Skills - 10s
-            { id: 'scene-3', start: 17, end: 24 },    // Projects - 7s
-            { id: 'scene-4', start: 24, end: 30 },    // CTA - 6s
+            { id: 'scene-1', start: 0, end: 7 },       // Name intro - 7s
+            { id: 'scene-2', start: 7, end: 17 },      // Skills - 10s
+            { id: 'scene-3', start: 17, end: 24 },     // Projects - 7s
+            { id: 'scene-4', start: 24, end: 30 },     // CTA - 6s
         ];
 
         const sceneEls = {};
-        scenes.forEach(s => {
-            sceneEls[s.id] = document.getElementById(s.id);
-        });
+        scenes.forEach(s => { sceneEls[s.id] = document.getElementById(s.id); });
+
+        const fadeOverlay = document.getElementById('fadeOverlay');
 
         function updateScenes(time) {
             scenes.forEach((scene, idx) => {
                 const el = sceneEls[scene.id];
-                const nextScene = scenes[idx + 1];
+                const isActive = time >= scene.start && time < scene.end;
+                const isTransitioning = (scene.end - time < 1) || (time - scene.start < 1);
 
-                if (time >= scene.start && time < scene.end) {
-                    // Current scene - active
+                if (isActive) {
                     el.classList.remove('exit');
                     el.classList.add('active');
 
-                    // Fade in at start
+                    // Smooth fade in at start
                     if (time - scene.start < 1) {
-                        el.style.opacity = Math.min((time - scene.start) / 1, 1);
-                        el.style.transform = `translateY(${30 * (1 - (time - scene.start))}px)`;
+                        const p = (time - scene.start) / 1;
+                        el.style.opacity = p;
+                        el.style.transform = `scale(${1 - 0.1 * (1 - p)})`;
                     }
 
-                    // Fade out near end
+                    // Smooth fade out near end
                     if (scene.end - time < 1) {
-                        el.style.opacity = Math.max(scene.end - time, 0);
-                        el.style.transform = `translateY(-${30 * (1 - (scene.end - time))}px)`;
+                        const p = (scene.end - time) / 1;
+                        el.style.opacity = p;
+                        el.style.transform = `scale(${0.9 + 0.1 * p})`;
                     }
                 } else {
                     el.classList.remove('active');
+                    if (idx < scenes.length - 1 && time >= scene.end) {
+                        el.classList.add('exit');
+                    }
                 }
             });
         }
@@ -623,15 +828,17 @@
         const startTime = Date.now();
         function tick() {
             const elapsed = (Date.now() - startTime) / 1000;
-            const time = elapsed % 30; // Loop every 30 seconds
+            const time = elapsed % 30;
             updateScenes(time);
             requestAnimationFrame(tick);
         }
         tick();
 
-        // Console Easter egg
-        console.log('%c🎬 Instagram Reel Ready!', 'color: #8b5cf6; font-size: 16px; font-weight: bold;');
-        console.log('%cScreen record this at 1080x1920 for your Instagram Reel', 'color: #06b6d4; font-size: 12px;');
+        // Initial fade out
+        setTimeout(() => { fadeOverlay.classList.add('hidden'); }, 500);
+
+        console.log('%c🎬 HD Instagram Reel Ready', 'color: #8b5cf6; font-size: 16px; font-weight: bold;');
+        console.log('%cOpen in browser → Fullscreen → Screen Record (portrait 1080x1920)', 'color: #06b6d4; font-size: 12px;');
     </script>
 </body>
 </html>
