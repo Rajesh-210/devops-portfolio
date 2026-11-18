@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telemetry Dashboard | Rajesh Chilukuri</title>
-    <!-- Tailwind CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -18,12 +18,45 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Outfit', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
+                        inter: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'space': { 950: '#030014', 900: '#0a0420', 800: '#140e2e' },
-                        'accent': { purple: '#bc13fe', blue: '#00d4ff', pink: '#ff006e' }
+                        abyss: { 50: '#f0f0ff', 100: '#e0e0ff', 500: '#0a0a12', 900: '#050508', 950: '#020204' },
+                        neon: { purple: '#8b5cf6', cyan: '#06b6d4', pink: '#ec4899', emerald: '#10b981', amber: '#f59e0b' },
+                        glass: { bg: 'rgba(10, 10, 18, 0.6)', border: 'rgba(139, 92, 246, 0.15)' },
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-slow': 'float 10s ease-in-out infinite',
+                        'float-fast': 'float 4s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
+                        'orbit': 'orbit 20s linear infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'gradient-shift': 'gradientShift 10s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-15px) rotate(2deg)' },
+                            '66%': { transform: 'translateY(10px) rotate(-2deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 30px rgba(139, 92, 246, 0.2), 0 0 60px rgba(6, 182, 212, 0.1)' },
+                            '50%': { boxShadow: '0 0 60px rgba(139, 92, 246, 0.4), 0 0 100px rgba(6, 182, 212, 0.2)' },
+                        },
+                        orbit: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
+                        gradientShift: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                    },
+                    backgroundImage: {
+                        'mesh-gradient': 'linear-gradient(135deg, #0a0a12 0%, #1a1a2e 50%, #0a0a12 100%)',
                     }
                 }
             }
@@ -31,218 +64,561 @@
     </script>
 
     <style>
-        :root {
-            --glass-bg: rgba(20, 14, 46, 0.7);
-            --glass-border: rgba(188, 19, 254, 0.15);
-            --accent-1: #bc13fe;
-            --accent-2: #00d4ff;
-            --accent-3: #ff006e;
-        }
-
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #030014;
+            font-family: 'Outfit', sans-serif;
+            background-color: #020204;
             color: #f8fafc;
             overflow-x: hidden;
         }
 
-        .glass {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        .glass-panel {
+            background: rgba(10, 10, 18, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
-        .glass:hover {
-            border-color: rgba(188, 19, 254, 0.4);
-            box-shadow: 0 0 30px rgba(188, 19, 254, 0.15);
+        .glass-panel-hover:hover {
+            border-color: rgba(139, 92, 246, 0.35);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+            transform: translateY(-4px);
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, #bc13fe, #00d4ff);
+            background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        .text-gradient-cyan {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Ambient glow */
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .orb {
             position: fixed;
             border-radius: 50%;
-            filter: blur(100px);
-            pointer-events: none;
-            opacity: 0.3;
+            filter: blur(80px);
+            opacity: 0.4;
             z-index: 0;
+            pointer-events: none;
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .node-status {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .node-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .cta-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: 0.5s;
+        }
+        .cta-button:hover::before {
+            left: 100%;
         }
     </style>
 </head>
-<body class="relative min-h-screen">
+<body class="min-h-screen overflow-x-hidden selection:bg-neon-purple selection:text-white">
 
-    <!-- Orbs -->
-    <div class="orb w-96 h-96 bg-[#bc13fe] top-0 left-0"></div>
-    <div class="orb w-96 h-96 bg-[#00d4ff] bottom-0 right-0"></div>
+    <!-- ============ ANIMATED BACKGROUND ============ -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="grid-bg"></div>
+        <div class="orb w-[600px] h-[600px] bg-[#8b5cf6] top-[-20%] left-[-20%] animate-pulse-glow"></div>
+        <div class="orb w-[500px] h-[500px] bg-[#06b6d4] bottom-[-15%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="orb w-[400px] h-[400px] bg-[#ec4899] top-[40%] right-[20%] animate-pulse-glow" style="animation-delay: 4s;"></div>
+    </div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-        <div class="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors">
-                ← Back to Portfolio
-            </a>
-            <span class="font-mono text-xs uppercase tracking-widest text-[#00d4ff]">Telemetry & Performance Observability</span>
-            <span class="flex items-center gap-2 text-xs font-mono text-[#10b981]">
-                <span class="w-2 h-2 rounded-full bg-[#10b981] animate-ping"></span> Live Prometheus Feeds
-            </span>
-        </div>
-    </nav>
+    <!-- ============ MAIN CONTENT ============ -->
+    <main class="relative z-10">
 
-    <!-- Main Dashboard -->
-    <main class="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-16 space-y-8">
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+            <div class="max-w-7xl mx-auto glass-panel rounded-2xl px-6 py-3 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-neon-purple to-neon-cyan flex items-center justify-center font-bold text-white text-xs group-hover:scale-110 transition-transform">
+                        ←
+                    </div>
+                    <span class="font-semibold text-slate-300 group-hover:text-white transition-colors">Back to Portfolio</span>
+                </a>
+                <div class="flex items-center gap-2 text-xs font-mono text-neon-cyan uppercase tracking-widest">
+                    <span class="w-2 h-2 rounded-full bg-neon-emerald animate-pulse"></span>
+                    Telemetry & Performance Observability
+                </div>
+                <a href="index.html#contact" class="px-5 py-2 rounded-xl bg-gradient-to-r from-neon-purple to-neon-cyan text-white font-semibold text-sm hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] transition-all cta-button">
+                    Contact
+                </a>
+            </div>
+        </nav>
 
-        <!-- Top Header -->
-        <header class="text-center max-w-3xl mx-auto mb-10">
-            <h1 class="text-4xl sm:text-5xl font-bold mb-3 text-gradient">Infrastructure Telemetry</h1>
-            <p class="text-slate-400 text-sm">Real-time simulation of production EKS, GitOps continuous delivery, and FinOps metrics driven by automated Terraform pipelines.</p>
+        <!-- Header -->
+        <header class="relative pt-20 pb-12 px-6 text-center max-w-4xl mx-auto">
+            <span class="text-xs font-mono text-neon-purple uppercase tracking-widest mb-4 inline-block">Infrastructure Telemetry</span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 tracking-tight">Live Cluster Monitoring</h1>
+            <p class="text-slate-400 text-sm max-w-2xl mx-auto">Real-time simulation of production EKS, GitOps continuous delivery, and FinOps metrics driven by automated Terraform pipelines.</p>
         </header>
 
         <!-- KPI Metrics Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <div class="glass p-5 rounded-2xl text-center">
-                <span class="text-2xl mb-2 block">⚡</span>
-                <span class="text-2xl font-bold font-mono text-[#00d4ff] block" id="deployTime">5 min</span>
-                <span class="text-xs text-slate-400">Release Duration</span>
-                <span class="text-[10px] text-[#10b981] block mt-1">−83% Cycle Time</span>
-            </div>
-            <div class="glass p-5 rounded-2xl text-center">
-                <span class="text-2xl mb-2 block">🏗️</span>
-                <span class="text-2xl font-bold font-mono text-[#bc13fe] block">10 min</span>
-                <span class="text-xs text-slate-400">Infra Provisioning</span>
-                <span class="text-[10px] text-[#10b981] block mt-1">−96% via Terraform</span>
-            </div>
-            <div class="glass p-5 rounded-2xl text-center">
-                <span class="text-2xl mb-2 block">🟢</span>
-                <span class="text-2xl font-bold font-mono text-[#10b981] block">99.9%</span>
-                <span class="text-xs text-slate-400">Uptime SLA</span>
-                <span class="text-[10px] text-[#00d4ff] block mt-1">Zero Downtime</span>
-            </div>
-            <div class="glass p-5 rounded-2xl text-center">
-                <span class="text-2xl mb-2 block">🚀</span>
-                <span class="text-2xl font-bold font-mono text-white block">47</span>
-                <span class="text-xs text-slate-400">Prod Releases</span>
-                <span class="text-[10px] text-[#bc13fe] block mt-1">100% Success</span>
-            </div>
-            <div class="glass p-5 rounded-2xl text-center">
-                <span class="text-2xl mb-2 block">💰</span>
-                <span class="text-2xl font-bold font-mono text-[#ff006e] block">$2.3K</span>
-                <span class="text-xs text-slate-400">Monthly Saved</span>
-                <span class="text-[10px] text-[#10b981] block mt-1">30% FinOps Gain</span>
-            </div>
-            <div class="glass p-5 rounded-2xl text-center">
-                <span class="text-2xl mb-2 block">🔧</span>
-                <span class="text-2xl font-bold font-mono text-[#00d4ff] block">15 min</span>
-                <span class="text-xs text-slate-400">MTTR</span>
-                <span class="text-[10px] text-[#10b981] block mt-1">−70% Recovery</span>
+        <div class="px-6 max-w-7xl mx-auto mb-12">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div class="glass-panel p-5 rounded-2xl text-center reveal">
+                    <div class="text-neon-cyan text-2xl mb-2">⚡</div>
+                    <div class="text-2xl font-bold font-mono text-white" id="deployTime">5 min</div>
+                    <div class="text-xs text-slate-400 mt-1">Release Duration</div>
+                    <div class="text-[10px] text-neon-emerald mt-1 font-mono">−83% Cycle Time</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center reveal" style="transition-delay: 100ms;">
+                    <div class="text-neon-purple text-2xl mb-2">🏗️</div>
+                    <div class="text-2xl font-bold font-mono text-white">10 min</div>
+                    <div class="text-xs text-slate-400 mt-1">Infra Provisioning</div>
+                    <div class="text-[10px] text-neon-emerald mt-1 font-mono">−96% via Terraform</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center reveal" style="transition-delay: 200ms;">
+                    <div class="text-neon-emerald text-2xl mb-2">🟢</div>
+                    <div class="text-2xl font-bold font-mono text-white">99.9%</div>
+                    <div class="text-xs text-slate-400 mt-1">Uptime SLA</div>
+                    <div class="text-[10px] text-neon-cyan mt-1 font-mono">Zero Downtime</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center reveal" style="transition-delay: 300ms;">
+                    <div class="text-white text-2xl mb-2">🚀</div>
+                    <div class="text-2xl font-bold font-mono text-white">47</div>
+                    <div class="text-xs text-slate-400 mt-1">Prod Releases</div>
+                    <div class="text-[10px] text-neon-purple mt-1 font-mono">100% Success</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center reveal" style="transition-delay: 400ms;">
+                    <div class="text-neon-amber text-2xl mb-2">💰</div>
+                    <div class="text-2xl font-bold font-mono text-white">$2.3K</div>
+                    <div class="text-xs text-slate-400 mt-1">Monthly Saved</div>
+                    <div class="text-[10px] text-neon-emerald mt-1 font-mono">30% FinOps Gain</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl text-center reveal" style="transition-delay: 500ms;">
+                    <div class="text-neon-cyan text-2xl mb-2">🔧</div>
+                    <div class="text-2xl font-bold font-mono text-white">15 min</div>
+                    <div class="text-xs text-slate-400 mt-1">MTTR</div>
+                    <div class="text-[10px] text-neon-emerald mt-1 font-mono">−70% Recovery</div>
+                </div>
             </div>
         </div>
 
         <!-- Charts Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Deployment Frequency & Duration -->
-            <div class="glass p-6 rounded-3xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Deployment Duration Trend</h2>
-                    <span class="text-xs font-mono text-[#00d4ff]">Jenkins CI</span>
+        <div class="px-6 max-w-7xl mx-auto mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Deployment Duration -->
+                <div class="glass-panel p-6 rounded-3xl reveal">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400">Deployment Duration Trend</h2>
+                        <span class="text-xs font-mono text-neon-cyan">Jenkins CI</span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="deployChart"></canvas>
+                    </div>
                 </div>
-                <div class="h-56">
-                    <canvas id="deployChart"></canvas>
-                </div>
-            </div>
 
-            <!-- Environment Health -->
-            <div class="glass p-6 rounded-3xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Environment Uptime Ratio</h2>
-                    <span class="text-xs font-mono text-[#10b981]">Prometheus</span>
+                <!-- Environment Uptime -->
+                <div class="glass-panel p-6 rounded-3xl reveal" style="transition-delay: 100ms;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400">Environment Uptime Ratio</h2>
+                        <span class="text-xs font-mono text-neon-emerald">Prometheus</span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="envChart"></canvas>
+                    </div>
                 </div>
-                <div class="h-56">
-                    <canvas id="envChart"></canvas>
-                </div>
-            </div>
 
-            <!-- IaC Provisioning -->
-            <div class="glass p-6 rounded-3xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Provisioning Automation</h2>
-                    <span class="text-xs font-mono text-[#bc13fe]">Terraform</span>
+                <!-- Provisioning Automation -->
+                <div class="glass-panel p-6 rounded-3xl reveal" style="transition-delay: 200ms;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400">Provisioning Automation</h2>
+                        <span class="text-xs font-mono text-neon-purple">Terraform</span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="infraChart"></canvas>
+                    </div>
                 </div>
-                <div class="h-56">
-                    <canvas id="infraChart"></canvas>
-                </div>
-            </div>
 
-            <!-- Cost Trend -->
-            <div class="glass p-6 rounded-3xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Cloud Cost Curve ($K)</h2>
-                    <span class="text-xs font-mono text-[#ff006e]">AWS FinOps</span>
+                <!-- Cost Trend -->
+                <div class="glass-panel p-6 rounded-3xl reveal" style="transition-delay: 300ms;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400">Cloud Cost Curve ($K)</h2>
+                        <span class="text-xs font-mono text-neon-amber">AWS FinOps</span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="costChart"></canvas>
+                    </div>
                 </div>
-                <div class="h-56">
-                    <canvas id="costChart"></canvas>
-                </div>
-            </div>
 
-            <!-- Incident Recovery -->
-            <div class="glass p-6 rounded-3xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Incident Recovery (Hours)</h2>
-                    <span class="text-xs font-mono text-[#00d4ff]">MTTR SRE</span>
+                <!-- Incident Recovery -->
+                <div class="glass-panel p-6 rounded-3xl reveal" style="transition-delay: 400ms;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400">Incident Recovery (Hours)</h2>
+                        <span class="text-xs font-mono text-neon-cyan">MTTR SRE</span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="incidentChart"></canvas>
+                    </div>
                 </div>
-                <div class="h-56">
-                    <canvas id="incidentChart"></canvas>
-                </div>
-            </div>
 
-            <!-- Cluster Utilization -->
-            <div class="glass p-6 rounded-3xl">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-sm font-mono uppercase tracking-wider text-slate-300">Cluster CPU & Memory</h2>
-                    <span class="text-xs font-mono text-[#bc13fe]">Amazon EKS</span>
-                </div>
-                <div class="h-56">
-                    <canvas id="utilChart"></canvas>
+                <!-- Cluster Utilization -->
+                <div class="glass-panel p-6 rounded-3xl reveal" style="transition-delay: 500ms;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400">Cluster CPU & Memory</h2>
+                        <span class="text-xs font-mono text-neon-purple">Amazon EKS</span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="utilChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Live Cluster Node Status -->
-        <div class="glass p-6 rounded-3xl">
-            <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-4">Live Kubernetes Cluster Nodes (ap-south-1)</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
-                    <div>
-                        <div class="font-bold text-white text-sm">ip-10-0-1-24.ec2.internal</div>
-                        <div class="text-xs text-slate-400 font-mono">m5.xlarge • Linux 5.15</div>
+        <!-- Cluster Node Status -->
+        <div class="px-6 max-w-7xl mx-auto mb-12">
+            <div class="glass-panel p-6 rounded-3xl reveal">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-6">Live Kubernetes Cluster Nodes (ap-south-1)</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-white text-sm">ip-10-0-1-24.ec2.internal</div>
+                            <div class="text-xs text-slate-400 font-mono">m5.xlarge • Linux 5.15</div>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <div class="w-2 h-2 rounded-full bg-neon-emerald animate-pulse"></div>
+                            <span class="text-xs font-mono text-neon-emerald">Ready</span>
+                        </div>
                     </div>
-                    <span class="text-xs font-mono px-2 py-1 rounded bg-[#10b981]/20 text-[#10b981]">Ready</span>
-                </div>
-                <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
-                    <div>
-                        <div class="font-bold text-white text-sm">ip-10-0-2-89.ec2.internal</div>
-                        <div class="text-xs text-slate-400 font-mono">m5.xlarge • Linux 5.15</div>
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-white text-sm">ip-10-0-2-89.ec2.internal</div>
+                            <div class="text-xs text-slate-400 font-mono">m5.xlarge • Linux 5.15</div>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <div class="w-2 h-2 rounded-full bg-neon-emerald animate-pulse"></div>
+                            <span class="text-xs font-mono text-neon-emerald">Ready</span>
+                        </div>
                     </div>
-                    <span class="text-xs font-mono px-2 py-1 rounded bg-[#10b981]/20 text-[#10b981]">Ready</span>
-                </div>
-                <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
-                    <div>
-                        <div class="font-bold text-white text-sm">ip-10-0-3-112.ec2.internal</div>
-                        <div class="text-xs text-slate-400 font-mono">m5.xlarge • Linux 5.15</div>
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-white text-sm">ip-10-0-3-112.ec2.internal</div>
+                            <div class="text-xs text-slate-400 font-mono">m5.xlarge • Linux 5.15</div>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <div class="w-2 h-2 rounded-full bg-neon-emerald animate-pulse"></div>
+                            <span class="text-xs font-mono text-neon-emerald">Ready</span>
+                        </div>
                     </div>
-                    <span class="text-xs font-mono px-2 py-1 rounded bg-[#10b981]/20 text-[#10b981]">Ready</span>
                 </div>
             </div>
         </div>
+
+        <!-- Footer CTA -->
+        <section class="px-6 py-16 max-w-7xl mx-auto">
+            <div class="glass-panel rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-neon-purple/10 via-transparent to-neon-cyan/10"></div>
+                <div class="relative stagger-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Need Infrastructure That Scales?</h2>
+                    <p class="text-slate-400 text-sm mb-8 max-w-xl mx-auto">I design and operate production-grade cloud platforms on AWS & Kubernetes with 99.9% SLA, 30% cost savings, and daily deployments.</p>
+                    <a href="index.html#contact" class="px-8 py-3 rounded-xl bg-gradient-to-r from-neon-purple to-neon-cyan text-white font-bold text-lg hover:shadow-[0_0_40px_rgba(139,92,246,0.6)] hover:scale-105 transition-all duration-300 cta-button">
+                        Let's Talk
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 px-6 border-t border-white/10">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs font-mono text-slate-500">© 2026 Rajesh Chilukuri. Telemetry Dashboard.</p>
+                <div class="flex items-center gap-6 text-xs font-mono text-slate-500">
+                    <a href="index.html" class="text-slate-400 hover:text-white transition-colors">Portfolio</a>
+                    <a href="mailto:rajeshchilukuri210@gmail.com" class="hover:text-neon-emerald transition-colors">Email</a>
+                </div>
+            </div>
+        </footer>
 
     </main>
 
-    <script src="assets/js/dashboard.js"></script>
+    <!-- ============ CHART.JS CONFIG (INLINE) ============ -->
+    <script>
+        const VIOLET = '#8b5cf6';
+        const CYAN = '#06b6d4';
+        const PINK = '#ec4899';
+        const EMERALD = '#10b981';
+        const AMBER = '#f59e0b';
+
+        const CHART_CONFIG = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(2, 2, 4, 0.9)',
+                    borderColor: 'rgba(139, 92, 246, 0.3)',
+                    borderWidth: 1,
+                    titleFont: { family: 'Outfit' },
+                    bodyFont: { family: 'Outfit' },
+                    padding: 12,
+                    cornerRadius: 8,
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: { color: '#64748b', font: { family: 'Outfit', size: 10 } }
+                },
+                y: {
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#64748b', font: { family: 'Outfit', size: 10 } }
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Deploy duration line chart
+            const ctxDeploy = document.getElementById('deployChart')?.getContext('2d');
+            if (ctxDeploy) {
+                new Chart(ctxDeploy, {
+                    type: 'line',
+                    data: {
+                        labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8'],
+                        datasets: [{
+                            data: [30, 24, 18, 12, 8, 6, 5, 5],
+                            borderColor: CYAN,
+                            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: CYAN,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            borderWidth: 3,
+                        }]
+                    },
+                    options: CHART_CONFIG
+                });
+            }
+
+            // 2. Env Uptime doughnut
+            const ctxEnv = document.getElementById('envChart')?.getContext('2d');
+            if (ctxEnv) {
+                new Chart(ctxEnv, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Production', 'Staging', 'Dev'],
+                        datasets: [{
+                            data: [99.9, 99.5, 98.2],
+                            backgroundColor: [CYAN, VIOLET, PINK],
+                            borderColor: '#020204',
+                            borderWidth: 4,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: {
+                            legend: { position: 'bottom', labels: { color: '#94a3b8', font: { family: 'Outfit', size: 11 }, padding: 20 } },
+                            tooltip: { enabled: false },
+                        }
+                    }
+                });
+            }
+
+            // 3. Infra Provisioning bar chart
+            const ctxInfra = document.getElementById('infraChart')?.getContext('2d');
+            if (ctxInfra) {
+                new Chart(ctxInfra, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Manual', 'Basic IaC', 'Modular', 'GitOps'],
+                        datasets: [{
+                            data: [180, 60, 25, 10],
+                            backgroundColor: [
+                                'rgba(236, 72, 153, 0.6)',
+                                'rgba(139, 92, 246, 0.6)',
+                                'rgba(6, 182, 212, 0.6)',
+                                'rgba(16, 185, 129, 0.8)'
+                            ],
+                            borderRadius: 8,
+                            barPercentage: 0.6,
+                            categoryPercentage: 0.8,
+                        }]
+                    },
+                    options: CHART_CONFIG
+                });
+            }
+
+            // 4. Cost Trend line chart
+            const ctxCost = document.getElementById('costChart')?.getContext('2d');
+            if (ctxCost) {
+                new Chart(ctxCost, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Mar', 'May', 'Jul', 'Sep', 'Nov'],
+                        datasets: [
+                            {
+                                label: 'Unoptimized',
+                                data: [4.2, 4.0, 3.8, 3.7, 3.8, 3.6],
+                                borderColor: PINK,
+                                borderDash: [5, 5],
+                                fill: false,
+                                pointRadius: 0,
+                                borderWidth: 2,
+                            },
+                            {
+                                label: 'Optimized',
+                                data: [3.8, 3.2, 2.7, 2.4, 2.3, 2.3],
+                                borderColor: EMERALD,
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                fill: true,
+                                tension: 0.4,
+                                pointBackgroundColor: EMERALD,
+                                pointRadius: 4,
+                                borderWidth: 3,
+                            }
+                        ]
+                    },
+                    options: CHART_CONFIG
+                });
+            }
+
+            // 5. Incident MTTR grouped bar
+            const ctxIncident = document.getElementById('incidentChart')?.getContext('2d');
+            if (ctxIncident) {
+                new Chart(ctxIncident, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Detect', 'Triage', 'Resolve', 'Postmortem'],
+                        datasets: [
+                            {
+                                label: 'Before',
+                                data: [4, 2, 8, 24],
+                                backgroundColor: 'rgba(236, 72, 153, 0.5)',
+                                borderRadius: 6,
+                                barPercentage: 0.7,
+                            },
+                            {
+                                label: 'After',
+                                data: [0.25, 0.5, 1, 4],
+                                backgroundColor: 'rgba(6, 182, 212, 0.8)',
+                                borderRadius: 6,
+                                barPercentage: 0.7,
+                            }
+                        ]
+                    },
+                    options: {
+                        ...CHART_CONFIG,
+                        scales: {
+                            ...CHART_CONFIG.scales,
+                            x: { stacked: false, grid: { display: false }, ticks: { color: '#64748b', font: { family: 'Outfit', size: 10 } } },
+                            y: { stacked: false, grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#64748b', font: { family: 'Outfit', size: 10 } } }
+                        }
+                    }
+                });
+            }
+
+            // 6. Cluster Utilization area chart
+            const ctxUtil = document.getElementById('utilChart')?.getContext('2d');
+            if (ctxUtil) {
+                new Chart(ctxUtil, {
+                    type: 'line',
+                    data: {
+                        labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                        datasets: [
+                            {
+                                label: 'CPU %',
+                                data: [28, 32, 48, 42, 52, 40],
+                                borderColor: CYAN,
+                                backgroundColor: 'rgba(6, 182, 212, 0.2)',
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 0,
+                                borderWidth: 3,
+                            },
+                            {
+                                label: 'Memory %',
+                                data: [50, 52, 58, 62, 60, 54],
+                                borderColor: VIOLET,
+                                backgroundColor: 'rgba(139, 92, 246, 0.15)',
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 0,
+                                borderWidth: 3,
+                            }
+                        ]
+                    },
+                    options: CHART_CONFIG
+                });
+            }
+
+            // Live counter simulation
+            const deployEl = document.getElementById('deployTime');
+            if (deployEl) {
+                const times = ['5.0 min', '4.8 min', '4.5 min', '4.2 min', '5.0 min'];
+                let idx = 0;
+                setInterval(() => {
+                    idx = (idx + 1) % times.length;
+                    deployEl.textContent = times[idx];
+                }, 1500);
+            }
+
+            // Scroll reveal
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
