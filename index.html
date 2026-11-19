@@ -380,7 +380,7 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
-        #terminalInput {
+        .terminal-input {
             background: transparent;
             border: none;
             color: #fff;
@@ -390,7 +390,7 @@
             outline: none;
             cursor: text;
         }
-        #terminalInput::placeholder { color: #475569; }
+        .terminal-input::placeholder { color: #475569; }
         .terminal-hint {
             position: absolute;
             bottom: 1rem; left: 50%; transform: translateX(-50%);
@@ -1211,7 +1211,7 @@
         const terminalOverlay = document.getElementById('terminalOverlay');
         const terminalToggleBtn = document.getElementById('terminalToggleBtn');
         const terminalCloseBtn = document.getElementById('terminalCloseBtn');
-        const terminalInput = document.getElementById('terminalInput');
+        const terminalInput = document.querySelector('.terminal-input');
         const terminalBody = document.getElementById('terminalBody');
         const terminalHint = document.getElementById('terminalHint');
 
