@@ -76,46 +76,99 @@
     </script>
 
     <style>
-        /* Light Theme Variables */
+        /* ============ BOTH THEMES: ANIMATED GLASS STYLE ============ */
+        body {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Dark Theme (default) - Deep Abyss with animated glass */
+        body:not([data-theme="light"]) {
+            background-color: #020204;
+            color: #f8fafc;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 35%),
+                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 35%);
+            background-size: 300% 300%;
+            animation: darkAmbient 20s ease-in-out infinite;
+        }
+
+        @keyframes darkAmbient {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+
+        body:not([data-theme="light"]) .glass-panel {
+            background: rgba(10, 10, 18, 0.55);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body:not([data-theme="light"]) .orb {
+            opacity: 0.4;
+        }
+
+        body:not([data-theme="light"]) .grid-bg {
+            background-image: linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+        }
+
+        body:not([data-theme="light"]) *::-webkit-scrollbar-track {
+            background: #050508;
+        }
+
+        body:not([data-theme="light"]) *::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #8b5cf6, #06b6d4);
+        }
+
+        /* Light Theme - Animated Glass (frosted white with neon accents) */
         [data-theme="light"] {
-            --bg: #f8fafc;
-            --text: #0f172a;
-            --text-secondary: #334155;
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(139, 92, 246, 0.2);
-            --nav-bg: rgba(255, 255, 255, 0.8);
-            --card-bg: rgba(255, 255, 255, 0.6);
-            --orb-1: rgba(139, 92, 246, 0.15);
-            --orb-2: rgba(6, 182, 212, 0.15);
-            --orb-3: rgba(236, 72, 153, 0.15);
-            --grid-color: rgba(139, 92, 246, 0.08);
-            --scrollbar-track: #e2e8f0;
-            --scrollbar-thumb: linear-gradient(to bottom, #8b5cf6, #06b6d4);
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(139, 92, 246, 0.18);
         }
 
         [data-theme="light"] body {
-            background-color: #f8fafc;
+            background-color: #f0f4ff;
             color: #0f172a;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+            background-size: 300% 300%;
+            animation: lightAmbient 15s ease-in-out infinite;
+        }
+
+        @keyframes lightAmbient {
+            0%, 100% { background-position: 0% 0%; }
+            33% { background-position: 100% 50%; }
+            66% { background-position: 50% 100%; }
         }
 
         [data-theme="light"] .glass-panel {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(139, 92, 246, 0.18);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
         }
 
         [data-theme="light"] .glass-panel-hover:hover {
-            border-color: rgba(139, 92, 246, 0.4);
+            border-color: rgba(139, 92, 246, 0.35);
             box-shadow: 0 12px 40px rgba(139, 92, 246, 0.12);
+            background: rgba(255, 255, 255, 0.7);
         }
 
         [data-theme="light"] .orb {
-            opacity: 0.25;
+            opacity: 0.35;
         }
 
         [data-theme="light"] .grid-bg {
-            background-image: linear-gradient(rgba(139, 92, 246, 0.08) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(139, 92, 246, 0.08) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(139, 92, 246, 0.06) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(139, 92, 246, 0.06) 1px, transparent 1px);
+            opacity: 0.6;
+        }
+
+        [data-theme="light"] .cta-button {
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
         }
 
         [data-theme="light"] *::-webkit-scrollbar-track {
@@ -132,7 +185,7 @@
         [data-theme="light"] .bg-white\/5 { background-color: rgba(255, 255, 255, 0.3) !important; }
         [data-theme="light"] .bg-white\/10 { background-color: rgba(255, 255, 255, 0.4) !important; }
         [data-theme="light"] .border-white\/10 { border-color: rgba(255, 255, 255, 0.4) !important; }
-        [data-theme="light"] .bg-black\/40 { background-color: rgba(0, 0, 0, 0.1) !important; }
+        [data-theme="light"] .bg-black\/40 { background-color: rgba(0, 0, 0, 0.08) !important; }
         [data-theme="light"] .bg-slate-800 { background-color: #cbd5e1 !important; }
         [data-theme="light"] .bg-slate-700 { background-color: #94a3b8 !important; }
 
