@@ -449,6 +449,14 @@
         .terminal-toggle-btn:active {
             transform: scale(0.95);
         }
+
+        /* CI/CD Pipeline Simulator */
+        .pipeline-stage {
+            transition: all 0.3s ease;
+        }
+        .stage-bar {
+            transition: width 0.5s ease, background-color 0.3s ease;
+        }
     </style>
 </head>
 <body class="min-h-screen selection:bg-neon-purple selection:text-white">
@@ -1071,6 +1079,126 @@
             </div>
         </section>
 
+        <!-- CI/CD Pipeline Simulator Section -->
+        <section id="cicd-simulator" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-xs font-mono text-neon-purple uppercase tracking-widest">CI/CD Simulator</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mt-4">Watch a Deployment<br><span class="text-gradient">Flow Through.</span></h2>
+                    <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Trigger a simulated GitOps deployment and watch it flow through Jenkins CI, security scanning, ArgoCD sync, and canary rollout.</p>
+                </div>
+
+                <div class="glass-panel p-8 md:p-12 rounded-3xl max-w-4xl mx-auto relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-neon-purple/10 rounded-full blur-3xl"></div>
+
+                    <div class="space-y-6">
+                        <!-- Pipeline Header -->
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-neon-emerald animate-pulse"></div>
+                                <span class="text-xs font-mono text-slate-300">Pipeline Status: Idle</span>
+                            </div>
+                            <button id="triggerDeploy" class="px-6 py-2 rounded-xl bg-gradient-to-r from-neon-purple to-neon-cyan text-white font-bold text-sm hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] hover:scale-105 transition-all cta-button disabled:opacity-50 disabled:cursor-not-allowed">
+                                Trigger Deployment
+                            </button>
+                        </div>
+
+                        <!-- Pipeline Stages -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+                            <!-- Stage 1: Lint & Test -->
+                            <div id="stage-lint" class="pipeline-stage glass-panel p-4 rounded-xl text-center border border-white/10">
+                                <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-3 text-xs font-bold text-slate-400">1</div>
+                                <div class="text-xs font-semibold text-slate-300 mb-1">Lint &amp; Unit Test</div>
+                                <div class="text-[10px] text-slate-500 font-mono">Jenkins CI</div>
+                                <div class="h-1 bg-slate-800 rounded-full mt-3 overflow-hidden">
+                                    <div class="stage-bar h-full bg-slate-500" style="width: 0%"></div>
+                                </div>
+                                <div class="text-[10px] text-slate-400 mt-1 stage-status" id="status-lint">Waiting</div>
+                            </div>
+
+                            <!-- Stage 2: Security Scan -->
+                            <div id="stage-scan" class="pipeline-stage glass-panel p-4 rounded-xl text-center border border-white/10 opacity-50">
+                                <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-3 text-xs font-bold text-slate-400">2</div>
+                                <div class="text-xs font-semibold text-slate-300 mb-1">Security Scan</div>
+                                <div class="text-[10px] text-slate-500 font-mono">Trivy + Snyk</div>
+                                <div class="h-1 bg-slate-800 rounded-full mt-3 overflow-hidden">
+                                    <div class="stage-bar h-full bg-slate-500" style="width: 0%"></div>
+                                </div>
+                                <div class="text-[10px] text-slate-400 mt-1 stage-status" id="status-scan">Waiting</div>
+                            </div>
+
+                            <!-- Stage 3: Build & Push -->
+                            <div id="stage-build" class="pipeline-stage glass-panel p-4 rounded-xl text-center border border-white/10 opacity-50">
+                                <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-3 text-xs font-bold text-slate-400">3</div>
+                                <div class="text-xs font-semibold text-slate-300 mb-1">Build &amp; Push</div>
+                                <div class="text-[10px] text-slate-500 font-mono">Docker → ECR</div>
+                                <div class="h-1 bg-slate-800 rounded-full mt-3 overflow-hidden">
+                                    <div class="stage-bar h-full bg-slate-500" style="width: 0%"></div>
+                                </div>
+                                <div class="text-[10px] text-slate-400 mt-1 stage-status" id="status-build">Waiting</div>
+                            </div>
+
+                            <!-- Stage 4: ArgoCD Sync -->
+                            <div id="stage-sync" class="pipeline-stage glass-panel p-4 rounded-xl text-center border border-white/10 opacity-50">
+                                <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-3 text-xs font-bold text-slate-400">4</div>
+                                <div class="text-xs font-semibold text-slate-300 mb-1">GitOps Sync</div>
+                                <div class="text-[10px] text-slate-500 font-mono">ArgoCD</div>
+                                <div class="h-1 bg-slate-800 rounded-full mt-3 overflow-hidden">
+                                    <div class="stage-bar h-full bg-slate-500" style="width: 0%"></div>
+                                </div>
+                                <div class="text-[10px] text-slate-400 mt-1 stage-status" id="status-sync">Waiting</div>
+                            </div>
+
+                            <!-- Stage 5: Canary -->
+                            <div id="stage-canary" class="pipeline-stage glass-panel p-4 rounded-xl text-center border border-white/10 opacity-50">
+                                <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-3 text-xs font-bold text-slate-400">5</div>
+                                <div class="text-xs font-semibold text-slate-300 mb-1">Canary Rollout</div>
+                                <div class="text-[10px] text-slate-500 font-mono">10% → 100%</div>
+                                <div class="h-1 bg-slate-800 rounded-full mt-3 overflow-hidden">
+                                    <div class="stage-bar h-full bg-slate-500" style="width: 0%"></div>
+                                </div>
+                                <div class="text-[10px] text-slate-400 mt-1 stage-status" id="status-canary">Waiting</div>
+                            </div>
+
+                            <!-- Stage 6: Complete -->
+                            <div id="stage-complete" class="pipeline-stage glass-panel p-4 rounded-xl text-center border border-white/10 opacity-50">
+                                <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-3 text-xs font-bold text-slate-400">✓</div>
+                                <div class="text-xs font-semibold text-slate-300 mb-1">Production Live</div>
+                                <div class="text-[10px] text-slate-500 font-mono">Zero Downtime</div>
+                                <div class="h-1 bg-slate-800 rounded-full mt-3 overflow-hidden">
+                                    <div class="stage-bar h-full bg-slate-500" style="width: 0%"></div>
+                                </div>
+                                <div class="text-[10px] text-slate-400 mt-1 stage-status" id="status-complete">Waiting</div>
+                            </div>
+                        </div>
+
+                        <!-- Live Logs -->
+                        <div class="glass-panel p-4 rounded-xl border border-white/10 bg-black/40">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-mono text-slate-400">Live Console Logs</span>
+                                <span class="text-[10px] text-slate-500 font-mono" id="pipelineTime">--:--:--</span>
+                            </div>
+                            <div class="h-32 overflow-y-auto font-mono text-xs text-slate-300 space-y-1" id="pipelineLogs">
+                                <div class="text-slate-500">[INFO] Pipeline ready. Trigger deployment to begin.</div>
+                            </div>
+                        </div>
+
+                        <!-- Results Summary -->
+                        <div id="deployResults" class="hidden grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
+                            <div class="glass-panel p-4 rounded-xl text-center border border-neon-emerald/30">
+                                <div class="text-xl font-bold font-mono text-neon-emerald" id="resultDuration">-- min</div>
+                                <div class="text-xs text-slate-400 mt-1">Total Duration</div>
+                            </div>
+                            <div class="glass-panel p-4 rounded-xl text-center border border-neon-emerald/30">
+                                <div class="text-xl font-bold font-mono text-white">100%</div>
+                                <div class="text-xs text-slate-400 mt-1">Success Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer class="py-10 px-6 border-t border-white/10">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
@@ -1532,6 +1660,160 @@
             // Initialize
             updateCalculator();
         }
+
+        // ============================================
+        // CI/CD PIPELINE SIMULATOR
+        // ============================================
+        const triggerBtn = document.getElementById('triggerDeploy');
+        const pipelineStages = [
+            { id: 'lint', name: 'Lint & Unit Test', tool: 'Jenkins CI', duration: 1200 },
+            { id: 'scan', name: 'Security Scan', tool: 'Trivy + Snyk', duration: 1800 },
+            { id: 'build', name: 'Build & Push', tool: 'Docker → ECR', duration: 1500 },
+            { id: 'sync', name: 'GitOps Sync', tool: 'ArgoCD', duration: 1600 },
+            { id: 'canary', name: 'Canary Rollout', tool: '10% → 100%', duration: 2000 },
+            { id: 'complete', name: 'Production Live', tool: 'Zero Downtime', duration: 800 },
+        ];
+
+        const stageElements = {};
+        pipelineStages.forEach(s => {
+            stageElements[s.id] = {
+                card: document.getElementById('stage-' + s.id),
+                bar: document.getElementById('stage-' + s.id).querySelector('.stage-bar'),
+                status: document.getElementById('status-' + s.id),
+            };
+        });
+
+        const logsEl = document.getElementById('pipelineLogs');
+        const timeEl = document.getElementById('pipelineTime');
+        const resultsEl = document.getElementById('deployResults');
+        const resultDuration = document.getElementById('resultDuration');
+
+        let isRunning = false;
+        let startTime = 0;
+
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false }).split('.')[0];
+            const colorMap = {
+                info: '#94a3b8',
+                success: '#10b981',
+                warn: '#f59e0b',
+                error: '#ec4899',
+            };
+            div.style.color = colorMap[type] || '#94a3b8';
+            div.innerHTML = `<span style="color:#64748b">[${time}]</span> ${message}`;
+            logsEl.appendChild(div);
+            logsEl.scrollTop = logsEl.scrollHeight;
+        }
+
+        function sleep(ms) {
+            return new Promise(r => setTimeout(r, ms));
+        }
+
+        function formatDuration(ms) {
+            const seconds = Math.floor(ms / 1000);
+            if (seconds < 60) return seconds + 's';
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return minutes + 'm ' + remainingSeconds + 's';
+        }
+
+        function updateTimer() {
+            const now = Date.now();
+            const elapsed = now - startTime;
+            timeEl.textContent = new Date(elapsed).toISOString().substr(11, 8);
+        }
+
+        async function runPipeline() {
+            if (isRunning) return;
+            isRunning = true;
+            triggerBtn.disabled = true;
+            triggerBtn.textContent = 'Deployment in Progress...';
+
+            // Reset UI
+            logsEl.innerHTML = '';
+            resultsEl.classList.add('hidden');
+            timeEl.textContent = '--:--:--';
+            resultDuration.textContent = '-- min';
+
+            pipelineStages.forEach(s => {
+                const el = stageElements[s.id];
+                el.card.classList.remove('border-neon-emerald/30', 'border-neon-purple/30');
+                el.card.classList.add('border-white/10');
+                el.bar.style.width = '0%';
+                el.bar.className = 'stage-bar h-full bg-slate-500';
+                el.status.textContent = 'Waiting';
+                el.status.className = 'text-[10px] text-slate-400 mt-1 stage-status';
+            });
+
+            log('[INFO] Pipeline triggered by rajesh@portfolio');
+            log('[INFO] Fetching latest commit from github.com/Rajesh-210/k8s-manifests');
+
+            startTime = Date.now();
+            const timerInterval = setInterval(updateTimer, 100);
+
+            let totalDuration = 0;
+
+            for (const s of pipelineStages) {
+                const el = stageElements[s.id];
+                const stageStart = Date.now();
+
+                log('[RUNNING] ' + s.name + ' via ' + s.tool, 'info');
+                el.card.classList.remove('opacity-50');
+                el.card.classList.add('border-neon-purple/30');
+                el.bar.className = 'stage-bar h-full bg-neon-purple transition-all duration-500';
+                el.status.textContent = 'Running...';
+                el.status.className = 'text-[10px] text-neon-purple mt-1 stage-status font-bold';
+
+                // Animate progress bar
+                const steps = 20;
+                for (let i = 0; i <= steps; i++) {
+                    el.bar.style.width = (i / steps * 100) + '%';
+                    await sleep(s.duration / steps);
+                }
+
+                const stageEnd = Date.now();
+                totalDuration += (stageEnd - stageStart);
+
+                // Mark complete
+                el.bar.className = 'stage-bar h-full bg-neon-emerald';
+                el.bar.style.width = '100%';
+                el.card.classList.remove('border-neon-purple/30');
+                el.card.classList.add('border-neon-emerald/30');
+                el.status.textContent = 'Complete';
+                el.status.className = 'text-[10px] text-neon-emerald mt-1 stage-status font-bold';
+
+                log('[OK] ' + s.name + ' passed (' + s.tool + ')', 'success');
+
+                if (s.id === 'scan') {
+                    log('[INFO] No vulnerabilities found in container images', 'success');
+                }
+                if (s.id === 'build') {
+                    log('[INFO] Image pushed: registry.aws/ecr/prod-app:latest', 'success');
+                }
+                if (s.id === 'sync') {
+                    log('[INFO] ArgoCD sync: application healthy, 3/3 pods running', 'success');
+                }
+                if (s.id === 'canary') {
+                    log('[INFO] Canary: 10% → 50% → 100% traffic shift, zero errors', 'success');
+                }
+            }
+
+            clearInterval(timerInterval);
+
+            // Final results
+            log('[SUCCESS] Deployment complete - production cluster updated', 'success');
+            log('[INFO] Zero downtime achieved. All health checks passed.', 'success');
+
+            resultsEl.classList.remove('hidden');
+            resultDuration.textContent = formatDuration(totalDuration);
+
+            triggerBtn.disabled = false;
+            triggerBtn.textContent = 'Trigger Deployment';
+            isRunning = false;
+        }
+
+        triggerBtn.addEventListener('click', runPipeline);
     </script>
 </body>
 </html>
