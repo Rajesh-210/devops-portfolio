@@ -325,6 +325,34 @@
             50% { opacity: 0; }
         }
 
+        /* 3D Tilt Cards */
+        .tilt-card {
+            position: relative;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        .tilt-card:hover {
+            transform: scale(1.02);
+        }
+        .tilt-card__shine {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: translateX(-100%) rotate(45deg);
+            pointer-events: none;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+        .tilt-card:hover .tilt-card__shine {
+            transform: translateX(100%) rotate(45deg);
+        }
+
         /* CTA button */
         .cta-button {
             position: relative;
@@ -744,7 +772,8 @@
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project 1 -->
-                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal" style="transform-style: preserve-3d;">
+                        <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-purple/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-cyan to-blue-600 flex items-center justify-center">
@@ -775,7 +804,8 @@
                     </article>
 
                     <!-- Project 2 -->
-                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-cyan/50 transition-all duration-300 reveal" style="transition-delay: 100ms;">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-cyan/50 transition-all duration-300 reveal" style="transition-delay: 100ms; transform-style: preserve-3d;">
+                        <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-cyan/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-purple to-pink-500 flex items-center justify-center">
@@ -806,7 +836,8 @@
                     </article>
 
                     <!-- Project 3 -->
-                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-emerald/50 transition-all duration-300 reveal" style="transition-delay: 200ms;">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-emerald/50 transition-all duration-300 reveal" style="transition-delay: 200ms; transform-style: preserve-3d;">
+                        <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-emerald/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
@@ -1192,7 +1223,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Case Study 1 -->
-                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-pink/50 transition-all duration-300 reveal">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-pink/50 transition-all duration-300 reveal" style="transform-style: preserve-3d;">
+                        <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-40 h-40 bg-neon-pink/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-pink to-purple-600 flex items-center justify-center">
@@ -1223,7 +1255,8 @@
                     </article>
 
                     <!-- Case Study 2 -->
-                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-cyan/50 transition-all duration-300 reveal" style="transition-delay: 100ms;">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-cyan/50 transition-all duration-300 reveal" style="transition-delay: 100ms; transform-style: preserve-3d;">
+                        <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-40 h-40 bg-neon-cyan/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-cyan to-blue-600 flex items-center justify-center">
@@ -1254,7 +1287,8 @@
                     </article>
 
                     <!-- Case Study 3 -->
-                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal" style="transition-delay: 200ms;">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal" style="transition-delay: 200ms; transform-style: preserve-3d;">
+                        <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-40 h-40 bg-neon-purple/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-purple to-pink-500 flex items-center justify-center">
@@ -1648,7 +1682,8 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Blog Post 1 -->
-                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-amber/50 transition-all duration-300 reveal">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-amber/50 transition-all duration-300 reveal" style="transform-style: preserve-3d;">
+                        <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-amber/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <span class="text-[10px] font-mono text-neon-amber uppercase tracking-wider">FinOps</span>
@@ -1668,7 +1703,8 @@
                     </article>
 
                     <!-- Blog Post 2 -->
-                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-cyan/50 transition-all duration-300 reveal" style="transition-delay: 100ms;">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-cyan/50 transition-all duration-300 reveal" style="transition-delay: 100ms; transform-style: preserve-3d;">
+                        <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-cyan/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <span class="text-[10px] font-mono text-neon-cyan uppercase tracking-wider">SRE</span>
@@ -1688,7 +1724,8 @@
                     </article>
 
                     <!-- Blog Post 3 -->
-                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal" style="transition-delay: 200ms;">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal" style="transition-delay: 200ms; transform-style: preserve-3d;">
+                        <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-purple/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <span class="text-[10px] font-mono text-neon-purple uppercase tracking-wider">Observability</span>
@@ -2714,6 +2751,42 @@
             if (!e.target.closest('#arch-diagram') && !e.target.closest('#arch-detail')) {
                 resetArch();
             }
+        });
+
+        // ============================================
+        // 3D TILT CARDS
+        // ============================================
+        const tiltCards = document.querySelectorAll('.tilt-card');
+
+        tiltCards.forEach(card => {
+            const shine = card.querySelector('.tilt-card__shine');
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+
+                if (shine) {
+                    const shineX = (x / rect.width) * 100;
+                    const shineY = (y / rect.height) * 100;
+                    shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255,255,255,0.15) 0%, transparent 50%)`;
+                    shine.style.opacity = '1';
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+                if (shine) {
+                    shine.style.opacity = '0';
+                }
+            });
         });
 
         // ============================================
