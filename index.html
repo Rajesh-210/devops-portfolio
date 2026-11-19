@@ -1703,70 +1703,95 @@
                     <div class="absolute top-0 right-0 w-48 h-48 bg-neon-purple/10 rounded-full blur-3xl"></div>
 
                     <!-- Architecture Diagram -->
-                    <div class="relative h-96 md:h-120 w-full flex items-center justify-center overflow-hidden" id="arch-diagram">
-                        <!-- AWS Cloud -->
-                        <div class="absolute left-10 top-1/4 group arch-node arch-aws" id="node-aws">
-                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-neon-cyan to-blue-600 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.4)] border border-white/20">
-                                <span class="text-xl">☁</span>
-                            </div>
-                            <div class="absolute bottom-full mb-2 text-xs font-bold text-white whitespace-nowrap">AWS Cloud</div>
+                    <div class="relative h-[500px] w-full flex items-center justify-center overflow-hidden" id="arch-diagram">
+                        <!-- Data flow label at top -->
+                        <div class="absolute top-4 left-1/2 transform -translate-x-1/2 text-[10px] font-mono text-slate-500 uppercase tracking-widest z-10">
+                            Data Flow →
                         </div>
 
-                        <!-- VPC -->
-                        <div class="absolute left-1/3 top-1/3 group arch-node arch-vpc" id="node-vpc">
+                        <!-- AWS Cloud (Top Left) -->
+                        <div class="absolute left-6 top-8 group arch-node arch-aws" id="node-aws">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-neon-cyan to-blue-600 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.4)] border border-white/20">
+                                <img src="https://skillicons.dev/icons?i=aws" alt="AWS" class="w-7 h-7">
+                            </div>
+                            <div class="absolute bottom-[120%] left-1/2 -translate-x-1/2 mb-1 text-[9px] font-bold text-white whitespace-nowrap bg-black/60 px-2 py-1 rounded">AWS Cloud</div>
+                        </div>
+
+                        <!-- VPC (Left Middle) -->
+                        <div class="absolute left-10 top-1/3 group arch-node arch-vpc" id="node-vpc">
                             <div class="w-16 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shadow-[0_0_25px_rgba(139,92,246,0.3)]">
-                                <span class="text-sm font-bold text-neon-purple">VPC</span>
+                                <img src="https://skillicons.dev/icons?i=amazonwebservices" alt="VPC" class="w-6 h-6">
+                                <span class="ml-1 text-[9px] font-bold text-neon-purple">VPC</span>
                             </div>
-                            <div class="absolute bottom-full mb-2 text-xs font-bold text-white whitespace-nowrap">Virtual Private Cloud</div>
+                            <div class="absolute bottom-[120%] left-1/2 -translate-x-1/2 mb-1 text-[9px] font-bold text-white whitespace-nowrap bg-black/60 px-2 py-1 rounded">VPC Networking</div>
                         </div>
 
-                        <!-- EKS Cluster -->
-                        <div class="absolute left-1/2 top-1/5 group arch-node arch-eks" id="node-eks">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-neon-purple to-pink-500 flex items-center justify-center shadow-[0_0_35px_rgba(139,92,246,0.5)] border border-white/20">
-                                <span class="text-2xl">⎈</span>
+                        <!-- EKS Cluster (Center) -->
+                        <div class="absolute left-1/2 top-1/6 transform -translate-x-1/2 group arch-node arch-eks" id="node-eks">
+                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-neon-purple to-pink-500 flex items-center justify-center shadow-[0_0_40px_rgba(139,92,246,0.5)] border border-white/20 relative">
+                                <img src="https://skillicons.dev/icons?i=kubernetes" alt="Kubernetes" class="w-10 h-10 absolute">
+                                <div class="absolute -bottom-2 right-2 w-5 h-5 bg-neon-emerald rounded-full border-2 border-black"></div>
                             </div>
-                            <div class="absolute bottom-full mb-2 text-xs font-bold text-white whitespace-nowrap">EKS Cluster</div>
+                            <div class="absolute bottom-[130%] left-1/2 -translate-x-1/2 mb-1 text-[9px] font-bold text-white whitespace-nowrap bg-black/60 px-2 py-1 rounded">EKS Cluster</div>
                         </div>
 
-                        <!-- ArgoCD -->
-                        <div class="absolute left-1/4 top-3/4 group arch-node arch-argocd" id="node-argocd">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center shadow-[0_0_25px_rgba(236,72,153,0.4)] border border-white/20">
-                                <span class="text-xl">🔄</span>
+                        <!-- ArgoCD (Bottom Left) -->
+                        <div class="absolute left-12 bottom-10 group arch-node arch-argocd" id="node-argocd">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center shadow-[0_0_25px_rgba(236,72,153,0.4)] border border-white/20">
+                                <img src="https://skillicons.dev/icons?i=argocd" alt="ArgoCD" class="w-7 h-7">
                             </div>
-                            <div class="absolute bottom-full mb-2 text-xs font-bold text-white whitespace-nowrap">ArgoCD GitOps</div>
+                            <div class="absolute top-[120%] left-1/2 -translate-x-1/2 mt-1 text-[9px] font-bold text-white whitespace-nowrap bg-black/60 px-2 py-1 rounded">ArgoCD GitOps</div>
                         </div>
 
-                        <!-- Jenkins -->
-                        <div class="absolute left-3/4 top-3/4 group arch-node arch-jenkins" id="node-jenkins">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-amber to-orange-500 flex items-center justify-center shadow-[0_0_25px_rgba(245,158,11,0.4)] border border-white/20">
-                                <span class="text-xl">🔧</span>
+                        <!-- Jenkins (Bottom Right) -->
+                        <div class="absolute right-12 bottom-10 group arch-node arch-jenkins" id="node-jenkins">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-neon-amber to-orange-500 flex items-center justify-center shadow-[0_0_25px_rgba(245,158,11,0.4)] border border-white/20">
+                                <img src="https://skillicons.dev/icons?i=jenkins" alt="Jenkins" class="w-7 h-7">
                             </div>
-                            <div class="absolute bottom-full mb-2 text-xs font-bold text-white whitespace-nowrap">Jenkins CI/CD</div>
+                            <div class="absolute top-[120%] left-1/2 -translate-x-1/2 mt-1 text-[9px] font-bold text-white whitespace-nowrap bg-black/60 px-2 py-1 rounded">Jenkins CI/CD</div>
                         </div>
 
-                        <!-- Prometheus -->
-                        <div class="absolute right-10 top-1/3 group arch-node arch-prometheus" id="node-prometheus">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-emerald to-teal-500 flex items-center justify-center shadow-[0_0_25px_rgba(16,185,129,0.4)] border border-white/20">
-                                <span class="text-xl">📊</span>
+                        <!-- Prometheus (Top Right) -->
+                        <div class="absolute right-6 top-8 group arch-node arch-prometheus" id="node-prometheus">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-neon-emerald to-teal-500 flex items-center justify-center shadow-[0_0_25px_rgba(16,185,129,0.4)] border border-white/20">
+                                <img src="https://skillicons.dev/icons?i=prometheus" alt="Prometheus" class="w-7 h-7">
                             </div>
-                            <div class="absolute bottom-full mb-2 text-xs font-bold text-white whitespace-nowrap">Prometheus</div>
+                            <div class="absolute bottom-[120%] left-1/2 -translate-x-1/2 mb-1 text-[9px] font-bold text-white whitespace-nowrap bg-black/60 px-2 py-1 rounded">Prometheus</div>
                         </div>
 
-                        <!-- Grafana -->
+                        <!-- Grafana (Bottom Right) -->
                         <div class="absolute right-10 top-2/3 group arch-node arch-grafana" id="node-grafana">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-neon-amber to-orange-600 flex items-center justify-center shadow-[0_0_25px_rgba(245,158,11,0.4)] border border-white/20">
-                                <span class="text-xl">📈</span>
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-neon-amber to-orange-600 flex items-center justify-center shadow-[0_0_25px_rgba(245,158,11,0.4)] border border-white/20">
+                                <img src="https://skillicons.dev/icons?i=grafana" alt="Grafana" class="w-7 h-7">
                             </div>
-                            <div class="absolute bottom-full mb-2 text-xs font-bold text-white whitespace-nowrap">Grafana</div>
+                            <div class="absolute top-[120%] left-1/2 -translate-x-1/2 mt-1 text-[9px] font-bold text-white whitespace-nowrap bg-black/60 px-2 py-1 rounded">Grafana</div>
                         </div>
 
-                        <!-- Connection lines -->
-                        <div class="absolute left-1/4 top-1/4 w-px h-[40%] bg-gradient-to-b from-neon-purple/30 to-transparent"></div>
-                        <div class="absolute left-2/5 top-1/4 w-[30%] h-px bg-gradient-to-r from-neon-purple/30 to-transparent"></div>
-                        <div class="absolute left-1/2 top-1/3 w-px h-[40%] bg-gradient-to-b from-neon-cyan/30 to-transparent"></div>
-                        <div class="absolute left-3/10 top-2/3 w-[20%] h-px bg-gradient-to-r from-neon-amber/30 to-transparent"></div>
-                        <div class="absolute left-7/10 top-1/3 w-px h-[50%] bg-gradient-to-b from-neon-emerald/30 to-transparent"></div>
-                        <div class="absolute left-1/2 top-2/3 w-[20%] h-px bg-gradient-to-r from-neon-pink/30 to-transparent"></div>
+                        <!-- Connection lines with labels -->
+                        <div class="absolute left-8 top-24 w-[40%] h-[2px] bg-gradient-to-r from-neon-purple/40 to-transparent">
+                            <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-neon-purple shadow-[0_0_8px_rgba(139,92,246,0.6)]"></div>
+                            <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-mono text-slate-400 whitespace-nowrap">Provisions</span>
+                        </div>
+                        <div class="absolute left-1/3 top-1/3 w-[20%] h-[2px] bg-gradient-to-r from-neon-purple/40 to-transparent">
+                            <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-mono text-slate-400 whitespace-nowrap">Hosts</span>
+                        </div>
+                        <div class="absolute left-1/2 top-40 w-[2px] h-[30%] bg-gradient-to-b from-neon-cyan/40 to-transparent">
+                            <div class="absolute left-1/2 -translate-x-1/2 -top-4 w-3 h-3 rounded-full bg-neon-cyan shadow-[0_0_8px_rgba(6,182,212,0.6)]"></div>
+                            <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-mono text-slate-400 whitespace-nowrap">Orchestrates</span>
+                        </div>
+                        <div class="absolute left-1/4 bottom-24 w-[15%] h-[2px] bg-gradient-to-l from-neon-purple/40 to-transparent">
+                            <span class="absolute top-4 left-1/2 -translate-x-1/2 text-[8px] font-mono text-slate-400 whitespace-nowrap">Deploys via</span>
+                        </div>
+                        <div class="absolute right-1/4 bottom-24 w-[15%] h-[2px] bg-gradient-to-r from-neon-amber/40 to-transparent">
+                            <span class="absolute top-4 left-1/2 -translate-x-1/2 text-[8px] font-mono text-slate-400 whitespace-nowrap">Builds via</span>
+                        </div>
+                        <div class="absolute right-8 top-24 w-[2px] h-[30%] bg-gradient-to-b from-neon-emerald/40 to-transparent">
+                            <div class="absolute right-1/2 -top-4 w-3 h-3 rounded-full bg-neon-emerald shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+                            <span class="absolute -top-6 right-1/2 -translate-x-1/2 text-[8px] font-mono text-slate-400 whitespace-nowrap">Monitors</span>
+                        </div>
+                        <div class="absolute right-8 top-2/3 w-[2px] h-[15%] bg-gradient-to-b from-neon-amber/40 to-transparent">
+                            <span class="absolute top-4 right-1/2 -translate-x-1/2 text-[8px] font-mono text-slate-400 whitespace-nowrap">Visualizes</span>
+                        </div>
                     </div>
 
                     <!-- Component Details Panel -->
