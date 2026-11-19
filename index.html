@@ -328,7 +328,7 @@
         /* 3D Tilt Cards - transform controlled entirely by JS inline styles */
         .tilt-card {
             position: relative;
-            transition: none !important;
+            transition: none;
             transform-style: preserve-3d;
             cursor: pointer;
             will-change: transform;
@@ -339,12 +339,7 @@
         .tilt-card.duration-300,
         .tilt-card.duration-150,
         .tilt-card.reveal {
-            transition: none !important;
-        }
-
-        /* Prevent reveal class from setting translateY that conflicts with 3D rotation */
-        .tilt-card.active {
-            transform: none;
+            transition: none;
         }
         .tilt-card__shine {
             position: absolute;
