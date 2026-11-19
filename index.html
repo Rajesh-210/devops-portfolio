@@ -863,11 +863,16 @@
         <!-- Navigation -->
         <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
             <div class="max-w-7xl mx-auto glass-panel rounded-2xl px-6 py-3 flex items-center justify-between">
-                <div class="flex items-center gap-3 cursor-pointer group">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-purple to-neon-cyan flex items-center justify-center font-bold text-white text-xs group-hover:scale-110 transition-transform">
-                        RC
+                <div class="flex items-center gap-4 cursor-pointer group">
+                    <div class="relative w-12 h-12 rounded-xl bg-gradient-to-br from-neon-purple to-neon-cyan flex items-center justify-center font-bold text-white text-xs group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(139,92,246,0.5)]">
+                        <span>RC</span>
+                        <div class="absolute -top-1 -right-1 w-4 h-4 bg-neon-amber rounded-full animate-ping border-2 border-[#020204]"></div>
                     </div>
-                    <span class="font-bold text-xl tracking-tight text-white">Rajesh <span class="text-neon-purple">Chilukuri</span></span>
+                    <div class="flex flex-col items-start">
+                        <span class="font-bold text-xl tracking-tight text-white">Rajesh <span class="text-gradient">Chilukuri</span></span>
+                        <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider mt-0.5">DevOps &amp; Platform Engineer</span>
+                    </div>
+                    <span class="text-[10px] font-bold text-white bg-neon-purple/20 px-2 py-1 rounded border border-neon-purple/30">Open to Work</span>
                 </div>
                 <div class="hidden md:flex items-center gap-8">
                     <a href="#work" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">Work</a>
