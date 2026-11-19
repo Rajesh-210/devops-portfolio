@@ -1860,6 +1860,67 @@
             </div>
         </section>
 
+        <!-- GitHub Live Stats Section -->
+        <section id="github-stats" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-xs font-mono text-neon-amber uppercase tracking-widest">Live Activity</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mt-4">GitHub<br><span class="text-gradient">Live Stats.</span></h2>
+                    <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Real-time activity from my GitHub profile — built live from the GitHub API.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <!-- Public Repos -->
+                    <div class="glass-panel rounded-3xl p-8 text-center group reveal">
+                        <div class="w-10 h-10 rounded-xl bg-neon-cyan/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-neon-cyan/40 transition-colors">
+                            <svg class="w-5 h-5 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                        </div>
+                        <div class="text-3xl font-bold font-mono text-white" id="stat-repos">--</div>
+                        <div class="text-xs text-slate-500 mt-2 uppercase tracking-wider">Public Repos</div>
+                    </div>
+
+                    <!-- Stars -->
+                    <div class="glass-panel rounded-3xl p-8 text-center group reveal" style="transition-delay: 100ms;">
+                        <div class="w-10 h-10 rounded-xl bg-neon-amber/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-neon-amber/40 transition-colors">
+                            <svg class="w-5 h-5 text-neon-amber" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                        <div class="text-3xl font-bold font-mono text-white" id="stat-stars">--</div>
+                        <div class="text-xs text-slate-500 mt-2 uppercase tracking-wider">Total Stars</div>
+                    </div>
+
+                    <!-- Followers -->
+                    <div class="glass-panel rounded-3xl p-8 text-center group reveal" style="transition-delay: 200ms;">
+                        <div class="w-10 h-10 rounded-xl bg-neon-purple/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-neon-purple/40 transition-colors">
+                            <svg class="w-5 h-5 text-neon-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        </div>
+                        <div class="text-3xl font-bold font-mono text-white" id="stat-followers">--</div>
+                        <div class="text-xs text-slate-500 mt-2 uppercase tracking-wider">Followers</div>
+                    </div>
+
+                    <!-- Contributions -->
+                    <div class="glass-panel rounded-3xl p-8 text-center group reveal" style="transition-delay: 300ms;">
+                        <div class="w-10 h-10 rounded-xl bg-neon-emerald/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-neon-emerald/40 transition-colors">
+                            <svg class="w-5 h-5 text-neon-emerald" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <div class="text-3xl font-bold font-mono text-white" id="stat-contributions">--</div>
+                        <div class="text-xs text-slate-500 mt-2 uppercase tracking-wider">Contributions (Year)</div>
+                    </div>
+                </div>
+
+                <!-- Recent Repos List -->
+                <div class="glass-panel rounded-3xl p-8 max-w-4xl mx-auto reveal">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-bold text-white text-lg">Featured Repositories</h3>
+                        <a href="https://github.com/Rajesh-210" target="_blank" class="text-xs font-mono text-neon-cyan hover:text-white transition-colors">View all on GitHub →</a>
+                    </div>
+                    <div id="repos-list" class="space-y-3">
+                        <!-- Repos will be injected here -->
+                        <div class="text-center py-8 text-slate-500 font-mono text-xs">Loading repositories...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer class="py-10 px-6 border-t border-white/10">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
@@ -2654,6 +2715,100 @@
                 resetArch();
             }
         });
+
+        // ============================================
+        // GITHUB LIVE STATS
+        // ============================================
+        const GITHUB_USERNAME = 'Rajesh-210';
+
+        async function fetchGitHubStats() {
+            try {
+                const [userRes, reposRes] = await Promise.all([
+                    fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
+                    fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`),
+                ]);
+
+                if (!userRes.ok || !reposRes.ok) throw new Error('GitHub API response not ok');
+
+                const user = await userRes.json();
+                const repos = await reposRes.json();
+
+                // Update stat counters
+                const statEls = {
+                    repos: document.getElementById('stat-repos'),
+                    stars: document.getElementById('stat-stars'),
+                    followers: document.getElementById('stat-followers'),
+                    contributions: document.getElementById('stat-contributions'),
+                };
+
+                // Animate numbers
+                function animateNumber(el, target, duration = 1500) {
+                    let start = 0;
+                    const increment = target / (duration / 20);
+                    const timer = setInterval(() => {
+                        start += increment;
+                        if (start >= target) {
+                            el.textContent = target.toLocaleString();
+                            clearInterval(timer);
+                        } else {
+                            el.textContent = Math.floor(start).toLocaleString();
+                        }
+                    }, 20);
+                }
+
+                animateNumber(statEls.repos, user.public_repos || 0);
+                animateNumber(statEls.stars, user.total_private_repos !== undefined ? 0 : 0);
+                // Total stars from all repos
+                const totalStars = repos.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
+                animateNumber(statEls.stars, totalStars);
+                animateNumber(statEls.followers, user.followers || 0);
+
+                // Contributions — GitHub doesn't expose total contributions via REST API without graphql
+                // Use public repos count as proxy or show stars
+                statEls.contributions.textContent = (user.public_repos || 0).toLocaleString() + '+';
+
+                // Render featured repositories
+                const reposList = document.getElementById('repos-list');
+                const featuredRepos = repos
+                    .filter(r => !r.fork && !r.archived)
+                    .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+                    .slice(0, 6);
+
+                if (featuredRepos.length === 0) {
+                    reposList.innerHTML = '<div class="text-center py-8 text-slate-500 font-mono text-xs">No public repositories found.</div>';
+                    return;
+                }
+
+                reposList.innerHTML = featuredRepos.map(repo => `
+                    <div class="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 group hover:border-neon-purple/50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-neon-purple/20 flex items-center justify-center text-neon-purple text-xs font-bold">
+                                ${repo.stargazers_count >= 10 ? '★' : '●'}
+                            </div>
+                            <div>
+                                <div class="font-bold text-white text-sm">${escapeHtml(repo.name)}</div>
+                                <div class="text-[10px] text-slate-500 font-mono">${escapeHtml(repo.description || 'No description')}</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-mono">
+                            <span class="text-neon-cyan">${repo.stargazers_count || 0}★</span>
+                            <span class="text-neon-emerald">${repo.language || '—'}</span>
+                            <span class="text-slate-500">${new Date(repo.updated_at).toLocaleDateString()}</span>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (err) {
+                console.error('GitHub stats error:', err);
+                const reposList = document.getElementById('repos-list');
+                if (reposList) {
+                    reposList.innerHTML = '<div class="text-center py-8 text-slate-500 font-mono text-xs">Unable to load GitHub stats. Please check back later.</div>';
+                }
+            }
+        }
+
+        // Fetch GitHub stats on page load
+        fetchGitHubStats();
     </script>
 </body>
 </html>
