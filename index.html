@@ -339,6 +339,17 @@
             display: none;
         }
 
+        /* Page Load Entrance Animations */
+        .entrance-hidden {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .entrance-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Hero typing effect */
         .hero-typing {
             display: inline-block;
@@ -731,7 +742,7 @@
         </nav>
 
         <!-- Hero Section -->
-        <section class="relative pt-32 pb-24 px-6">
+        <section class="relative pt-32 pb-24 px-6 entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center max-w-4xl mx-auto">
                     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-neon-purple/30 mb-8">
@@ -782,14 +793,14 @@
         </section>
 
         <!-- Marquee Ticker -->
-        <div class="marquee-container">
+        <div class="marquee-container entrance-hidden">
             <div class="marquee">
                 <span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>ArgoCD</span><span>Prometheus</span><span>Grafana</span><span>Jenkins</span><span>Docker</span><span>GitHub Actions</span><span>EKS</span><span>FinOps</span><span>DevSecOps</span><span>SRE</span><span>CI/CD</span><span>IaC</span><span>AWS</span><span>Kubernetes</span><span>Terraform</span><span>ArgoCD</span><span>Prometheus</span><span>Grafana</span><span>Jenkins</span><span>Docker</span><span>GitHub Actions</span><span>EKS</span><span>FinOps</span><span>DevSecOps</span><span>SRE</span><span>CI/CD</span><span>IaC</span>
             </div>
         </div>
 
         <!-- Work Section -->
-        <section id="work" class="py-24 px-6 relative">
+        <section id="work" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-purple uppercase tracking-widest">Selected Work</span>
@@ -931,7 +942,7 @@
         </section>
 
         <!-- Stack Section -->
-        <section id="stack" class="py-24 px-6 relative bg-white/5">
+        <section id="stack" class="py-24 px-6 relative bg-white/5 entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-purple uppercase tracking-widest">Technology Stack</span>
@@ -1031,7 +1042,7 @@
         </section>
 
         <!-- Impact Section -->
-        <section id="impact" class="py-24 px-6 relative">
+        <section id="impact" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-emerald uppercase tracking-widest">Business Impact</span>
@@ -1176,7 +1187,7 @@
         </section>
 
         <!-- FinOps Savings Calculator Section -->
-        <section id="calculator" class="py-24 px-6 relative">
+        <section id="calculator" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-amber uppercase tracking-widest">FinOps Calculator</span>
@@ -1273,7 +1284,7 @@
         </section>
 
         <!-- Case Study Results Section -->
-        <section id="case-studies" class="py-24 px-6 relative">
+        <section id="case-studies" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-pink uppercase tracking-widest">Case Study Results</span>
@@ -1387,7 +1398,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-24 px-6 relative">
+        <section id="contact" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-4xl mx-auto">
                 <div class="glass-panel rounded-4xl p-8 md:p-16 text-center relative overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-r from-neon-purple/10 via-transparent to-neon-cyan/10"></div>
@@ -1468,7 +1479,7 @@
         </section>
 
         <!-- CI/CD Pipeline Simulator Section -->
-        <section id="cicd-simulator" class="py-24 px-6 relative">
+        <section id="cicd-simulator" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-purple uppercase tracking-widest">CI/CD Simulator</span>
@@ -1588,7 +1599,7 @@
         </section>
 
         <!-- SRE Incident Post-Mortem Section -->
-        <section id="postmortem" class="py-24 px-6 relative">
+        <section id="postmortem" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-pink uppercase tracking-widest">SRE Case Study</span>
@@ -1729,7 +1740,7 @@
         </section>
 
         <!-- Technical Blog Section -->
-        <section id="blog" class="py-24 px-6 relative">
+        <section id="blog" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-amber uppercase tracking-widest">Technical Blog</span>
@@ -1810,7 +1821,7 @@
         </section>
 
         <!-- Interactive Architecture Diagram Section -->
-        <section id="architecture" class="py-24 px-6 relative">
+        <section id="architecture" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-purple uppercase tracking-widest">Architecture Visualization</span>
@@ -1952,7 +1963,7 @@
         </section>
 
         <!-- GitHub Live Stats Section -->
-        <section id="github-stats" class="py-24 px-6 relative">
+        <section id="github-stats" class="py-24 px-6 relative entrance-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
                     <span class="text-xs font-mono text-neon-amber uppercase tracking-widest">Live Activity</span>
@@ -2805,6 +2816,30 @@
             if (!e.target.closest('#arch-diagram') && !e.target.closest('#arch-detail')) {
                 resetArch();
             }
+        });
+
+        // ============================================
+        // PAGE LOAD ENTRANCE ANIMATIONS
+        // ============================================
+        const entranceObserverOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px',
+        };
+
+        const entranceObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.remove('entrance-hidden');
+                        entry.target.classList.add('entrance-visible');
+                    }, index * 150); // staggered delay
+                    entranceObserver.unobserve(entry.target);
+                }
+            });
+        }, entranceObserverOptions);
+
+        document.querySelectorAll('.entrance-hidden').forEach((el) => {
+            entranceObserver.observe(el);
         });
 
         // ============================================
