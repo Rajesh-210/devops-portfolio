@@ -325,13 +325,26 @@
             50% { opacity: 0; }
         }
 
-        /* 3D Tilt Cards */
+        /* 3D Tilt Cards - aggressive override of all Tailwind transitions */
         .tilt-card {
             position: relative;
             transition: none !important;
-            transform-style: preserve-3d;
+            transform-style: preserve-3d !important;
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) !important;
             cursor: pointer;
-            transform: perspective(1000px) rotateX(0) rotateY(0) scale(1);
+            will-change: transform;
+        }
+
+        /* Override reveal class transition on tilt cards */
+        .tilt-card.reveal {
+            transition: none !important;
+        }
+
+        /* Override any Tailwind transition utilities applied via class */
+        .tilt-card.transition-all,
+        .tilt-card.duration-300,
+        .tilt-card.duration-150 {
+            transition: none !important;
         }
         .tilt-card__shine {
             position: absolute;
