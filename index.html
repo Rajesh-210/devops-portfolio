@@ -275,6 +275,180 @@
             box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
             outline: none;
         }
+
+        /* ============ INTERACTIVE TERMINAL ============ */
+        .terminal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .terminal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .terminal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 2, 4, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .terminal-window {
+            position: absolute;
+            top: 10%; left: 10%; right: 10%; bottom: 10%;
+            background: rgba(5, 5, 8, 0.92);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .terminal-overlay.open .terminal-window {
+            transform: scale(1);
+        }
+        .terminal-header {
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            flex-shrink: 0;
+        }
+        .terminal-dots {
+            display: flex;
+            gap: 6px;
+        }
+        .terminal-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+        }
+        .terminal-dot.red { background: #ff5f56; box-shadow: 0 0 10px #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; box-shadow: 0 0 10px #ffbd2e; }
+        .terminal-dot.green { background: #27c93f; box-shadow: 0 0 10px #27c93f; }
+        .terminal-title {
+            margin-left: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+        .terminal-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .terminal-line {
+            margin-bottom: 0.75rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .terminal-prompt {
+            display: inline;
+            color: var(--neon-cyan);
+            font-weight: 700;
+        }
+        .terminal-user { color: var(--neon-purple); }
+        .terminal-host { color: var(--neon-pink); }
+        .terminal-output { color: #e2e8f0; }
+        .terminal-output-dim { color: #94a3b8; }
+        .terminal-output-success { color: var(--neon-emerald); }
+        .terminal-output-error { color: var(--neon-pink); }
+        .terminal-output-warn { color: var(--neon-amber); }
+        .terminal-output-key { color: var(--neon-cyan); }
+        .terminal-output-val { color: #fbbf24; }
+        .terminal-input-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .terminal-cursor {
+            color: var(--neon-purple);
+            font-weight: 700;
+            animation: cursorBlink 1s infinite;
+        }
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        #terminalInput {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            flex: 1;
+            outline: none;
+            cursor: text;
+        }
+        #terminalInput::placeholder { color: #475569; }
+        .terminal-hint {
+            position: absolute;
+            bottom: 1rem; left: 50%; transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #64748b;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+        .terminal-close-btn {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #94a3b8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .terminal-close-btn:hover {
+            background: rgba(236, 72, 153, 0.2);
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+        .terminal-toggle-btn {
+            position: fixed;
+            bottom: 1.5rem; right: 1.5rem;
+            z-index: 99;
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+            border: none;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .terminal-toggle-btn:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 0 60px rgba(6, 182, 212, 0.6);
+        }
+        .terminal-toggle-btn:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body class="min-h-screen selection:bg-neon-purple selection:text-white">
@@ -814,6 +988,42 @@
 
     </main>
 
+    <!-- ============ INTERACTIVE TERMINAL ============ -->
+    <div class="terminal-overlay" id="terminalOverlay">
+        <div class="terminal-backdrop"></div>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                </div>
+                <div class="terminal-title">rajesh@portfolio:~$</div>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">[~]</span>
+                    <span class="terminal-output">Welcome to Rajesh Chilukuri's DevOps Terminal</span>
+                </div>
+                <div class="terminal-line terminal-output-dim">
+                    Type <span class="terminal-output-key">help</span> to see available commands.
+                </div>
+                <div class="terminal-line"></div>
+                <div class="terminal-input-line">
+                    <span class="terminal-prompt terminal-user">rajesh</span>
+                    <span class="terminal-prompt terminal-host">@portfolio</span>
+                    <span class="terminal-prompt">:~$</span>
+                    <span class="terminal-cursor">_</span>
+                    <input type="text" id="terminalInput" placeholder="" autocomplete="off" spellcheck="false">
+                </div>
+            </div>
+            <button class="terminal-close-btn" id="terminalCloseBtn">&times;</button>
+            <div class="terminal-hint" id="terminalHint">Press ` or Ctrl+K to open</div>
+        </div>
+    </div>
+
+    <button class="terminal-toggle-btn" id="terminalToggleBtn">➜</button>
+
     <!-- ============ DEVOPS TOOL BACKGROUND ANIMATION ============ -->
     <script>
         // ============================================
@@ -996,13 +1206,211 @@
         }
 
         // ============================================
-        // Console Easter Egg
+        // INTERACTIVE TERMINAL LOGIC
         // ============================================
+        const terminalOverlay = document.getElementById('terminalOverlay');
+        const terminalToggleBtn = document.getElementById('terminalToggleBtn');
+        const terminalCloseBtn = document.getElementById('terminalCloseBtn');
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalBody = document.getElementById('terminalBody');
+        const terminalHint = document.getElementById('terminalHint');
+
+        let isOpen = false;
+
+        function openTerminal() {
+            terminalOverlay.classList.add('open');
+            terminalToggleBtn.style.opacity = '0';
+            terminalToggleBtn.style.pointerEvents = 'none';
+            terminalHint.style.opacity = '0';
+            isOpen = true;
+            setTimeout(() => terminalInput.focus(), 300);
+        }
+
+        function closeTerminal() {
+            terminalOverlay.classList.remove('open');
+            terminalToggleBtn.style.opacity = '1';
+            terminalToggleBtn.style.pointerEvents = 'auto';
+            terminalHint.style.opacity = '0.6';
+            isOpen = false;
+        }
+
+        terminalToggleBtn.addEventListener('click', openTerminal);
+        terminalCloseBtn.addEventListener('click', closeTerminal);
+
+        // Keyboard shortcuts: backtick (`) or Ctrl+K
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '`' || (e.ctrlKey && e.key === 'k')) {
+                e.preventDefault();
+                if (isOpen) closeTerminal(); else openTerminal();
+            }
+            if (isOpen && e.key === 'Escape') closeTerminal();
+        });
+
+        // Terminal command handlers
+        const commands = {
+            help: () => {
+                return [
+                    { type: 'output', text: 'Available commands:' },
+                    { type: 'output', text: '  help          Show this help menu' },
+                    { type: 'output', text: '  whoami        Display engineer profile' },
+                    { type: 'output', text: '  stack         List DevOps toolchain' },
+                    { type: 'output', text: '  projects      View production case studies' },
+                    { type: 'output', text: '  contact       Open contact information' },
+                    { type: 'output', text: '  clear         Clear the terminal screen' },
+                    { type: 'output', text: '  exit          Close the terminal' },
+                ];
+            },
+            whoami: () => {
+                return [
+                    { type: 'output', text: 'name:     Rajesh Chilukuri' },
+                    { type: 'output', text: 'role:     Senior DevOps & Platform Engineer' },
+                    { type: 'output', text: 'exp:      4+ Years in Cloud Native Engineering' },
+                    { type: 'output', text: 'focus:    AWS, Kubernetes, Terraform, ArgoCD, Prometheus' },
+                    { type: 'output', text: 'location: Hyderabad, India (Remote-first)' },
+                    { type: 'output', text: 'email:    rajeshchilukuri210@gmail.com' },
+                ];
+            },
+            stack: () => {
+                return [
+                    { type: 'output', text: 'Cloud:          AWS (EKS, VPC, IAM, ECR, RDS)' },
+                    { type: 'output', text: 'Containers:     Docker, Kubernetes, Helm' },
+                    { type: 'output', text: 'GitOps:         ArgoCD, Jenkins CI/CD' },
+                    { type: 'output', text: 'IaC:            Terraform, Ansible' },
+                    { type: 'output', text: 'Observability:  Prometheus, Grafana, Alertmanager' },
+                    { type: 'output', text: 'Scripting:      Bash, Python, Go' },
+                    { type: 'output', text: 'OS:             Linux (Ubuntu, RHEL, Amazon Linux)' },
+                ];
+            },
+            projects: () => {
+                return [
+                    { type: 'output', text: 'Production Case Studies:' },
+                    { type: 'output', text: '' },
+                    { type: 'output', text: '  1. Three-Tier EKS Platform' },
+                    { type: 'output-dim', text: '     AWS • EKS • ArgoCD • Terraform • 83% faster deploys • Zero downtime' },
+                    { type: 'output', text: '' },
+                    { type: 'output', text: '  2. Zero-Trust Service Mesh' },
+                    { type: 'output-dim', text: '     Istio • mTLS • OPA • EKS • 100% policy coverage • Zero critical CVEs' },
+                    { type: 'output', text: '' },
+                    { type: 'output', text: '  3. FinOps Auto-Scaling' },
+                    { type: 'output-dim', text: '     Karpenter • Spot Instances • 30% monthly cloud spend saved' },
+                    { type: 'output', text: '' },
+                    { type: 'output', text: 'Visit /projects.html for full architectural deep-dives.' },
+                ];
+            },
+            contact: () => {
+                return [
+                    { type: 'output', text: 'Contact Information:' },
+                    { type: 'output', text: '' },
+                    { type: 'output', text: '  Email:   rajeshchilukuri210@gmail.com' },
+                    { type: 'output', text: '  LinkedIn: linkedin.com/in/rajesh-chilukuri-692506406' },
+                    { type: 'output', text: '  GitHub:  github.com/Rajesh-210' },
+                    { type: 'output-success', text: 'Opening mailto link...' },
+                ];
+            },
+            clear: () => {
+                terminalBody.innerHTML = '';
+                return null;
+            },
+            exit: () => {
+                closeTerminal();
+                return null;
+            },
+        };
+
+        function addTerminalLine(html, className = '') {
+            const div = document.createElement('div');
+            div.className = 'terminal-line ' + className;
+            div.innerHTML = html;
+            terminalBody.appendChild(div);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        function addInputLine() {
+            const div = document.createElement('div');
+            div.className = 'terminal-input-line';
+            div.innerHTML = `
+                <span class="terminal-prompt terminal-user">rajesh</span>
+                <span class="terminal-prompt terminal-host">@portfolio</span>
+                <span class="terminal-prompt">:~$</span>
+                <span class="terminal-cursor">_</span>
+                <input type="text" id="terminalInput" placeholder="" autocomplete="off" spellcheck="false">
+            `;
+            terminalBody.appendChild(div);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+            const newInput = terminalBody.querySelector('#terminalInput');
+            newInput.focus();
+            setupInputHandler(newInput);
+        }
+
+        function setupInputHandler(input) {
+            input.addEventListener('keydown', async (e) => {
+                if (e.key === 'Enter') {
+                    const cmd = input.value.trim();
+                    input.disabled = true;
+                    input.style.opacity = '0.5';
+
+                    // Echo the command
+                    addTerminalLine(
+                        `<span class="terminal-prompt terminal-user">rajesh</span>` +
+                        `<span class="terminal-prompt terminal-host">@portfolio</span>` +
+                        `<span class="terminal-prompt">:~$</span> <span class="terminal-output">${escapeHtml(cmd)}</span>`
+                    );
+
+                    // Process command
+                    const parts = cmd.toLowerCase().split(/\s+/);
+                    const cmdName = parts[0];
+                    const args = parts.slice(1);
+
+                    if (cmdName === '') {
+                        addInputLine();
+                        return;
+                    }
+
+                    if (cmdName in commands) {
+                        const result = commands[cmdName](args);
+                        if (result) {
+                            // Type out the output line by line for effect
+                            for (const line of result) {
+                                await new Promise(r => setTimeout(r, 60));
+                                addTerminalLine(line.text, line.type);
+                            }
+                        }
+                    } else {
+                        addTerminalLine(
+                            `<span class="terminal-output-error">bash: ${cmdName}: command not found</span>`,
+                            'terminal-output-error'
+                        );
+                        addTerminalLine(`Type 'help' for available commands.`, 'terminal-output-dim');
+                    }
+
+                    addInputLine();
+                } else if (e.key === 'Tab') {
+                    e.preventDefault();
+                }
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initialize input handler
+        setupInputHandler(terminalInput);
+
+        // Close on backdrop click
+        terminalOverlay.addEventListener('click', (e) => {
+            if (e.target === terminalOverlay) closeTerminal();
+        });
+
+        // Console Easter egg
         console.log('%c👋 Hello Fellow Engineer!', 'color: #8b5cf6; font-size: 24px; font-weight: bold;');
         console.log('%cWelcome to Rajesh Chilukuri\'s DevOps Portfolio', 'color: #06b6d4; font-size: 14px;');
         console.log('%cStack: AWS • Kubernetes • Terraform • ArgoCD • Prometheus', 'color: #a855f7; font-size: 12px;');
         console.log('%cOpen to opportunities: rajeshchilukuri210@gmail.com', 'color: #ec4899; font-size: 12px;');
         console.log('%c🌟 GitHub: https://github.com/Rajesh-210', 'color: #22d3ee; font-size: 12px;');
+        console.log('%c🖥️ Interactive Terminal Ready — Press ` or Ctrl+K', 'color: #8b5cf6; font-size: 12px;');
     </script>
 </body>
 </html>
