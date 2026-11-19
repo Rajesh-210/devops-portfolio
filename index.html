@@ -1009,14 +1009,14 @@
                     Type <span class="terminal-output-key">help</span> to see available commands.
                 </div>
                 <div class="terminal-line"></div>
-                <div class="terminal-input-line">
-                    <span class="terminal-prompt terminal-user">rajesh</span>
-                    <span class="terminal-prompt terminal-host">@portfolio</span>
-                    <span class="terminal-prompt">:~$</span>
-                    <span class="terminal-cursor">_</span>
-                    <input type="text" class="terminal-input" placeholder="" autocomplete="off" spellcheck="false">
-                </div>
+            <div class="terminal-input-line">
+                <span class="terminal-prompt terminal-user">rajesh</span>
+                <span class="terminal-prompt terminal-host">@portfolio</span>
+                <span class="terminal-prompt">:~$</span>
+                <span class="terminal-cursor">_</span>
+                <input type="text" class="terminal-input" placeholder="" autocomplete="off" spellcheck="false">
             </div>
+        </div>
             <button class="terminal-close-btn" id="terminalCloseBtn">&times;</button>
             <div class="terminal-hint" id="terminalHint">Press ` or Ctrl+K to open</div>
         </div>
@@ -1321,25 +1321,8 @@
             const div = document.createElement('div');
             div.className = 'terminal-line ' + className;
             div.innerHTML = html;
-            terminalBody.appendChild(div);
+            terminalBody.insertBefore(div, inputLine);
             terminalBody.scrollTop = terminalBody.scrollHeight;
-        }
-
-        function addInputLine() {
-            const div = document.createElement('div');
-            div.className = 'terminal-input-line';
-            div.innerHTML = `
-                <span class="terminal-prompt terminal-user">rajesh</span>
-                <span class="terminal-prompt terminal-host">@portfolio</span>
-                <span class="terminal-prompt">:~$</span>
-                <span class="terminal-cursor">_</span>
-                <input type="text" class="terminal-input" placeholder="" autocomplete="off" spellcheck="false">
-            `;
-            terminalBody.appendChild(div);
-            terminalBody.scrollTop = terminalBody.scrollHeight;
-            const newInput = terminalBody.querySelector('.terminal-input:last-child');
-            newInput.focus();
-            setupInputHandler(newInput);
         }
 
         function setupInputHandler(input) {
@@ -1362,14 +1345,15 @@
                     const args = parts.slice(1);
 
                     if (cmdName === '') {
-                        addInputLine();
+                        input.disabled = false;
+                        input.style.opacity = '1';
+                        input.focus();
                         return;
                     }
 
                     if (cmdName in commands) {
                         const result = commands[cmdName](args);
                         if (result) {
-                            // Type out the output line by line for effect
                             for (const line of result) {
                                 await new Promise(r => setTimeout(r, 60));
                                 addTerminalLine(line.text, line.type);
@@ -1383,7 +1367,10 @@
                         addTerminalLine(`Type 'help' for available commands.`, 'terminal-output-dim');
                     }
 
-                    addInputLine();
+                    input.disabled = false;
+                    input.style.opacity = '1';
+                    input.focus();
+                    input.value = '';
                 } else if (e.key === 'Tab') {
                     e.preventDefault();
                 }
@@ -1397,7 +1384,9 @@
         }
 
         // Initialize input handler
-        setupInputHandler(terminalInput);
+        const inputLine = document.querySelector('.terminal-input-line');
+        const initialInput = document.querySelector('.terminal-input');
+        setupInputHandler(initialInput);
 
         // Close on backdrop click
         terminalOverlay.addEventListener('click', (e) => {
