@@ -1014,7 +1014,7 @@
                     <span class="terminal-prompt terminal-host">@portfolio</span>
                     <span class="terminal-prompt">:~$</span>
                     <span class="terminal-cursor">_</span>
-                    <input type="text" id="terminalInput" placeholder="" autocomplete="off" spellcheck="false">
+                    <input type="text" class="terminal-input" placeholder="" autocomplete="off" spellcheck="false">
                 </div>
             </div>
             <button class="terminal-close-btn" id="terminalCloseBtn">&times;</button>
@@ -1333,11 +1333,11 @@
                 <span class="terminal-prompt terminal-host">@portfolio</span>
                 <span class="terminal-prompt">:~$</span>
                 <span class="terminal-cursor">_</span>
-                <input type="text" id="terminalInput" placeholder="" autocomplete="off" spellcheck="false">
+                <input type="text" class="terminal-input" placeholder="" autocomplete="off" spellcheck="false">
             `;
             terminalBody.appendChild(div);
             terminalBody.scrollTop = terminalBody.scrollHeight;
-            const newInput = terminalBody.querySelector('#terminalInput');
+            const newInput = terminalBody.querySelector('.terminal-input:last-child');
             newInput.focus();
             setupInputHandler(newInput);
         }
