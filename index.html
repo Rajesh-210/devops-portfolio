@@ -303,6 +303,28 @@
             z-index: -1;
         }
 
+        /* Hero typing effect */
+        .hero-typing {
+            display: inline-block;
+            min-width: 14rem;
+        }
+        .hero-typing-text {
+            color: #fff;
+        }
+        .hero-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: #06b6d4;
+            margin-left: 4px;
+            animation: blink 1s infinite;
+            vertical-align: text-bottom;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
         /* CTA button */
         .cta-button {
             position: relative;
@@ -663,7 +685,10 @@
                     </div>
                     <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-8 leading-tight hero-glow" data-glow="DevOps that delivers business value.">
                         <span class="text-white">DevOps that delivers</span><br>
-                        <span class="text-gradient">business value.</span>
+                        <span class="text-gradient hero-typing">
+                            <span class="hero-typing-text" id="heroTyping"></span>
+                            <span class="hero-cursor"></span>
+                        </span>
                     </h1>
                     <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
                         I'm Rajesh Chilukuri, a Senior DevOps &amp; Platform Engineer. I help engineering teams ship
@@ -2477,6 +2502,48 @@
         }
 
         triggerBtn.addEventListener('click', runPipeline);
+
+        // ============================================
+        // DYNAMIC HERO TYPING EFFECT
+        // ============================================
+        const heroTypingEl = document.getElementById('heroTyping');
+        const heroRoles = [
+            'DevOps Engineer',
+            'Platform Architect',
+            'Cloud Native Specialist',
+            'SRE Practitioner',
+            'FinOps Optimizer',
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 60;
+
+        function typeHero() {
+            const currentRole = heroRoles[roleIndex];
+            if (isDeleting) {
+                heroTypingEl.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 30;
+            } else {
+                heroTypingEl.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 80;
+            }
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                isDeleting = true;
+                typeSpeed = 2000;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % heroRoles.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeHero, typeSpeed);
+        }
+
+        setTimeout(typeHero, 800);
 
         // ============================================
         // INTERACTIVE ARCHITECTURE DIAGRAM
