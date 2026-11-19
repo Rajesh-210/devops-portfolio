@@ -325,17 +325,16 @@
             50% { opacity: 0; }
         }
 
-        /* 3D Tilt Cards - force transform control via JS only */
+        /* 3D Tilt Cards - transform controlled entirely by JS inline styles */
         .tilt-card {
             position: relative;
             transition: none !important;
-            transform-style: preserve-3d !important;
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) !important;
+            transform-style: preserve-3d;
             cursor: pointer;
             will-change: transform;
         }
 
-        /* Override ALL Tailwind transition/transform utilities on tilt cards */
+        /* Disable all CSS transitions on tilt cards so JS transform isn't interrupted */
         .tilt-card.transition-all,
         .tilt-card.duration-300,
         .tilt-card.duration-150,
@@ -343,10 +342,9 @@
             transition: none !important;
         }
 
-        /* Ensure reveal's translateY doesn't override our 3D transform */
-        .tilt-card.active,
-        .tilt-card.reveal.active {
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0) !important;
+        /* Prevent reveal class from setting translateY that conflicts with 3D rotation */
+        .tilt-card.active {
+            transform: none !important;
         }
         .tilt-card__shine {
             position: absolute;
