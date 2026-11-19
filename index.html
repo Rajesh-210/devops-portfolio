@@ -325,22 +325,6 @@
             50% { opacity: 0; }
         }
 
-        /* 3D Tilt Cards - transform controlled entirely by JS inline styles */
-        .tilt-card {
-            position: relative;
-            transition: none;
-            transform-style: preserve-3d;
-            cursor: pointer;
-            will-change: transform;
-        }
-
-        /* Disable all CSS transitions on tilt cards so JS transform isn't interrupted */
-        .tilt-card.transition-all,
-        .tilt-card.duration-300,
-        .tilt-card.duration-150,
-        .tilt-card.reveal {
-            transition: none;
-        }
         .tilt-card__shine {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -778,8 +762,7 @@
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project 1 -->
-                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal" style="transform-style: preserve-3d;">
-                        <div class="tilt-card__shine"></div>
+                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-purple/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-cyan to-blue-600 flex items-center justify-center">
@@ -810,8 +793,7 @@
                     </article>
 
                     <!-- Project 2 -->
-                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-cyan/50 transition-all duration-300 reveal" style="transition-delay: 100ms; transform-style: preserve-3d;">
-                        <div class="tilt-card__shine"></div>
+                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-cyan/50 transition-all duration-300 reveal" style="transition-delay: 100ms;">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-cyan/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-purple to-pink-500 flex items-center justify-center">
@@ -842,8 +824,7 @@
                     </article>
 
                     <!-- Project 3 -->
-                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-emerald/50 transition-all duration-300 reveal" style="transition-delay: 200ms; transform-style: preserve-3d;">
-                        <div class="tilt-card__shine"></div>
+                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-emerald/50 transition-all duration-300 reveal" style="transition-delay: 200ms;">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-emerald/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
@@ -874,8 +855,7 @@
                     </article>
 
                     <!-- Project 4: Transcode Pipeline -->
-                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal md:col-span-3 transform-style-preserve-3d" style="transform-style: preserve-3d;">
-                        <div class="tilt-card__shine"></div>
+                    <article class="glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-purple/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-purple to-pink-500 flex items-center justify-center">
@@ -2794,46 +2774,6 @@
             if (!e.target.closest('#arch-diagram') && !e.target.closest('#arch-detail')) {
                 resetArch();
             }
-        });
-
-        // ============================================
-        // 3D TILT CARDS (click to rotate)
-        // ============================================
-        const tiltCards = document.querySelectorAll('.tilt-card');
-
-        tiltCards.forEach(card => {
-            const shine = card.querySelector('.tilt-card__shine');
-
-            card.addEventListener('click', (e) => {
-                // If a link/button inside was clicked, let it work normally
-                if (e.target.closest('a, button')) return;
-
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = ((y - centerY) / centerY) * -8;
-                const rotateY = ((x - centerX) / centerX) * 8;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-
-                if (shine) {
-                    const shineX = (x / rect.width) * 100;
-                    const shineY = (y / rect.height) * 100;
-                    shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255,255,255,0.15) 0%, transparent 50%)`;
-                    shine.style.opacity = '1';
-                }
-
-                // Reset after 1.5 seconds
-                setTimeout(() => {
-                    card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
-                    if (shine) {
-                        shine.style.opacity = '0';
-                    }
-                }, 1500);
-            });
         });
 
         // ============================================
