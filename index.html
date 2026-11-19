@@ -899,6 +899,103 @@
             </div>
         </section>
 
+        <!-- FinOps Savings Calculator Section -->
+        <section id="calculator" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-xs font-mono text-neon-amber uppercase tracking-widest">FinOps Calculator</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white mt-4">Calculate Your<br><span class="text-gradient">Cloud Savings.</span></h2>
+                    <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Enter your current monthly cloud spend and see how much you could save with proper FinOps automation.</p>
+                </div>
+
+                <div class="glass-panel p-8 md:p-12 rounded-3xl max-w-2xl mx-auto relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-neon-amber/10 rounded-full blur-3xl"></div>
+
+                    <div class="space-y-8">
+                        <!-- Monthly Spend Input -->
+                        <div>
+                            <label class="block text-xs font-mono text-neon-amber uppercase tracking-widest mb-3">
+                                Monthly Cloud Spend ($)
+                            </label>
+                            <div class="relative">
+                                <input type="range" id="spendSlider" min="1000" max="100000" step="500" value="10000"
+                                    class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-neon-amber">
+                                <div class="flex justify-between text-xs text-slate-400 font-mono mb-2">
+                                    <span>$1,000</span>
+                                    <span>$100,000</span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span id="spendValue" class="text-2xl font-bold text-white font-mono">$10,000</span>
+                                <span class="text-slate-400 text-xs">/month</span>
+                            </div>
+                        </div>
+
+                        <!-- Savings Breakdown -->
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="glass-panel p-6 rounded-2xl border border-neon-emerald/20">
+                                <div class="text-xs font-mono text-neon-emerald uppercase tracking-wider mb-2">Est. Monthly Savings</div>
+                                <div class="text-3xl font-bold font-mono text-white" id="monthlySavings">$3,000</div>
+                                <div class="text-xs text-slate-400 mt-1">30% reduction via Spot, Karpenter, right-sizing</div>
+                            </div>
+                            <div class="glass-panel p-6 rounded-2xl border border-neon-purple/20">
+                                <div class="text-xs font-mono text-neon-purple uppercase tracking-wider mb-2">Est. Annual Savings</div>
+                                <div class="text-3xl font-bold font-mono text-white" id="annualSavings">$36,000</div>
+                                <div class="text-xs text-slate-400 mt-1">30% × 12 months</div>
+                            </div>
+                        </div>
+
+                        <!-- Savings Bar -->
+                        <div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mb-2">
+                                <span>Current Spend</span>
+                                <span>Optimized Spend</span>
+                            </div>
+                            <div class="h-3 bg-slate-800 rounded-full overflow-hidden relative">
+                                <div id="currentBar" class="h-full bg-gradient-to-r from-neon-pink to-neon-purple" style="width: 100%"></div>
+                                <div id="savingsBar" class="absolute top-0 left-0 h-full bg-gradient-to-r from-neon-emerald to-neon-cyan opacity-0" style="width: 30%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Savings Methods -->
+                        <div class="pt-6 border-t border-white/10">
+                            <div class="text-xs font-mono text-neon-amber uppercase tracking-wider mb-4">How We Save</div>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5">
+                                    <div class="w-8 h-8 rounded bg-neon-amber/20 flex items-center justify-center text-neon-amber text-xs font-bold">☁</div>
+                                    <div>
+                                        <div class="text-sm font-semibold text-white">Spot Instance Orchestration</div>
+                                        <div class="text-xs text-slate-400">Karpenter + AWS Spot - up to 90% compute savings</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5">
+                                    <div class="w-8 h-8 rounded bg-neon-cyan/20 flex items-center justify-center text-neon-cyan text-xs font-bold">📏</div>
+                                    <div>
+                                        <div class="text-sm font-semibold text-white">Right-Sizing</div>
+                                        <div class="text-xs text-slate-400">Match instance types to actual workload requirements</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 rounded-xl bg-white/5">
+                                    <div class="w-8 h-8 rounded bg-neon-emerald/20 flex items-center justify-center text-neon-emerald text-xs font-bold">⏱️</div>
+                                    <div>
+                                        <div class="text-sm font-semibold text-white">Auto-Scaling Policies</div>
+                                        <div class="text-xs text-slate-400">Scale down during off-peak hours automatically</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 mt-6 border-t border-white/10 flex items-center justify-between">
+                            <div class="text-xs font-mono text-slate-400">Ready to optimize your cloud bill?</div>
+                            <a href="mailto:rajeshchilukuri210@gmail.com?subject=FinOps%20Cloud%20Cost%20Optimization" class="px-6 py-2 rounded-xl bg-gradient-to-r from-neon-amber to-orange-500 text-white font-bold text-sm hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] transition-all cta-button">
+                                Let's Talk
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact" class="py-24 px-6 relative">
             <div class="max-w-4xl mx-auto">
@@ -1400,6 +1497,41 @@
         console.log('%cOpen to opportunities: rajeshchilukuri210@gmail.com', 'color: #ec4899; font-size: 12px;');
         console.log('%c🌟 GitHub: https://github.com/Rajesh-210', 'color: #22d3ee; font-size: 12px;');
         console.log('%c🖥️ Interactive Terminal Ready — Press ` or Ctrl+K', 'color: #8b5cf6; font-size: 12px;');
+
+        // ============================================
+        // FINOPS SAVINGS CALCULATOR
+        // ============================================
+        const spendSlider = document.getElementById('spendSlider');
+        const spendValue = document.getElementById('spendValue');
+        const monthlySavings = document.getElementById('monthlySavings');
+        const annualSavings = document.getElementById('annualSavings');
+        const currentBar = document.getElementById('currentBar');
+        const savingsBar = document.getElementById('savingsBar');
+
+        if (spendSlider) {
+            const SAVINGS_RATE = 0.30; // 30% savings
+
+            function updateCalculator() {
+                const spend = parseInt(spendSlider.value);
+                const monthly = Math.round(spend * SAVINGS_RATE);
+                const annual = monthly * 12;
+
+                spendValue.textContent = '$' + spend.toLocaleString();
+                monthlySavings.textContent = '$' + monthly.toLocaleString();
+                annualSavings.textContent = '$' + annual.toLocaleString();
+
+                const savingsPercent = SAVINGS_RATE * 100;
+                currentBar.style.width = '100%';
+                savingsBar.style.width = savingsPercent + '%';
+                savingsBar.style.opacity = '0.85';
+            }
+
+            spendSlider.addEventListener('input', updateCalculator);
+            spendSlider.addEventListener('change', updateCalculator);
+
+            // Initialize
+            updateCalculator();
+        }
     </script>
 </body>
 </html>
