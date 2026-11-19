@@ -104,6 +104,29 @@
             100% { background-position: 50px 50px; }
         }
 
+        /* ============ FILM GRAIN ============ */
+        .film-grain {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 100000;
+            opacity: 0.06;
+            mix-blend-mode: overlay;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+        }
+
+        /* ============ LETTERBOX BARS ============ */
+        .letterbox-bar {
+            position: fixed;
+            left: 0; width: 100vw; height: 0;
+            background: #000;
+            z-index: 99999;
+            transition: height 0.5s ease;
+        }
+        .letterbox-bar.top { top: 0; }
+        .letterbox-bar.bottom { bottom: 0; }
+        .letterbox-bar.active { height: 3vh; }
+
         /* ============ LIGHT LEAK ============ */
         .light-leak {
             position: absolute;
@@ -510,7 +533,10 @@
         <div class="orb orb-4"></div>
 
         <div class="grid-bg"></div>
+        <div class="film-grain"></div>
         <div class="light-leak"></div>
+        <div class="letterbox-bar top" id="reelLetterboxTop"></div>
+        <div class="letterbox-bar bottom" id="reelLetterboxBottom"></div>
 
         <canvas id="reelCanvas"></canvas>
 
@@ -833,6 +859,12 @@
             requestAnimationFrame(tick);
         }
         tick();
+
+        // Activate letterbox bars after page load
+        setTimeout(() => {
+            document.getElementById('reelLetterboxTop').classList.add('active');
+            document.getElementById('reelLetterboxBottom').classList.add('active');
+        }, 1500);
 
         // Initial fade out
         setTimeout(() => { fadeOverlay.classList.add('hidden'); }, 500);
