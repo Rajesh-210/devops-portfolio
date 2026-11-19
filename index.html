@@ -879,7 +879,7 @@
                     </article>
 
                     <!-- Project 4: Transcode Pipeline -->
-                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal" style="transition-delay: 300ms; transform-style: preserve-3d;">
+                    <article class="tilt-card glass-panel rounded-3xl p-8 group hover:border-neon-purple/50 transition-all duration-300 reveal md:col-span-3 transform-style-preserve-3d" style="transform-style: preserve-3d;">
                         <div class="tilt-card__shine"></div>
                         <div class="absolute top-0 right-0 w-32 h-32 bg-neon-purple/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                         <div class="flex items-center gap-3 mb-6">
@@ -2802,24 +2802,27 @@
         });
 
         // ============================================
-        // 3D TILT CARDS
+        // 3D TILT CARDS (click to rotate)
         // ============================================
         const tiltCards = document.querySelectorAll('.tilt-card');
 
         tiltCards.forEach(card => {
             const shine = card.querySelector('.tilt-card__shine');
 
-            card.addEventListener('mousemove', (e) => {
+            card.addEventListener('click', (e) => {
+                // If a link/button inside was clicked, let it work normally
+                if (e.target.closest('a, button')) return;
+
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
 
-                const rotateX = ((y - centerY) / centerY) * -5;
-                const rotateY = ((x - centerX) / centerX) * 5;
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
 
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
 
                 if (shine) {
                     const shineX = (x / rect.width) * 100;
@@ -2827,13 +2830,14 @@
                     shine.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255,255,255,0.15) 0%, transparent 50%)`;
                     shine.style.opacity = '1';
                 }
-            });
 
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
-                if (shine) {
-                    shine.style.opacity = '0';
-                }
+                // Reset after 1.5 seconds
+                setTimeout(() => {
+                    card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+                    if (shine) {
+                        shine.style.opacity = '0';
+                    }
+                }, 1500);
             });
         });
 
