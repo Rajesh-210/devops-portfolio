@@ -333,6 +333,75 @@
             background: rgba(255, 255, 255, 0.08) !important;
         }
 
+        /* Mobile Menu Polish - Slide Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: -100vw;
+            width: 100vw;
+            height: 100vh;
+            background: #020204;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .mobile-menu-overlay.open {
+            left: 0;
+        }
+        .mobile-menu-overlay a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.125rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            transition: color 0.3s ease;
+        }
+        .mobile-menu-overlay a:hover {
+            color: #06b6d4;
+        }
+        .mobile-close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        .mobile-close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #06b6d4;
+            transform: rotate(90deg);
+        }
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            width: auto;
+        }
+        .mobile-menu-link:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #06b6d4 !important;
+        }
+
         /* Back to Top Button */
         .back-to-top {
             position: fixed;
@@ -812,11 +881,21 @@
                         <svg id="themeIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
                     </button>
                 </div>
-                <button class="md:hidden text-slate-400 hover:text-white">
+                <button class="md:hidden text-slate-400 hover:text-white mobile-menu-btn">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
             </div>
         </nav>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <button class="mobile-close-btn" id="mobileCloseBtn">✕</button>
+            <a href="#work" class="mobile-menu-link">Work</a>
+            <a href="#stack" class="mobile-menu-link">Stack</a>
+            <a href="#impact" class="mobile-menu-link">Impact</a>
+            <a href="dashboard.html" class="mobile-menu-link">Dashboard</a>
+            <a href="#contact" class="mobile-menu-link">Let's Talk</a>
+        </div>
 
         <!-- Hero Section -->
         <section class="relative pt-32 pb-24 px-6 entrance-hidden">
@@ -2329,17 +2408,30 @@
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // ============================================
-        // Mobile Menu Toggle
+        // Mobile Menu Toggle (Slide Overlay)
         // ============================================
-        const mobileBtn = document.querySelector('nav button');
-        const mobileLinks = document.querySelector('nav .hidden.md\\:flex');
-        if (mobileBtn && mobileLinks) {
-            mobileBtn.addEventListener('click', () => {
-                mobileLinks.classList.toggle('hidden');
-                mobileLinks.classList.toggle('md:flex');
-                mobileLinks.classList.add('fixed', 'top-20', 'left-0', 'right-0', 'bg-[#020204]/95', 'backdrop-blur', 'p-6', 'z-49', 'flex-col', 'items-center', 'gap-4', 'rounded-2xl', 'border', 'border-white/10');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+
+        if (mobileMenuBtn && mobileMenuOverlay) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('open');
             });
         }
+
+        if (mobileCloseBtn && mobileMenuOverlay) {
+            mobileCloseBtn.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('open');
+            });
+        }
+
+        // Close when clicking a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('open');
+            });
+        });
 
         // ============================================
         // INTERACTIVE TERMINAL LOGIC
