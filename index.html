@@ -328,12 +328,10 @@
         /* 3D Tilt Cards */
         .tilt-card {
             position: relative;
-            transition: transform 0.1s ease-out;
+            transition: none !important;
             transform-style: preserve-3d;
             cursor: pointer;
-        }
-        .tilt-card:hover {
-            transform: scale(1.02);
+            transform: perspective(1000px) rotateX(0) rotateY(0) scale(1);
         }
         .tilt-card__shine {
             position: absolute;
